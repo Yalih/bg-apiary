@@ -1,5 +1,14 @@
 # Changelog
 
+## Sprint 1 - project cleanup
+
+- Added production-ready README.
+- Added `.gitignore` and `.env.example`.
+- Added documentation index, architecture overview and roadmap.
+- Removed local `.git/` history from the shared package.
+- Kept application logic unchanged.
+
+
 ## 2.0 BGS Visual Experience
 
 - Dodano finalny motyw wizualny BG APIARY.
