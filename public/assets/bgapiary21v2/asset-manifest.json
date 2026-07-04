@@ -1,0 +1,22 @@
+{
+  "version": "2.1-hivevisualoverhaul",
+  "hiveStates": [
+    "bardzo_silna",
+    "silna",
+    "srednia",
+    "slaba",
+    "bardzo_slaba",
+    "odklad",
+    "nowy_pakiet",
+    "rodzina_produkcyjna",
+    "rodzina_rojowa",
+    "po_miodobraniu",
+    "bez_matki",
+    "leczenie",
+    "alarm_zdrowotny",
+    "kwarantanna",
+    "zimowanie"
+  ],
+  "queenBase": "/assets/bgapiary21v2/queen/base/queen_base.svg",
+  "note": "Clean authored SVG assets. No reference sheets in UI."
+}

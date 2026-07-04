@@ -1,0 +1,650 @@
+{
+  "findings": {
+    "sprite_or_reference": [
+      {
+        "file": "src/logic/bgApiaryReferenceAssets.ts",
+        "count": 1,
+        "sample": [
+          "reference-assets"
+        ]
+      },
+      {
+        "file": "src/tests/noSpriteSheetInUi20.test.ts",
+        "count": 2,
+        "sample": [
+          "sprite",
+          "sheet"
+        ]
+      },
+      {
+        "file": "src/tests/cleanAssets20.test.ts",
+        "count": 2,
+        "sample": [
+          "sheet",
+          "sheet"
+        ]
+      },
+      {
+        "file": "src/tests/noSpriteSheets20.test.ts",
+        "count": 3,
+        "sample": [
+          "sprite",
+          "sheet",
+          "library-reference"
+        ]
+      },
+      {
+        "file": "src/tests/noSpriteSheets21.test.ts",
+        "count": 4,
+        "sample": [
+          "sprite",
+          "sheet",
+          "sheet",
+          "sheet"
+        ]
+      }
+    ],
+    "old_placeholder_words": [
+      {
+        "file": "src/data/demoData.ts",
+        "count": 1,
+        "sample": [
+          "placeholder"
+        ]
+      },
+      {
+        "file": "src/logic/queenReplacement.ts",
+        "count": 1,
+        "sample": [
+          "brak danych"
+        ]
+      },
+      {
+        "file": "src/logic/queenCatalog.ts",
+        "count": 3,
+        "sample": [
+          "brak danych",
+          "brak danych",
+          "brak danych"
+        ]
+      },
+      {
+        "file": "src/logic/advancedReports.ts",
+        "count": 1,
+        "sample": [
+          "brak danych"
+        ]
+      },
+      {
+        "file": "src/logic/uxSystem.ts",
+        "count": 1,
+        "sample": [
+          "Brak danych"
+        ]
+      },
+      {
+        "file": "src/logic/designSystem20.ts",
+        "count": 1,
+        "sample": [
+          "Brak danych"
+        ]
+      },
+      {
+        "file": "src/logic/rcQuality20.ts",
+        "count": 1,
+        "sample": [
+          "Brak danych"
+        ]
+      },
+      {
+        "file": "src/logic/bgsTheme20.ts",
+        "count": 1,
+        "sample": [
+          "brak danych"
+        ]
+      },
+      {
+        "file": "src/tests/emptyStates20.test.ts",
+        "count": 1,
+        "sample": [
+          "Brak danych"
+        ]
+      },
+      {
+        "file": "src/tests/emptyStatesUxRefresh20.test.ts",
+        "count": 3,
+        "sample": [
+          "Brak danych",
+          "Brak elementów",
+          "Nie znaleziono"
+        ]
+      },
+      {
+        "file": "src/tests/premiumEmptyStates20.test.ts",
+        "count": 1,
+        "sample": [
+          "Brak danych"
+        ]
+      },
+      {
+        "file": "src/tests/weatherNavigation20.test.ts",
+        "count": 1,
+        "sample": [
+          "placeholder"
+        ]
+      },
+      {
+        "file": "src/tests/nectarNavigation20.test.ts",
+        "count": 1,
+        "sample": [
+          "placeholder"
+        ]
+      },
+      {
+        "file": "src/tests/emptyStatesPremium20.test.ts",
+        "count": 1,
+        "sample": [
+          "Brak danych"
+        ]
+      },
+      {
+        "file": "src/tests/noTemporarySymbols20.test.ts",
+        "count": 1,
+        "sample": [
+          "placeholder"
+        ]
+      },
+      {
+        "file": "src/tests/emptyStatesVisual20.test.ts",
+        "count": 1,
+        "sample": [
+          "Brak danych"
+        ]
+      },
+      {
+        "file": "src/tests/noOldIconsVisible20.test.ts",
+        "count": 1,
+        "sample": [
+          "placeholder"
+        ]
+      },
+      {
+        "file": "src/App.tsx",
+        "count": 7,
+        "sample": [
+          "Nie znaleziono",
+          "Nie znaleziono",
+          "Nie znaleziono",
+          "Nie znaleziono",
+          "Nie znaleziono",
+          "Nie znaleziono"
+        ]
+      },
+      {
+        "file": "src/pages/DashboardPage.tsx",
+        "count": 1,
+        "sample": [
+          "placeholder"
+        ]
+      },
+      {
+        "file": "src/pages/HivesPage.tsx",
+        "count": 2,
+        "sample": [
+          "Nie znaleziono",
+          "placeholder"
+        ]
+      },
+      {
+        "file": "src/pages/CreateApiaryPage.tsx",
+        "count": 3,
+        "sample": [
+          "placeholder",
+          "placeholder",
+          "placeholder"
+        ]
+      },
+      {
+        "file": "src/pages/CreateHivePage.tsx",
+        "count": 2,
+        "sample": [
+          "placeholder",
+          "placeholder"
+        ]
+      },
+      {
+        "file": "src/pages/CreateInspectionPage.tsx",
+        "count": 1,
+        "sample": [
+          "placeholder"
+        ]
+      },
+      {
+        "file": "src/pages/CreateFeedingPage.tsx",
+        "count": 2,
+        "sample": [
+          "placeholder",
+          "placeholder"
+        ]
+      },
+      {
+        "file": "src/pages/CreateNotePage.tsx",
+        "count": 1,
+        "sample": [
+          "placeholder"
+        ]
+      },
+      {
+        "file": "src/pages/CreatePhotoPage.tsx",
+        "count": 1,
+        "sample": [
+          "placeholder"
+        ]
+      },
+      {
+        "file": "src/pages/AssistantPage.tsx",
+        "count": 6,
+        "sample": [
+          "brak danych",
+          "brak danych",
+          "brak danych",
+          "brak danych",
+          "brak danych",
+          "brak danych"
+        ]
+      },
+      {
+        "file": "src/pages/AuthPage.tsx",
+        "count": 4,
+        "sample": [
+          "placeholder",
+          "placeholder",
+          "placeholder",
+          "placeholder"
+        ]
+      },
+      {
+        "file": "src/pages/WorkCenterPage.tsx",
+        "count": 1,
+        "sample": [
+          "placeholder"
+        ]
+      },
+      {
+        "file": "src/pages/ApiaryMapPage.tsx",
+        "count": 1,
+        "sample": [
+          "Nie znaleziono"
+        ]
+      },
+      {
+        "file": "src/pages/QueenCatalogPage.tsx",
+        "count": 1,
+        "sample": [
+          "placeholder"
+        ]
+      },
+      {
+        "file": "src/pages/InventoryPage.tsx",
+        "count": 3,
+        "sample": [
+          "placeholder",
+          "placeholder",
+          "placeholder"
+        ]
+      },
+      {
+        "file": "src/pages/HoneyPage.tsx",
+        "count": 2,
+        "sample": [
+          "placeholder",
+          "placeholder"
+        ]
+      },
+      {
+        "file": "src/pages/HealthPage.tsx",
+        "count": 1,
+        "sample": [
+          "placeholder"
+        ]
+      },
+      {
+        "file": "src/pages/SeasonPlanPage.tsx",
+        "count": 1,
+        "sample": [
+          "placeholder"
+        ]
+      },
+      {
+        "file": "src/styles.css",
+        "count": 2,
+        "sample": [
+          "placeholder",
+          "placeholder"
+        ]
+      }
+    ],
+    "temporary_symbols": [
+      {
+        "file": "src/logic/bgApiaryPremium20.ts",
+        "count": 2,
+        "sample": [
+          "▣",
+          "□"
+        ]
+      },
+      {
+        "file": "src/tests/iconConsistency20.test.ts",
+        "count": 3,
+        "sample": [
+          "▰",
+          "▣",
+          "♧"
+        ]
+      },
+      {
+        "file": "src/tests/noTemporarySymbols20.test.ts",
+        "count": 3,
+        "sample": [
+          "▰",
+          "▣",
+          "♧"
+        ]
+      },
+      {
+        "file": "src/pages/InventoryPage.tsx",
+        "count": 1,
+        "sample": [
+          "□"
+        ]
+      }
+    ],
+    "emoji": [
+      {
+        "file": "src/data/demoData.ts",
+        "count": 2,
+        "sample": [
+          "🌳",
+          "🌼"
+        ]
+      },
+      {
+        "file": "src/logic/queenColor.ts",
+        "count": 4,
+        "sample": [
+          "🟡",
+          "🔴",
+          "🟢",
+          "🔵"
+        ]
+      },
+      {
+        "file": "src/logic/workCenter.ts",
+        "count": 7,
+        "sample": [
+          "🔍",
+          "🍯",
+          "👑",
+          "🧪",
+          "🍯",
+          "🐝"
+        ]
+      },
+      {
+        "file": "src/logic/uxSystem.ts",
+        "count": 12,
+        "sample": [
+          "🏠",
+          "🐝",
+          "🧠",
+          "👑",
+          "📊",
+          "💾"
+        ]
+      },
+      {
+        "file": "src/logic/largeData.ts",
+        "count": 1,
+        "sample": [
+          "🐝"
+        ]
+      },
+      {
+        "file": "src/logic/inventory.ts",
+        "count": 8,
+        "sample": [
+          "📐",
+          "🏠",
+          "🍯",
+          "💊",
+          "👑",
+          "🐝"
+        ]
+      },
+      {
+        "file": "src/logic/designSystem20.ts",
+        "count": 7,
+        "sample": [
+          "🚀",
+          "🏠",
+          "📅",
+          "🍯",
+          "📦",
+          "🤖"
+        ]
+      },
+      {
+        "file": "src/logic/largeData20.ts",
+        "count": 1,
+        "sample": [
+          "🐝"
+        ]
+      },
+      {
+        "file": "src/tests/forms.test.ts",
+        "count": 1,
+        "sample": [
+          "🐝"
+        ]
+      },
+      {
+        "file": "src/tests/uxConsistency15.test.ts",
+        "count": 6,
+        "sample": [
+          "🏠",
+          "🐝",
+          "👑",
+          "📊",
+          "💾",
+          "🐝"
+        ]
+      },
+      {
+        "file": "src/tests/realUserStorage.test.ts",
+        "count": 1,
+        "sample": [
+          "🐝"
+        ]
+      },
+      {
+        "file": "src/tests/finalDataDeletion20.test.ts",
+        "count": 1,
+        "sample": [
+          "🐝"
+        ]
+      },
+      {
+        "file": "src/tests/finalE2EWorkflow20.test.ts",
+        "count": 1,
+        "sample": [
+          "🐝"
+        ]
+      },
+      {
+        "file": "src/components/TaskCard.tsx",
+        "count": 4,
+        "sample": [
+          "🔍",
+          "🍯",
+          "📝",
+          "👑"
+        ]
+      },
+      {
+        "file": "src/pages/StartPage.tsx",
+        "count": 1,
+        "sample": [
+          "🐝"
+        ]
+      },
+      {
+        "file": "src/pages/HivesPage.tsx",
+        "count": 1,
+        "sample": [
+          "🗺"
+        ]
+      },
+      {
+        "file": "src/pages/MorePage.tsx",
+        "count": 12,
+        "sample": [
+          "👥",
+          "🔐",
+          "🧾",
+          "🕘",
+          "💾",
+          "🐝"
+        ]
+      },
+      {
+        "file": "src/pages/CreateApiaryPage.tsx",
+        "count": 7,
+        "sample": [
+          "🌳",
+          "🌼",
+          "🏡",
+          "🌲",
+          "🌻",
+          "🐝"
+        ]
+      },
+      {
+        "file": "src/pages/ReportsPage.tsx",
+        "count": 7,
+        "sample": [
+          "📊",
+          "📅",
+          "🐝",
+          "🏠",
+          "👑",
+          "🍯"
+        ]
+      },
+      {
+        "file": "src/pages/AssistantPage.tsx",
+        "count": 5,
+        "sample": [
+          "🔍",
+          "🍯",
+          "📝",
+          "🐝",
+          "💡"
+        ]
+      },
+      {
+        "file": "src/pages/WorkCenterPage.tsx",
+        "count": 1,
+        "sample": [
+          "🐝"
+        ]
+      },
+      {
+        "file": "src/pages/FirstRunPage.tsx",
+        "count": 2,
+        "sample": [
+          "🐝",
+          "💾"
+        ]
+      },
+      {
+        "file": "src/pages/HoneyPage.tsx",
+        "count": 6,
+        "sample": [
+          "🍯",
+          "🏷",
+          "🫙",
+          "🛒",
+          "👤",
+          "🏷"
+        ]
+      },
+      {
+        "file": "src/pages/HealthPage.tsx",
+        "count": 4,
+        "sample": [
+          "🦠",
+          "💊",
+          "🔄",
+          "📈"
+        ]
+      },
+      {
+        "file": "src/pages/SeasonPlanPage.tsx",
+        "count": 5,
+        "sample": [
+          "📆",
+          "🎯",
+          "🌼",
+          "📈",
+          "🧭"
+        ]
+      },
+      {
+        "file": "src/styles.css",
+        "count": 1,
+        "sample": [
+          "🐝"
+        ]
+      }
+    ]
+  },
+  "assetManagerFiles": [
+    "src/components/HiveCard.tsx",
+    "src/components/bgapiary/AssetManagerComponents21.tsx",
+    "src/components/bgapiary/CleanAssets.tsx",
+    "src/pages/DashboardPage.tsx",
+    "src/pages/HiveDetailsPage.tsx",
+    "src/tests/assetPipeline21.test.ts",
+    "src/tests/cleanHiveAssets20.test.ts",
+    "src/tests/cleanQueenAssets20.test.ts",
+    "src/tests/hiveCardCleanImage20.test.ts",
+    "src/tests/hiveExperienceAssets21.test.ts",
+    "src/tests/hiveHeroCleanImage20.test.ts",
+    "src/tests/mobileAssets21.test.ts",
+    "src/tests/mobileCleanAssets20.test.ts",
+    "src/tests/noSpriteSheetInUi20.test.ts",
+    "src/tests/noSpriteSheets21.test.ts",
+    "src/tests/premiumDashboardAssets21.test.ts",
+    "src/tests/queenDot21.test.ts",
+    "src/tests/queenDotProfessional20.test.ts",
+    "src/tests/seasonalAssets21.test.ts"
+  ],
+  "directOldAssetRefs": [
+    "src/logic/bgApiaryCleanAssets.ts",
+    "src/logic/bgApiaryReferenceAssets.ts",
+    "src/tests/cleanHiveAssets20.test.ts",
+    "src/tests/cleanQueenAssets20.test.ts",
+    "src/tests/hiveCardsVisualPolish20.test.ts",
+    "src/tests/noSpriteSheetInUi20.test.ts",
+    "src/tests/referenceAssetsImplemented20.test.ts",
+    "src/tests/referenceAssetsUsage20.test.ts"
+  ],
+  "assetSummary": {
+    "bgapiary21": 251,
+    "bgapiary": 263,
+    "bgapiary-clean": 76,
+    "bgapiary-reference": 55
+  },
+  "totalSourceFilesScanned": 331,
+  "totalPublicAssets": 645
+}

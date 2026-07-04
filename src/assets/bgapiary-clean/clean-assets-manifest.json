@@ -1,0 +1,117 @@
+{
+  "version": "2.0-professional-clean-assets",
+  "note": "Clean individual UI assets. Full reference boards are not used in UI.",
+  "hives": {
+    "bardzoSilna": {
+      "mini": "/assets/bgapiary-clean/hives/mini/bardzo_silna.png",
+      "card": "/assets/bgapiary-clean/hives/card/bardzo_silna.png",
+      "hero": "/assets/bgapiary-clean/hives/hero/bardzo_silna.png"
+    },
+    "silna": {
+      "mini": "/assets/bgapiary-clean/hives/mini/silna.png",
+      "card": "/assets/bgapiary-clean/hives/card/silna.png",
+      "hero": "/assets/bgapiary-clean/hives/hero/silna.png"
+    },
+    "srednia": {
+      "mini": "/assets/bgapiary-clean/hives/mini/srednia.png",
+      "card": "/assets/bgapiary-clean/hives/card/srednia.png",
+      "hero": "/assets/bgapiary-clean/hives/hero/srednia.png"
+    },
+    "slaba": {
+      "mini": "/assets/bgapiary-clean/hives/mini/slaba.png",
+      "card": "/assets/bgapiary-clean/hives/card/slaba.png",
+      "hero": "/assets/bgapiary-clean/hives/hero/slaba.png"
+    },
+    "bardzoSlaba": {
+      "mini": "/assets/bgapiary-clean/hives/mini/bardzo_slaba.png",
+      "card": "/assets/bgapiary-clean/hives/card/bardzo_slaba.png",
+      "hero": "/assets/bgapiary-clean/hives/hero/bardzo_slaba.png"
+    },
+    "nowyPakiet": {
+      "mini": "/assets/bgapiary-clean/hives/mini/nowy_pakiet.png",
+      "card": "/assets/bgapiary-clean/hives/card/nowy_pakiet.png",
+      "hero": "/assets/bgapiary-clean/hives/hero/nowy_pakiet.png"
+    },
+    "odklad": {
+      "mini": "/assets/bgapiary-clean/hives/mini/odklad.png",
+      "card": "/assets/bgapiary-clean/hives/card/odklad.png",
+      "hero": "/assets/bgapiary-clean/hives/hero/odklad.png"
+    },
+    "zimowanie": {
+      "mini": "/assets/bgapiary-clean/hives/mini/zimowanie.png",
+      "card": "/assets/bgapiary-clean/hives/card/zimowanie.png",
+      "hero": "/assets/bgapiary-clean/hives/hero/zimowanie.png"
+    },
+    "leczenie": {
+      "mini": "/assets/bgapiary-clean/hives/mini/leczenie.png",
+      "card": "/assets/bgapiary-clean/hives/card/leczenie.png",
+      "hero": "/assets/bgapiary-clean/hives/hero/leczenie.png"
+    },
+    "alarm": {
+      "mini": "/assets/bgapiary-clean/hives/mini/alarm_zdrowotny.png",
+      "card": "/assets/bgapiary-clean/hives/card/alarm_zdrowotny.png",
+      "hero": "/assets/bgapiary-clean/hives/hero/alarm_zdrowotny.png"
+    },
+    "bezMatki": {
+      "mini": "/assets/bgapiary-clean/hives/mini/bez_matki.png",
+      "card": "/assets/bgapiary-clean/hives/card/bez_matki.png",
+      "hero": "/assets/bgapiary-clean/hives/hero/bez_matki.png"
+    },
+    "kwarantanna": {
+      "mini": "/assets/bgapiary-clean/hives/mini/kwarantanna.png",
+      "card": "/assets/bgapiary-clean/hives/card/kwarantanna.png",
+      "hero": "/assets/bgapiary-clean/hives/hero/kwarantanna.png"
+    },
+    "rodzinaProdukcyjna": {
+      "mini": "/assets/bgapiary-clean/hives/mini/rodzina_produkcyjna.png",
+      "card": "/assets/bgapiary-clean/hives/card/rodzina_produkcyjna.png",
+      "hero": "/assets/bgapiary-clean/hives/hero/rodzina_produkcyjna.png"
+    },
+    "rodzinaRojowa": {
+      "mini": "/assets/bgapiary-clean/hives/mini/rodzina_rojowa.png",
+      "card": "/assets/bgapiary-clean/hives/card/rodzina_rojowa.png",
+      "hero": "/assets/bgapiary-clean/hives/hero/rodzina_rojowa.png"
+    },
+    "poMiodobraniu": {
+      "mini": "/assets/bgapiary-clean/hives/mini/po_miodobraniu.png",
+      "card": "/assets/bgapiary-clean/hives/card/po_miodobraniu.png",
+      "hero": "/assets/bgapiary-clean/hives/hero/po_miodobraniu.png"
+    },
+    "hero": {
+      "mini": "/assets/bgapiary-clean/hives/mini/variant_hero_ul.png",
+      "card": "/assets/bgapiary-clean/hives/card/variant_hero_ul.png",
+      "hero": "/assets/bgapiary-clean/hives/hero/variant_hero_ul.png"
+    }
+  },
+  "queens": {
+    "matkaObecna": "/assets/bgapiary-clean/queens/matka_obecna.png",
+    "mlodaMatka": "/assets/bgapiary-clean/queens/mloda_matka.png",
+    "matkaWAkceptacji": "/assets/bgapiary-clean/queens/matka_w_akceptacji.png",
+    "matkaCzerwi": "/assets/bgapiary-clean/queens/matka_czerwi.png",
+    "matkaSlaboCzerwi": "/assets/bgapiary-clean/queens/matka_slabo_czerwi.png",
+    "matkaDoWymiany": "/assets/bgapiary-clean/queens/matka_do_wymiany.png",
+    "matkaStara": "/assets/bgapiary-clean/queens/matka_stara.png",
+    "matkaNieznaleziona": "/assets/bgapiary-clean/queens/matka_nieznaleziona.png",
+    "matkaWKlatce": "/assets/bgapiary-clean/queens/matka_w_klatce.png",
+    "oczekiwanie": "/assets/bgapiary-clean/queens/oczekiwanie.png",
+    "matkaWysokiejJakosci": "/assets/bgapiary-clean/queens/matka_wysokiej_jakosci.png",
+    "brakMatki": "/assets/bgapiary-clean/queens/brak_matki.png"
+  },
+  "status": {
+    "ok": "/assets/bgapiary-clean/status/ok.png",
+    "uwaga": "/assets/bgapiary-clean/status/uwaga.png",
+    "alarm": "/assets/bgapiary-clean/status/alarm.png",
+    "przeglad": "/assets/bgapiary-clean/status/przeglad.png",
+    "leczenie": "/assets/bgapiary-clean/status/leczenie.png",
+    "warroza": "/assets/bgapiary-clean/status/warroza.png",
+    "nowaMatka": "/assets/bgapiary-clean/status/nowa_matka.png",
+    "brakMatki": "/assets/bgapiary-clean/status/brak_matki.png",
+    "karmienie": "/assets/bgapiary-clean/status/karmienie.png",
+    "pozytek": "/assets/bgapiary-clean/status/pozytek.png",
+    "miod": "/assets/bgapiary-clean/status/miod.png",
+    "zimowanie": "/assets/bgapiary-clean/status/zimowanie.png",
+    "transport": "/assets/bgapiary-clean/status/transport.png",
+    "synchronizacja": "/assets/bgapiary-clean/status/synchronizacja.png",
+    "backup": "/assets/bgapiary-clean/status/backup.png"
+  }
+}

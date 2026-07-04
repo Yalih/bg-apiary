@@ -1,0 +1,270 @@
+{
+  "version": "2.0-reference-assets-implemented",
+  "source": "Assets cropped from user-provided reference boards. No new graphics generated.",
+  "hives": [
+    {
+      "key": "bardzo_silna",
+      "label": "Bardzo silna",
+      "path": "/assets/bgapiary-reference/hives/bardzo_silna.png"
+    },
+    {
+      "key": "silna",
+      "label": "Silna",
+      "path": "/assets/bgapiary-reference/hives/silna.png"
+    },
+    {
+      "key": "srednia",
+      "label": "Średnia",
+      "path": "/assets/bgapiary-reference/hives/srednia.png"
+    },
+    {
+      "key": "slaba",
+      "label": "Słaba",
+      "path": "/assets/bgapiary-reference/hives/slaba.png"
+    },
+    {
+      "key": "bardzo_slaba",
+      "label": "Bardzo słaba",
+      "path": "/assets/bgapiary-reference/hives/bardzo_slaba.png"
+    },
+    {
+      "key": "nowy_pakiet",
+      "label": "Nowy pakiet",
+      "path": "/assets/bgapiary-reference/hives/nowy_pakiet.png"
+    },
+    {
+      "key": "odklad",
+      "label": "Odkład",
+      "path": "/assets/bgapiary-reference/hives/odklad.png"
+    },
+    {
+      "key": "rodzina_produkcyjna",
+      "label": "Rodzina produkcyjna",
+      "path": "/assets/bgapiary-reference/hives/rodzina_produkcyjna.png"
+    },
+    {
+      "key": "rodzina_rojowa",
+      "label": "Rodzina rojowa",
+      "path": "/assets/bgapiary-reference/hives/rodzina_rojowa.png"
+    },
+    {
+      "key": "zimowanie",
+      "label": "Zimowanie",
+      "path": "/assets/bgapiary-reference/hives/zimowanie.png"
+    },
+    {
+      "key": "po_miodobraniu",
+      "label": "Po miodobraniu",
+      "path": "/assets/bgapiary-reference/hives/po_miodobraniu.png"
+    },
+    {
+      "key": "bez_matki",
+      "label": "Bez matki",
+      "path": "/assets/bgapiary-reference/hives/bez_matki.png"
+    },
+    {
+      "key": "matka_mloda",
+      "label": "Matka młoda",
+      "path": "/assets/bgapiary-reference/hives/matka_mloda.png"
+    },
+    {
+      "key": "matka_stara",
+      "label": "Matka stara",
+      "path": "/assets/bgapiary-reference/hives/matka_stara.png"
+    },
+    {
+      "key": "kwarantanna",
+      "label": "Kwarantanna",
+      "path": "/assets/bgapiary-reference/hives/kwarantanna.png"
+    },
+    {
+      "key": "leczenie",
+      "label": "Leczenie",
+      "path": "/assets/bgapiary-reference/hives/leczenie.png"
+    },
+    {
+      "key": "alarm_zdrowotny",
+      "label": "Alarm zdrowotny",
+      "path": "/assets/bgapiary-reference/hives/alarm_zdrowotny.png"
+    },
+    {
+      "key": "variant_pelny_kolor",
+      "label": "Pełny kolor",
+      "path": "/assets/bgapiary-reference/hives/variant_pelny_kolor.png"
+    },
+    {
+      "key": "variant_soft_3d",
+      "label": "Soft 3D",
+      "path": "/assets/bgapiary-reference/hives/variant_soft_3d.png"
+    },
+    {
+      "key": "variant_izometryczny",
+      "label": "Izometryczny",
+      "path": "/assets/bgapiary-reference/hives/variant_izometryczny.png"
+    },
+    {
+      "key": "variant_minimalistyczny",
+      "label": "Minimalistyczny",
+      "path": "/assets/bgapiary-reference/hives/variant_minimalistyczny.png"
+    },
+    {
+      "key": "variant_outline",
+      "label": "Outline",
+      "path": "/assets/bgapiary-reference/hives/variant_outline.png"
+    },
+    {
+      "key": "variant_monochromatyczny",
+      "label": "Monochromatyczny",
+      "path": "/assets/bgapiary-reference/hives/variant_monochromatyczny.png"
+    },
+    {
+      "key": "variant_dark_mode",
+      "label": "Dark mode",
+      "path": "/assets/bgapiary-reference/hives/variant_dark_mode.png"
+    },
+    {
+      "key": "variant_hero_ul",
+      "label": "Hero ul",
+      "path": "/assets/bgapiary-reference/hives/variant_hero_ul.png"
+    }
+  ],
+  "queens": [
+    {
+      "key": "matka_obecna",
+      "label": "Matka obecna",
+      "path": "/assets/bgapiary-reference/queens/matka_obecna.png"
+    },
+    {
+      "key": "mloda_matka",
+      "label": "Młoda matka",
+      "path": "/assets/bgapiary-reference/queens/mloda_matka.png"
+    },
+    {
+      "key": "matka_w_akceptacji",
+      "label": "Matka w akceptacji",
+      "path": "/assets/bgapiary-reference/queens/matka_w_akceptacji.png"
+    },
+    {
+      "key": "matka_czerwi",
+      "label": "Matka czerwi",
+      "path": "/assets/bgapiary-reference/queens/matka_czerwi.png"
+    },
+    {
+      "key": "matka_slabo_czerwi",
+      "label": "Matka słabo czerwi",
+      "path": "/assets/bgapiary-reference/queens/matka_slabo_czerwi.png"
+    },
+    {
+      "key": "matka_do_wymiany",
+      "label": "Matka do wymiany",
+      "path": "/assets/bgapiary-reference/queens/matka_do_wymiany.png"
+    },
+    {
+      "key": "matka_stara",
+      "label": "Matka stara",
+      "path": "/assets/bgapiary-reference/queens/matka_stara.png"
+    },
+    {
+      "key": "matka_nieznaleziona",
+      "label": "Matka nieznaleziona",
+      "path": "/assets/bgapiary-reference/queens/matka_nieznaleziona.png"
+    },
+    {
+      "key": "matka_w_klatce",
+      "label": "Matka w klatce",
+      "path": "/assets/bgapiary-reference/queens/matka_w_klatce.png"
+    },
+    {
+      "key": "oczekiwanie",
+      "label": "Oczekiwanie",
+      "path": "/assets/bgapiary-reference/queens/oczekiwanie.png"
+    },
+    {
+      "key": "matka_wysokiej_jakosci",
+      "label": "Matka wysokiej jakości",
+      "path": "/assets/bgapiary-reference/queens/matka_wysokiej_jakosci.png"
+    },
+    {
+      "key": "brak_matki",
+      "label": "Brak matki",
+      "path": "/assets/bgapiary-reference/queens/brak_matki.png"
+    }
+  ],
+  "status": [
+    {
+      "key": "ok",
+      "label": "OK",
+      "path": "/assets/bgapiary-reference/status/ok.png"
+    },
+    {
+      "key": "uwaga",
+      "label": "Uwaga",
+      "path": "/assets/bgapiary-reference/status/uwaga.png"
+    },
+    {
+      "key": "alarm",
+      "label": "Alarm",
+      "path": "/assets/bgapiary-reference/status/alarm.png"
+    },
+    {
+      "key": "przeglad",
+      "label": "Przegląd",
+      "path": "/assets/bgapiary-reference/status/przeglad.png"
+    },
+    {
+      "key": "leczenie",
+      "label": "Leczenie",
+      "path": "/assets/bgapiary-reference/status/leczenie.png"
+    },
+    {
+      "key": "warroza",
+      "label": "Warroza",
+      "path": "/assets/bgapiary-reference/status/warroza.png"
+    },
+    {
+      "key": "nowa_matka",
+      "label": "Nowa matka",
+      "path": "/assets/bgapiary-reference/status/nowa_matka.png"
+    },
+    {
+      "key": "brak_matki",
+      "label": "Brak matki",
+      "path": "/assets/bgapiary-reference/status/brak_matki.png"
+    },
+    {
+      "key": "karmienie",
+      "label": "Karmienie",
+      "path": "/assets/bgapiary-reference/status/karmienie.png"
+    },
+    {
+      "key": "pozytek",
+      "label": "Pożytek",
+      "path": "/assets/bgapiary-reference/status/pozytek.png"
+    },
+    {
+      "key": "miod",
+      "label": "Miód",
+      "path": "/assets/bgapiary-reference/status/miod.png"
+    },
+    {
+      "key": "zimowanie",
+      "label": "Zimowanie",
+      "path": "/assets/bgapiary-reference/status/zimowanie.png"
+    },
+    {
+      "key": "transport",
+      "label": "Transport",
+      "path": "/assets/bgapiary-reference/status/transport.png"
+    },
+    {
+      "key": "synchronizacja",
+      "label": "Synchronizacja",
+      "path": "/assets/bgapiary-reference/status/synchronizacja.png"
+    },
+    {
+      "key": "backup",
+      "label": "Backup",
+      "path": "/assets/bgapiary-reference/status/backup.png"
+    }
+  ]
+}

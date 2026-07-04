@@ -1,0 +1,269 @@
+{
+  "version": "2.1-assetpipeline",
+  "hives": {
+    "bardzo_silna": {
+      "hero": "/assets/bgapiary21/hive/hero/bardzo_silna.png",
+      "card": "/assets/bgapiary21/hive/card/bardzo_silna.png",
+      "list": "/assets/bgapiary21/hive/list/bardzo_silna.png",
+      "mini": {
+        "32": "/assets/bgapiary21/hive/mini/32/bardzo_silna.png",
+        "48": "/assets/bgapiary21/hive/mini/48/bardzo_silna.png",
+        "64": "/assets/bgapiary21/hive/mini/64/bardzo_silna.png",
+        "96": "/assets/bgapiary21/hive/mini/96/bardzo_silna.png"
+      },
+      "seasonal": {
+        "spring": "/assets/bgapiary21/hive/seasonal/spring/bardzo_silna.png",
+        "summer": "/assets/bgapiary21/hive/seasonal/summer/bardzo_silna.png",
+        "autumn": "/assets/bgapiary21/hive/seasonal/autumn/bardzo_silna.png",
+        "winter": "/assets/bgapiary21/hive/seasonal/winter/bardzo_silna.png"
+      }
+    },
+    "silna": {
+      "hero": "/assets/bgapiary21/hive/hero/silna.png",
+      "card": "/assets/bgapiary21/hive/card/silna.png",
+      "list": "/assets/bgapiary21/hive/list/silna.png",
+      "mini": {
+        "32": "/assets/bgapiary21/hive/mini/32/silna.png",
+        "48": "/assets/bgapiary21/hive/mini/48/silna.png",
+        "64": "/assets/bgapiary21/hive/mini/64/silna.png",
+        "96": "/assets/bgapiary21/hive/mini/96/silna.png"
+      },
+      "seasonal": {
+        "spring": "/assets/bgapiary21/hive/seasonal/spring/silna.png",
+        "summer": "/assets/bgapiary21/hive/seasonal/summer/silna.png",
+        "autumn": "/assets/bgapiary21/hive/seasonal/autumn/silna.png",
+        "winter": "/assets/bgapiary21/hive/seasonal/winter/silna.png"
+      }
+    },
+    "srednia": {
+      "hero": "/assets/bgapiary21/hive/hero/srednia.png",
+      "card": "/assets/bgapiary21/hive/card/srednia.png",
+      "list": "/assets/bgapiary21/hive/list/srednia.png",
+      "mini": {
+        "32": "/assets/bgapiary21/hive/mini/32/srednia.png",
+        "48": "/assets/bgapiary21/hive/mini/48/srednia.png",
+        "64": "/assets/bgapiary21/hive/mini/64/srednia.png",
+        "96": "/assets/bgapiary21/hive/mini/96/srednia.png"
+      },
+      "seasonal": {
+        "spring": "/assets/bgapiary21/hive/seasonal/spring/srednia.png",
+        "summer": "/assets/bgapiary21/hive/seasonal/summer/srednia.png",
+        "autumn": "/assets/bgapiary21/hive/seasonal/autumn/srednia.png",
+        "winter": "/assets/bgapiary21/hive/seasonal/winter/srednia.png"
+      }
+    },
+    "slaba": {
+      "hero": "/assets/bgapiary21/hive/hero/slaba.png",
+      "card": "/assets/bgapiary21/hive/card/slaba.png",
+      "list": "/assets/bgapiary21/hive/list/slaba.png",
+      "mini": {
+        "32": "/assets/bgapiary21/hive/mini/32/slaba.png",
+        "48": "/assets/bgapiary21/hive/mini/48/slaba.png",
+        "64": "/assets/bgapiary21/hive/mini/64/slaba.png",
+        "96": "/assets/bgapiary21/hive/mini/96/slaba.png"
+      },
+      "seasonal": {
+        "spring": "/assets/bgapiary21/hive/seasonal/spring/slaba.png",
+        "summer": "/assets/bgapiary21/hive/seasonal/summer/slaba.png",
+        "autumn": "/assets/bgapiary21/hive/seasonal/autumn/slaba.png",
+        "winter": "/assets/bgapiary21/hive/seasonal/winter/slaba.png"
+      }
+    },
+    "bardzo_slaba": {
+      "hero": "/assets/bgapiary21/hive/hero/bardzo_slaba.png",
+      "card": "/assets/bgapiary21/hive/card/bardzo_slaba.png",
+      "list": "/assets/bgapiary21/hive/list/bardzo_slaba.png",
+      "mini": {
+        "32": "/assets/bgapiary21/hive/mini/32/bardzo_slaba.png",
+        "48": "/assets/bgapiary21/hive/mini/48/bardzo_slaba.png",
+        "64": "/assets/bgapiary21/hive/mini/64/bardzo_slaba.png",
+        "96": "/assets/bgapiary21/hive/mini/96/bardzo_slaba.png"
+      },
+      "seasonal": {
+        "spring": "/assets/bgapiary21/hive/seasonal/spring/bardzo_slaba.png",
+        "summer": "/assets/bgapiary21/hive/seasonal/summer/bardzo_slaba.png",
+        "autumn": "/assets/bgapiary21/hive/seasonal/autumn/bardzo_slaba.png",
+        "winter": "/assets/bgapiary21/hive/seasonal/winter/bardzo_slaba.png"
+      }
+    },
+    "odklad": {
+      "hero": "/assets/bgapiary21/hive/hero/odklad.png",
+      "card": "/assets/bgapiary21/hive/card/odklad.png",
+      "list": "/assets/bgapiary21/hive/list/odklad.png",
+      "mini": {
+        "32": "/assets/bgapiary21/hive/mini/32/odklad.png",
+        "48": "/assets/bgapiary21/hive/mini/48/odklad.png",
+        "64": "/assets/bgapiary21/hive/mini/64/odklad.png",
+        "96": "/assets/bgapiary21/hive/mini/96/odklad.png"
+      },
+      "seasonal": {
+        "spring": "/assets/bgapiary21/hive/seasonal/spring/odklad.png",
+        "summer": "/assets/bgapiary21/hive/seasonal/summer/odklad.png",
+        "autumn": "/assets/bgapiary21/hive/seasonal/autumn/odklad.png",
+        "winter": "/assets/bgapiary21/hive/seasonal/winter/odklad.png"
+      }
+    },
+    "nowy_pakiet": {
+      "hero": "/assets/bgapiary21/hive/hero/nowy_pakiet.png",
+      "card": "/assets/bgapiary21/hive/card/nowy_pakiet.png",
+      "list": "/assets/bgapiary21/hive/list/nowy_pakiet.png",
+      "mini": {
+        "32": "/assets/bgapiary21/hive/mini/32/nowy_pakiet.png",
+        "48": "/assets/bgapiary21/hive/mini/48/nowy_pakiet.png",
+        "64": "/assets/bgapiary21/hive/mini/64/nowy_pakiet.png",
+        "96": "/assets/bgapiary21/hive/mini/96/nowy_pakiet.png"
+      },
+      "seasonal": {
+        "spring": "/assets/bgapiary21/hive/seasonal/spring/nowy_pakiet.png",
+        "summer": "/assets/bgapiary21/hive/seasonal/summer/nowy_pakiet.png",
+        "autumn": "/assets/bgapiary21/hive/seasonal/autumn/nowy_pakiet.png",
+        "winter": "/assets/bgapiary21/hive/seasonal/winter/nowy_pakiet.png"
+      }
+    },
+    "rodzina_produkcyjna": {
+      "hero": "/assets/bgapiary21/hive/hero/rodzina_produkcyjna.png",
+      "card": "/assets/bgapiary21/hive/card/rodzina_produkcyjna.png",
+      "list": "/assets/bgapiary21/hive/list/rodzina_produkcyjna.png",
+      "mini": {
+        "32": "/assets/bgapiary21/hive/mini/32/rodzina_produkcyjna.png",
+        "48": "/assets/bgapiary21/hive/mini/48/rodzina_produkcyjna.png",
+        "64": "/assets/bgapiary21/hive/mini/64/rodzina_produkcyjna.png",
+        "96": "/assets/bgapiary21/hive/mini/96/rodzina_produkcyjna.png"
+      },
+      "seasonal": {
+        "spring": "/assets/bgapiary21/hive/seasonal/spring/rodzina_produkcyjna.png",
+        "summer": "/assets/bgapiary21/hive/seasonal/summer/rodzina_produkcyjna.png",
+        "autumn": "/assets/bgapiary21/hive/seasonal/autumn/rodzina_produkcyjna.png",
+        "winter": "/assets/bgapiary21/hive/seasonal/winter/rodzina_produkcyjna.png"
+      }
+    },
+    "rodzina_rojowa": {
+      "hero": "/assets/bgapiary21/hive/hero/rodzina_rojowa.png",
+      "card": "/assets/bgapiary21/hive/card/rodzina_rojowa.png",
+      "list": "/assets/bgapiary21/hive/list/rodzina_rojowa.png",
+      "mini": {
+        "32": "/assets/bgapiary21/hive/mini/32/rodzina_rojowa.png",
+        "48": "/assets/bgapiary21/hive/mini/48/rodzina_rojowa.png",
+        "64": "/assets/bgapiary21/hive/mini/64/rodzina_rojowa.png",
+        "96": "/assets/bgapiary21/hive/mini/96/rodzina_rojowa.png"
+      },
+      "seasonal": {
+        "spring": "/assets/bgapiary21/hive/seasonal/spring/rodzina_rojowa.png",
+        "summer": "/assets/bgapiary21/hive/seasonal/summer/rodzina_rojowa.png",
+        "autumn": "/assets/bgapiary21/hive/seasonal/autumn/rodzina_rojowa.png",
+        "winter": "/assets/bgapiary21/hive/seasonal/winter/rodzina_rojowa.png"
+      }
+    },
+    "po_miodobraniu": {
+      "hero": "/assets/bgapiary21/hive/hero/po_miodobraniu.png",
+      "card": "/assets/bgapiary21/hive/card/po_miodobraniu.png",
+      "list": "/assets/bgapiary21/hive/list/po_miodobraniu.png",
+      "mini": {
+        "32": "/assets/bgapiary21/hive/mini/32/po_miodobraniu.png",
+        "48": "/assets/bgapiary21/hive/mini/48/po_miodobraniu.png",
+        "64": "/assets/bgapiary21/hive/mini/64/po_miodobraniu.png",
+        "96": "/assets/bgapiary21/hive/mini/96/po_miodobraniu.png"
+      },
+      "seasonal": {
+        "spring": "/assets/bgapiary21/hive/seasonal/spring/po_miodobraniu.png",
+        "summer": "/assets/bgapiary21/hive/seasonal/summer/po_miodobraniu.png",
+        "autumn": "/assets/bgapiary21/hive/seasonal/autumn/po_miodobraniu.png",
+        "winter": "/assets/bgapiary21/hive/seasonal/winter/po_miodobraniu.png"
+      }
+    },
+    "bez_matki": {
+      "hero": "/assets/bgapiary21/hive/hero/bez_matki.png",
+      "card": "/assets/bgapiary21/hive/card/bez_matki.png",
+      "list": "/assets/bgapiary21/hive/list/bez_matki.png",
+      "mini": {
+        "32": "/assets/bgapiary21/hive/mini/32/bez_matki.png",
+        "48": "/assets/bgapiary21/hive/mini/48/bez_matki.png",
+        "64": "/assets/bgapiary21/hive/mini/64/bez_matki.png",
+        "96": "/assets/bgapiary21/hive/mini/96/bez_matki.png"
+      },
+      "seasonal": {
+        "spring": "/assets/bgapiary21/hive/seasonal/spring/bez_matki.png",
+        "summer": "/assets/bgapiary21/hive/seasonal/summer/bez_matki.png",
+        "autumn": "/assets/bgapiary21/hive/seasonal/autumn/bez_matki.png",
+        "winter": "/assets/bgapiary21/hive/seasonal/winter/bez_matki.png"
+      }
+    },
+    "leczenie": {
+      "hero": "/assets/bgapiary21/hive/hero/leczenie.png",
+      "card": "/assets/bgapiary21/hive/card/leczenie.png",
+      "list": "/assets/bgapiary21/hive/list/leczenie.png",
+      "mini": {
+        "32": "/assets/bgapiary21/hive/mini/32/leczenie.png",
+        "48": "/assets/bgapiary21/hive/mini/48/leczenie.png",
+        "64": "/assets/bgapiary21/hive/mini/64/leczenie.png",
+        "96": "/assets/bgapiary21/hive/mini/96/leczenie.png"
+      },
+      "seasonal": {
+        "spring": "/assets/bgapiary21/hive/seasonal/spring/leczenie.png",
+        "summer": "/assets/bgapiary21/hive/seasonal/summer/leczenie.png",
+        "autumn": "/assets/bgapiary21/hive/seasonal/autumn/leczenie.png",
+        "winter": "/assets/bgapiary21/hive/seasonal/winter/leczenie.png"
+      }
+    },
+    "alarm_zdrowotny": {
+      "hero": "/assets/bgapiary21/hive/hero/alarm_zdrowotny.png",
+      "card": "/assets/bgapiary21/hive/card/alarm_zdrowotny.png",
+      "list": "/assets/bgapiary21/hive/list/alarm_zdrowotny.png",
+      "mini": {
+        "32": "/assets/bgapiary21/hive/mini/32/alarm_zdrowotny.png",
+        "48": "/assets/bgapiary21/hive/mini/48/alarm_zdrowotny.png",
+        "64": "/assets/bgapiary21/hive/mini/64/alarm_zdrowotny.png",
+        "96": "/assets/bgapiary21/hive/mini/96/alarm_zdrowotny.png"
+      },
+      "seasonal": {
+        "spring": "/assets/bgapiary21/hive/seasonal/spring/alarm_zdrowotny.png",
+        "summer": "/assets/bgapiary21/hive/seasonal/summer/alarm_zdrowotny.png",
+        "autumn": "/assets/bgapiary21/hive/seasonal/autumn/alarm_zdrowotny.png",
+        "winter": "/assets/bgapiary21/hive/seasonal/winter/alarm_zdrowotny.png"
+      }
+    },
+    "kwarantanna": {
+      "hero": "/assets/bgapiary21/hive/hero/kwarantanna.png",
+      "card": "/assets/bgapiary21/hive/card/kwarantanna.png",
+      "list": "/assets/bgapiary21/hive/list/kwarantanna.png",
+      "mini": {
+        "32": "/assets/bgapiary21/hive/mini/32/kwarantanna.png",
+        "48": "/assets/bgapiary21/hive/mini/48/kwarantanna.png",
+        "64": "/assets/bgapiary21/hive/mini/64/kwarantanna.png",
+        "96": "/assets/bgapiary21/hive/mini/96/kwarantanna.png"
+      },
+      "seasonal": {
+        "spring": "/assets/bgapiary21/hive/seasonal/spring/kwarantanna.png",
+        "summer": "/assets/bgapiary21/hive/seasonal/summer/kwarantanna.png",
+        "autumn": "/assets/bgapiary21/hive/seasonal/autumn/kwarantanna.png",
+        "winter": "/assets/bgapiary21/hive/seasonal/winter/kwarantanna.png"
+      }
+    },
+    "zimowanie": {
+      "hero": "/assets/bgapiary21/hive/hero/zimowanie.png",
+      "card": "/assets/bgapiary21/hive/card/zimowanie.png",
+      "list": "/assets/bgapiary21/hive/list/zimowanie.png",
+      "mini": {
+        "32": "/assets/bgapiary21/hive/mini/32/zimowanie.png",
+        "48": "/assets/bgapiary21/hive/mini/48/zimowanie.png",
+        "64": "/assets/bgapiary21/hive/mini/64/zimowanie.png",
+        "96": "/assets/bgapiary21/hive/mini/96/zimowanie.png"
+      },
+      "seasonal": {
+        "spring": "/assets/bgapiary21/hive/seasonal/spring/zimowanie.png",
+        "summer": "/assets/bgapiary21/hive/seasonal/summer/zimowanie.png",
+        "autumn": "/assets/bgapiary21/hive/seasonal/autumn/zimowanie.png",
+        "winter": "/assets/bgapiary21/hive/seasonal/winter/zimowanie.png"
+      }
+    }
+  },
+  "queenBase": "/assets/bgapiary21/queen/base/queen_base.png",
+  "queenDots": {
+    "white": "/assets/bgapiary21/queen/dots/white.png",
+    "yellow": "/assets/bgapiary21/queen/dots/yellow.png",
+    "red": "/assets/bgapiary21/queen/dots/red.png",
+    "green": "/assets/bgapiary21/queen/dots/green.png",
+    "blue": "/assets/bgapiary21/queen/dots/blue.png"
+  },
+  "policy": "UI uses individual assets only. Reference sheets are documentation only."
+}

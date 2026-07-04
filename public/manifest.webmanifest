@@ -1,0 +1,10 @@
+{
+  "name": "BgApiary",
+  "short_name": "BgApiary",
+  "description": "Inteligentny dziennik pasieczny",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fff8e6",
+  "theme_color": "#f6b93b",
+  "icons": []
+}

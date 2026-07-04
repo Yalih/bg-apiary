@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 220" role="img" aria-label="Matka pszczela">
+  <defs>
+    <linearGradient id="body" x1="0" x2="1"><stop offset="0" stop-color="#F0B85A"/><stop offset=".5" stop-color="#8A4B20"/><stop offset="1" stop-color="#2C180E"/></linearGradient>
+    <filter id="qshadow"><feDropShadow dx="0" dy="12" stdDeviation="8" flood-color="#0F3D2E" flood-opacity=".18"/></filter>
+  </defs>
+  <g filter="url(#qshadow)" transform="translate(90 110)">
+    <ellipse cx="-42" cy="-18" rx="42" ry="17" fill="#F8FFFF" opacity=".62" transform="rotate(-23)"/>
+    <ellipse cx="42" cy="-18" rx="42" ry="17" fill="#F8FFFF" opacity=".62" transform="rotate(23)"/>
+    <ellipse cx="0" cy="-64" rx="22" ry="20" fill="#3A210F"/>
+    <circle cx="-8" cy="-70" r="4" fill="#0D0804"/><circle cx="8" cy="-70" r="4" fill="#0D0804"/>
+    <path d="M-12 -83c-18-18-28-22-38-24M12 -83c18-18 28-22 38-24" stroke="#2C180E" stroke-width="4" stroke-linecap="round" fill="none"/>
+    <ellipse cx="0" cy="-28" rx="28" ry="40" fill="url(#body)"/>
+    <ellipse cx="0" cy="36" rx="34" ry="78" fill="url(#body)"/>
+    <path d="M-25 -36c16 8 34 8 50 0M-28 -10c18 9 38 9 56 0M-31 18c20 10 42 10 62 0M-29 48c18 9 40 9 58 0M-21 76c13 7 29 7 42 0" stroke="#2A1508" stroke-width="7" opacity=".8"/>
+    <path d="M-30 -10c-38 18-52 48-60 82M30 -10c38 18 52 48 60 82" stroke="#2C180E" stroke-width="4" stroke-linecap="round" fill="none"/>
+  </g>
+</svg>

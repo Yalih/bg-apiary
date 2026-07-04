@@ -1,0 +1,428 @@
+/* BgApiary 2.1 Apiary Map Polish */
+
+.apiary-map-premium-page {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 12px 14px 112px;
+  overflow-x: hidden;
+}
+
+.apiary-map-premium-hero {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  gap: 18px;
+  padding: 24px;
+  border-radius: 34px;
+  color: #F7F5EE;
+  background:
+    radial-gradient(circle at 92% 0%, rgba(244,212,122,.20), transparent 14rem),
+    linear-gradient(145deg, #0F3D2E, #1E5B43);
+  box-shadow: 0 28px 70px rgba(15,61,46,.20);
+}
+
+.apiary-map-premium-hero span {
+  color: rgba(255,255,255,.72);
+  font-weight: 950;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.apiary-map-premium-hero h1 {
+  margin: 6px 0;
+  color: #F7F5EE;
+  font-size: clamp(2.4rem, 9vw, 4.8rem);
+  line-height: .88;
+  font-weight: 950;
+}
+
+.apiary-map-premium-hero p {
+  margin: 0;
+  color: rgba(255,255,255,.78);
+  font-weight: 750;
+}
+
+.apiary-map-premium-summary {
+  display: grid;
+  place-items: center;
+  width: 92px;
+  height: 92px;
+  border-radius: 28px;
+  background: rgba(255,255,255,.14);
+  border: 1px solid rgba(255,255,255,.18);
+}
+
+.apiary-map-premium-summary strong {
+  color: #F7F5EE;
+  font-size: 2rem;
+}
+
+.apiary-map-premium-summary small {
+  color: rgba(255,255,255,.76);
+  font-weight: 850;
+}
+
+.apiary-map-premium-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 14px 0;
+}
+
+.apiary-map-premium-legend span,
+.apiary-map-premium-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 30px;
+  padding: 7px 11px;
+  border-radius: 999px;
+  font-weight: 950;
+  font-size: .78rem;
+}
+
+.apiary-map-premium-legend b {
+  font-size: .85rem;
+}
+
+.legend-ok {
+  color: #0F6B46;
+  background: rgba(15,107,70,.12);
+}
+
+.legend-warning {
+  color: #7A5314;
+  background: rgba(165,124,46,.16);
+}
+
+.legend-alarm {
+  color: #B42318;
+  background: rgba(180,35,24,.12);
+}
+
+.legend-muted {
+  color: #637069;
+  background: rgba(99,112,105,.12);
+}
+
+.apiary-map-premium-message {
+  padding: 16px;
+  border-radius: 26px;
+  background: #FFFFFF;
+  border: 1px solid rgba(15,61,46,.10);
+  box-shadow: 0 12px 28px rgba(15,61,46,.08);
+}
+
+.apiary-map-premium-message strong {
+  color: #0F3D2E;
+  font-size: 1.08rem;
+}
+
+.apiary-map-premium-message p {
+  margin: 5px 0 0;
+  color: #637069;
+  font-weight: 650;
+}
+
+.apiary-map-premium-scroll {
+  margin-top: 14px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 2px 2px 14px;
+  scrollbar-width: thin;
+}
+
+.apiary-map-premium-board {
+  display: grid;
+  gap: 14px;
+  min-width: min-content;
+}
+
+.apiary-map-premium-row {
+  display: grid;
+  grid-template-columns: 82px 1fr;
+  align-items: center;
+  gap: 12px;
+}
+
+.apiary-map-premium-row-label {
+  color: #0F3D2E;
+  font-weight: 950;
+  font-size: .84rem;
+  text-align: right;
+}
+
+.apiary-map-premium-row-hives {
+  display: flex;
+  gap: 12px;
+  min-width: max-content;
+  padding: 10px;
+  border-radius: 30px;
+  background: rgba(247,242,232,.72);
+  border: 1px solid rgba(15,61,46,.08);
+}
+
+.apiary-map-premium-tile {
+  position: relative;
+  width: 170px;
+  min-height: 226px;
+  display: grid;
+  grid-template-rows: auto 96px 1fr auto;
+  gap: 8px;
+  padding: 12px;
+  border: 0;
+  border-radius: 28px;
+  background: #FFFFFF;
+  color: #0F3D2E;
+  text-align: left;
+  box-shadow: 0 14px 34px rgba(15,61,46,.10);
+  cursor: pointer;
+}
+
+.apiary-map-premium-tile:focus-visible {
+  outline: 3px solid #A57C2E;
+  outline-offset: 3px;
+}
+
+.apiary-map-premium-tile.status-ok {
+  border: 1px solid rgba(15,107,70,.24);
+}
+
+.apiary-map-premium-tile.status-uwaga {
+  border: 1px solid rgba(165,124,46,.34);
+}
+
+.apiary-map-premium-tile.status-alarm {
+  border: 1px solid rgba(180,35,24,.34);
+}
+
+.apiary-map-premium-tile.status-brak-pozycji {
+  border: 1px dashed rgba(99,112,105,.34);
+}
+
+.apiary-map-premium-badge {
+  justify-self: start;
+  min-height: 26px;
+  padding: 6px 9px;
+}
+
+.status-ok .apiary-map-premium-badge {
+  color: #0F6B46;
+  background: rgba(15,107,70,.12);
+}
+
+.status-uwaga .apiary-map-premium-badge {
+  color: #7A5314;
+  background: rgba(165,124,46,.16);
+}
+
+.status-alarm .apiary-map-premium-badge {
+  color: #B42318;
+  background: rgba(180,35,24,.12);
+}
+
+.status-brak-pozycji .apiary-map-premium-badge {
+  color: #637069;
+  background: rgba(99,112,105,.12);
+}
+
+.apiary-map-premium-visual {
+  display: grid;
+  place-items: center;
+  overflow: visible;
+}
+
+.apiary-map-premium-visual .asset-mini,
+.apiary-map-premium-visual .clean-hive-image {
+  width: 96px !important;
+  height: 96px !important;
+  object-fit: contain !important;
+}
+
+.apiary-map-premium-copy {
+  display: grid;
+  gap: 3px;
+}
+
+.apiary-map-premium-copy strong {
+  color: #0F3D2E;
+  font-size: 1.05rem;
+  font-weight: 950;
+  line-height: 1.05;
+}
+
+.apiary-map-premium-copy span,
+.apiary-map-premium-copy small {
+  color: #637069;
+  font-weight: 750;
+  line-height: 1.25;
+}
+
+.apiary-map-premium-footer {
+  display: grid;
+  grid-template-columns: 1fr 46px;
+  align-items: center;
+  gap: 9px;
+}
+
+.apiary-map-premium-strength {
+  height: 9px;
+  border-radius: 999px;
+  background: rgba(165,124,46,.16);
+  overflow: hidden;
+}
+
+.apiary-map-premium-strength i {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #0F3D2E, #2F7D5B, #A57C2E);
+}
+
+.apiary-map-premium-queen {
+  width: 46px !important;
+  height: 46px !important;
+}
+
+.apiary-map-premium-queen img:first-child {
+  width: 44px !important;
+  height: 44px !important;
+}
+
+.apiary-map-premium-queen .queen-year-dot21 {
+  width: 11px !important;
+  height: 11px !important;
+  left: 50% !important;
+  top: 43% !important;
+}
+
+.apiary-map-premium-unpositioned {
+  margin-top: 16px;
+  padding: 16px;
+  border-radius: 30px;
+  background: #FFFFFF;
+  border: 1px solid rgba(15,61,46,.10);
+  box-shadow: 0 12px 28px rgba(15,61,46,.08);
+}
+
+.apiary-map-premium-unpositioned header {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.apiary-map-premium-unpositioned header span {
+  color: #637069;
+  font-weight: 950;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  font-size: .78rem;
+}
+
+.apiary-map-premium-unpositioned header strong {
+  color: #0F3D2E;
+}
+
+.apiary-map-premium-unpositioned p {
+  margin: 8px 0 14px;
+  color: #637069;
+  font-weight: 650;
+}
+
+.apiary-map-premium-unpositioned-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(158px, 1fr));
+  gap: 12px;
+}
+
+.apiary-map-premium-unpositioned-grid .apiary-map-premium-tile {
+  width: auto;
+}
+
+.apiary-map-premium-empty {
+  margin-top: 16px;
+  display: grid;
+  gap: 10px;
+  place-items: center;
+  text-align: center;
+  padding: 28px;
+  border-radius: 30px;
+  background: #FFFFFF;
+  border: 1px solid rgba(15,61,46,.10);
+  box-shadow: 0 12px 28px rgba(15,61,46,.08);
+}
+
+.apiary-map-premium-empty strong {
+  color: #0F3D2E;
+  font-size: 1.2rem;
+}
+
+.apiary-map-premium-empty p {
+  margin: 0;
+  color: #637069;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .apiary-map-premium-tile {
+    transition: transform .18s ease, box-shadow .18s ease;
+  }
+
+  .apiary-map-premium-tile:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 20px 48px rgba(15,61,46,.14);
+  }
+}
+
+@media (max-width: 680px) {
+  .apiary-map-premium-page {
+    padding: 10px 10px 116px;
+    overflow-x: hidden;
+  }
+
+  .apiary-map-premium-hero {
+    grid-template-columns: 1fr;
+    border-radius: 30px;
+    padding: 20px;
+  }
+
+  .apiary-map-premium-summary {
+    width: 74px;
+    height: 74px;
+  }
+
+  .apiary-map-premium-row {
+    grid-template-columns: 1fr;
+  }
+
+  .apiary-map-premium-row-label {
+    text-align: left;
+    padding-left: 4px;
+  }
+
+  .apiary-map-premium-scroll {
+    max-width: calc(100vw - 20px);
+  }
+
+  .apiary-map-premium-row-hives {
+    padding: 8px;
+    border-radius: 24px;
+  }
+
+  .apiary-map-premium-tile {
+    width: 154px;
+    min-height: 214px;
+    border-radius: 24px;
+  }
+
+  .apiary-map-premium-visual .asset-mini,
+  .apiary-map-premium-visual .clean-hive-image {
+    width: 88px !important;
+    height: 88px !important;
+  }
+
+  body,
+  #root,
+  .app-shell {
+    overflow-x: hidden;
+  }
+}

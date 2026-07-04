@@ -1,0 +1,28 @@
+/* BgApiary 2.1 GPS Location */
+
+.gps-location-button {
+  min-height: 50px;
+  border: 0;
+  border-radius: 999px;
+  padding: 0 18px;
+  color: #102820;
+  background: linear-gradient(135deg, #F4D47A, #C99A2E);
+  font-weight: 950;
+  box-shadow: 0 12px 28px rgba(165,124,46,.18);
+  cursor: pointer;
+}
+
+.gps-location-button:disabled {
+  opacity: .7;
+  cursor: wait;
+}
+
+.gps-location-status {
+  margin: -2px 0 8px;
+  padding: 12px 14px;
+  border-radius: 18px;
+  background: rgba(15,61,46,.07);
+  color: #0F3D2E;
+  font-weight: 750;
+  line-height: 1.35;
+}
