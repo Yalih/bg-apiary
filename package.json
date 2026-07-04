@@ -1,7 +1,7 @@
 {
   "name": "bgapiary",
   "private": true,
-  "version": "2.1.0-apiary-edit-gps-fix",
+  "version": "2.0.0-ui-branding",
   "type": "module",
   "scripts": {
     "dev": "vite --host 0.0.0.0",

@@ -1,5 +1,16 @@
 # Changelog
 
+## Sprint 2.0 - UI and branding redesign
+
+- Ustawiono wersję aplikacji jako **BG Apiary v2.0**.
+- Dodano oficjalne logo BG Apiary w wariantach: mark, horizontal dark, horizontal light i stacked.
+- Dodano favicon, ikony PWA 192x192 oraz 512x512.
+- Dodano katalog `public/brand/` z ikonami modułów i grafikami placeholderów.
+- Przebudowano dashboard w motywie premium: hero, statystyki, szybkie akcje, pogoda, pożytek, pasieki, zadania i asystent.
+- Dodano desktopowy sidebar, topbar oraz spójne użycie brandingu.
+- Przygotowano fundament jasnego i ciemnego motywu.
+- Dodano dokumentację `docs/SPRINT_2_UI_BRANDING.md` i `docs/DESIGN_SYSTEM.md`.
+
 ## Sprint 1 - project cleanup
 
 - Added production-ready README.

@@ -1,13 +1,27 @@
 # BG Apiary
 
-**BG Apiary** is a beekeeping management web application for apiaries, hives, inspections, queens, feeding, treatments, weather notes and seasonal planning.
+**BG Apiary** is a premium beekeeping management web application for apiaries, hives, inspections, queens, feeding, treatments, weather notes and seasonal planning.
+
+Slogan: **Smart Beekeeping Management**.
 
 Production: https://bgapiary.pro
 
 ## Current status
 
-Version: **2.1.0 Apiary Edit GPS Fix**  
+Version: **BG Apiary v2.0 - UI and Branding Redesign**  
 Deployment: **GitHub Actions → VPS → Nginx → HTTPS**
+
+
+## Sprint 2.0 - UI and Branding
+
+Sprint 2.0 introduces the official BG Apiary visual identity:
+
+- new logo and favicon,
+- PWA icons,
+- premium dashboard redesign,
+- desktop sidebar and sticky topbar,
+- mobile-first layout polish,
+- design system documentation.
 
 ## Main features
 
