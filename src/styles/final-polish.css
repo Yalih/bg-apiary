@@ -1,0 +1,210 @@
+/* BG Apiary v2.0.9 - final UI polish before Sprint 3.0 */
+:root {
+  --app-version: "2.0.9";
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-solid: var(--surface-solid);
+  --color-text: var(--text);
+  --color-muted: var(--muted);
+  --color-graphite: var(--text);
+  --color-honey: var(--brand);
+  --shadow-card: var(--shadow-md);
+  --focus-visible-ring: 0 0 0 4px var(--focus-ring, rgba(255, 183, 3, 0.36));
+  --app-transition: 160ms ease;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--bg);
+  color: var(--text);
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+}
+
+img,
+svg {
+  max-width: 100%;
+}
+
+button,
+a,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-visible-ring);
+}
+
+.app-layout-shell,
+.app-layout-main,
+.app-layout-content {
+  color: var(--text);
+}
+
+.app-topbar,
+.app-sidebar,
+.app-mobile-nav,
+.dashboard-v203-hero__copy,
+.dashboard-v203-hero__card,
+.dashboard-v203-panel,
+.dashboard-v203-weather,
+.dashboard-v203-stat,
+.ui-card,
+.ui-modal__panel,
+.theme-toggle__button,
+.theme-toggle__segments {
+  transition: background var(--app-transition), color var(--app-transition), border-color var(--app-transition), box-shadow var(--app-transition);
+}
+
+.app-topbar__brand strong,
+.app-topbar__context strong,
+.dashboard-v203 h1,
+.dashboard-v203 h2,
+.dashboard-v203 h3,
+.ui-card__title,
+.ui-page-header__title {
+  color: inherit;
+}
+
+.app-topbar__brand span,
+.app-topbar__context span,
+.dashboard-v203 small,
+.ui-field__message {
+  color: var(--muted);
+}
+
+.app-sidebar__item.is-active,
+.app-mobile-nav button.is-active,
+.theme-toggle__segments button.is-active {
+  color: #111827;
+}
+
+.dashboard-v203 {
+  color: var(--text);
+}
+
+.dashboard-v203-hero__card,
+.dashboard-v203-panel,
+.dashboard-v203-weather,
+.dashboard-v203-stat {
+  background: var(--surface);
+  border-color: var(--line);
+  color: var(--text);
+}
+
+.dashboard-v203-section-head button,
+.dashboard-v203-weather__actions button {
+  border: 1px solid var(--line);
+  background: var(--surface-solid);
+  color: var(--text);
+}
+
+.dashboard-v203-hero__card button {
+  background: linear-gradient(135deg, var(--brand), var(--brand-strong));
+  color: #111827;
+}
+
+.dashboard-v203-empty,
+.dashboard-v203-task,
+.dashboard-v203-health-list button,
+.dashboard-v203-action,
+.dashboard-v203-apiary-summary button,
+.dashboard-v203-timeline article {
+  background: color-mix(in srgb, var(--surface-solid) 86%, transparent);
+  border-color: var(--line);
+  color: var(--text);
+}
+
+[data-theme="dark"] .dashboard-v203-hero__card,
+.theme-dark .dashboard-v203-hero__card,
+[data-theme="dark"] .dashboard-v203-panel,
+.theme-dark .dashboard-v203-panel,
+[data-theme="dark"] .dashboard-v203-weather,
+.theme-dark .dashboard-v203-weather,
+[data-theme="dark"] .dashboard-v203-stat,
+.theme-dark .dashboard-v203-stat {
+  background: rgba(17, 24, 39, 0.82);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+[data-theme="dark"] .dashboard-v203-section-head button,
+.theme-dark .dashboard-v203-section-head button,
+[data-theme="dark"] .dashboard-v203-weather__actions button,
+.theme-dark .dashboard-v203-weather__actions button {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text);
+}
+
+[data-theme="dark"] .dashboard-v203-empty,
+.theme-dark .dashboard-v203-empty,
+[data-theme="dark"] .dashboard-v203-task,
+.theme-dark .dashboard-v203-task,
+[data-theme="dark"] .dashboard-v203-health-list button,
+.theme-dark .dashboard-v203-health-list button,
+[data-theme="dark"] .dashboard-v203-action,
+.theme-dark .dashboard-v203-action,
+[data-theme="dark"] .dashboard-v203-apiary-summary button,
+.theme-dark .dashboard-v203-apiary-summary button,
+[data-theme="dark"] .dashboard-v203-timeline article,
+.theme-dark .dashboard-v203-timeline article {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.11);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]):not([data-theme="dark"]) .dashboard-v203-hero__card,
+  :root:not([data-theme="light"]):not([data-theme="dark"]) .dashboard-v203-panel,
+  :root:not([data-theme="light"]):not([data-theme="dark"]) .dashboard-v203-weather,
+  :root:not([data-theme="light"]):not([data-theme="dark"]) .dashboard-v203-stat {
+    background: rgba(17, 24, 39, 0.82);
+    border-color: rgba(255, 255, 255, 0.12);
+  }
+}
+
+.offline-page,
+.pwa-offline {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: var(--bg, #fff8e6);
+  color: var(--text, #111827);
+}
+
+@media (max-width: 760px) {
+  .app-layout-content {
+    scroll-padding-bottom: calc(var(--mobile-nav-height, 76px) + env(safe-area-inset-bottom, 0px) + 28px);
+  }
+
+  .dashboard-v203-panel,
+  .dashboard-v203-weather,
+  .dashboard-v203-stat,
+  .ui-card {
+    box-shadow: var(--shadow-sm);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}

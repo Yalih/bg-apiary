@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
+  <title id="title">BG Apiary icon</title>
+  <desc id="desc">Minimalistyczna pszczoła w sześciokącie plastra miodu.</desc>
+  <defs>
+    <linearGradient id="honey" x1="20" y1="10" x2="108" y2="118" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFC93C"/>
+      <stop offset="1" stop-color="#FF9F1C"/>
+    </linearGradient>
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#000" flood-opacity="0.22"/>
+    </filter>
+  </defs>
+  <path d="M64 7 113.4 35.5v57L64 121 14.6 92.5v-57L64 7Z" fill="#111827" stroke="url(#honey)" stroke-width="6" filter="url(#softShadow)"/>
+  <path d="M41 66c0-15 11-26 25-26 14 0 25 11 25 26 0 17-12 29-25 29S41 83 41 66Z" fill="url(#honey)" stroke="#0B1120" stroke-width="4"/>
+  <path d="M46 56h40M43 68h46M48 80h35" stroke="#0B1120" stroke-width="8" stroke-linecap="round"/>
+  <path d="M42 54c-12-5-20-14-17-22 3-8 16-7 26 2 6 5 8 12 5 17-2 4-8 5-14 3Z" fill="#FFFFFF" fill-opacity="0.92" stroke="#0B1120" stroke-width="4"/>
+  <path d="M85 54c12-5 20-14 17-22-3-8-16-7-26 2-6 5-8 12-5 17 2 4 8 5 14 3Z" fill="#FFFFFF" fill-opacity="0.92" stroke="#0B1120" stroke-width="4"/>
+  <circle cx="55" cy="42" r="5" fill="#0B1120"/>
+  <circle cx="74" cy="42" r="5" fill="#0B1120"/>
+  <path d="M66 37c1-9 7-15 15-18M62 37c-1-9-7-15-15-18" stroke="#FFC93C" stroke-width="4" stroke-linecap="round"/>
+</svg>

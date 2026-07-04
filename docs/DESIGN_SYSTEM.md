@@ -1,73 +1,89 @@
-# BG Apiary Design System v2.0
+# BG Apiary Design System v2.0.1
 
-## Brand promise
-
-**BG Apiary - Smart Beekeeping Management**
-
-A premium, practical application for beekeepers who need fast access to apiaries, hives, queens, inspections, tasks, weather and statistics.
-
-## Logo
-
-Core logo elements:
-
-- bee symbol,
-- honeycomb hexagon,
-- gold, black and white palette,
-- professional, high-contrast appearance.
-
-Logo files:
+Sprint 2.0.1 wprowadza pierwszy rzeczywisty design system dla BG Apiary. System jest oparty o tokeny CSS w pliku:
 
 ```text
-public/brand/logo-mark.svg
-public/brand/logo-horizontal-dark.svg
-public/brand/logo-horizontal-light.svg
-public/brand/logo-stacked.svg
+src/styles/design-tokens.css
 ```
 
-## Colors
+## Założenia wizualne
 
-| Token | Value | Usage |
-|---|---:|---|
-| Navy | `#0B1118` | app shell, premium dark surfaces |
-| Gold | `#FFC107` | primary brand color, icons, CTAs |
-| Gold strong | `#FFB300` | gradients and accents |
-| White | `#FFFFFF` | cards and light surfaces |
-| Green | `#4CAF50` | success and OK state |
-| Orange | `#FF9800` | warning state |
-| Red | `#EF4444` | danger and problem state |
-| Blue | `#2196F3` | information state |
+BG Apiary ma wyglądać jak profesjonalna aplikacja premium dla pszczelarzy: spokojna, czytelna, nowoczesna i wygodna w użyciu w terenie.
 
-## Typography
+## Branding
 
-Primary stack:
+- Nazwa: **BG Apiary**
+- Wersja: **v2.0.1**
+- Slogan: **Smart Beekeeping Management**
+- Motyw: pszczoła + sześciokąt/plaster miodu
+
+## Kolory główne
+
+| Token | Zastosowanie |
+|---|---|
+| `--color-honey-500` | główny kolor marki |
+| `--color-honey-400` | akcenty i highlight |
+| `--color-honey-700` | mocny akcent, tekst na jasnym tle |
+| `--color-graphite-950` | ciemne tło premium |
+| `--color-graphite-900` | powierzchnie ciemne |
+| `--color-white` | biel i powierzchnie jasne |
+
+## Statusy
+
+| Token | Znaczenie |
+|---|---|
+| `--status-ok` | stan dobry, wykonane, zdrowe |
+| `--status-warning` | ostrzeżenie, wymaga uwagi |
+| `--status-danger` | problem, pilne działanie |
+| `--status-info` | informacja, neutralny komunikat |
+
+## Tryby
+
+Design system obsługuje:
+
+- tryb jasny jako domyślny,
+- tryb ciemny przez `.theme-dark` lub `[data-theme="dark"]`,
+- automatyczny tryb ciemny przez `prefers-color-scheme`, jeśli aplikacja nie wymusi `data-theme="light"`.
+
+## Typografia
+
+Główna rodzina fontów:
+
+```css
+--font-sans: Inter, Poppins, ui-sans-serif, system-ui, ...
+--font-display: Poppins, Inter, ui-sans-serif, system-ui, ...
+```
+
+## Spacing
+
+Tokeny spacingu od `--space-1` do `--space-12` pozwalają utrzymać rytm i porządek w kolejnych sprintach.
+
+## Radiusy
+
+- `--radius-sm` - małe elementy,
+- `--radius-md` - przyciski i karty kompaktowe,
+- `--radius-lg` - większe karty,
+- `--radius-xl` - hero, panele, layout premium,
+- `--radius-pill` - badge i pill buttons.
+
+## Cienie
+
+- `--shadow-sm`
+- `--shadow-md`
+- `--shadow-lg`
+- `--shadow-brand`
+
+## Pliki brandingu
 
 ```text
-Inter, Segoe UI, system-ui, sans-serif
+public/brand/bg-apiary-logo.svg
+public/brand/bg-apiary-logo-dark.svg
+public/brand/bg-apiary-icon.svg
+public/favicon.svg
+public/icons/icon-192.png
+public/icons/icon-512.png
 ```
 
-Rules:
+## Kolejny krok
 
-- heavy headings,
-- short labels in uppercase with letter spacing,
-- readable body text,
-- large touch targets on mobile.
-
-## Components
-
-Core UI patterns:
-
-- premium hero,
-- glass cards,
-- statistic cards,
-- module icon buttons,
-- quick action panel,
-- desktop sidebar,
-- mobile bottom navigation,
-- status badges.
-
-## Mobile rules
-
-- one-column dashboard under 720px,
-- bottom navigation remains active,
-- tap targets should stay around 44-48px,
-- cards must be readable in outdoor conditions.
+Sprint 2.0.2 powinien wykorzystać te tokeny do realnej przebudowy dashboardu. Nie należy już dopisywać nowych kolorów bezpośrednio w komponentach, bo wtedy znowu powstanie wizualny bazar, a takich atrakcji mamy w życiu wystarczająco dużo.

@@ -1,122 +1,48 @@
-# BG Apiary
+# BG Apiary v2.0.9
 
-**BG Apiary** is a premium beekeeping management web application for apiaries, hives, inspections, queens, feeding, treatments, weather notes and seasonal planning.
+**Smart Beekeeping Management**
 
-Slogan: **Smart Beekeeping Management**.
+BG Apiary to aplikacja dla pszczelarzy do prowadzenia pasiek, uli, przeglądów, zadań, pogody, pożytków i raportów.
 
-Production: https://bgapiary.pro
+## Aktualna wersja
 
-## Current status
+- Sprint: **2.0.9**
+- Wersja aplikacji: **BG Apiary v2.0.9**
+- Zakres: **Final polish Sprintu 2.0 i przygotowanie do Sprintu 3.0**
 
-Version: **BG Apiary v2.0 - UI and Branding Redesign**  
-Deployment: **GitHub Actions → VPS → Nginx → HTTPS**
+## Co zawiera Sprint 2.0
 
+- `2.0.1` - branding i design system.
+- `2.0.2` - layout aplikacji.
+- `2.0.3` - dashboard v2.
+- `2.0.4` - system komponentów UI.
+- `2.0.5` - ikony i grafiki aplikacyjne.
+- `2.0.6` - tryb jasny/ciemny/systemowy.
+- `2.0.7` - responsywność i mobile polish.
+- `2.0.8` - PWA i instalacja aplikacji.
+- `2.0.9` - final polish UI, porządek wersji i przygotowanie do modułu Ule.
 
-## Sprint 2.0 - UI and Branding
+## Sprint 2.0.9
 
-Sprint 2.0 introduces the official BG Apiary visual identity:
+- Ujednolicono numerację wersji w aplikacji, topbarze, `index.html`, manifeście i dokumentacji.
+- Dodano `src/version.ts` jako jedno miejsce prawdy dla wersji widocznej w UI.
+- Dodano `src/styles/final-polish.css` dla spójności layoutu, dashboardu, PWA/offline i trybów kolorystycznych.
+- Uporządkowano dokumentację końcową Sprintu 2.0.
+- Przygotowano wejście do Sprintu 3.0: Moduł Ule.
 
-- new logo and favicon,
-- PWA icons,
-- premium dashboard redesign,
-- desktop sidebar and sticky topbar,
-- mobile-first layout polish,
-- design system documentation.
-
-## Main features
-
-- apiary dashboard,
-- hive cards and hive details,
-- inspection notes,
-- queen marking dot system,
-- apiary location and GPS fixes,
-- weather and nectar screens,
-- visual asset system,
-- local data persistence in the current frontend version.
-
-## Tech stack
-
-- React 18,
-- TypeScript,
-- Vite,
-- CSS,
-- GitHub Actions,
-- Nginx on VPS.
-
-## Project structure
-
-```text
-bg-apiary/
-├── .github/workflows/      # CI/CD deployment workflow
-├── docs/                   # technical documentation and roadmap
-├── public/                 # PWA manifest and static files
-├── src/                    # application source code
-├── index.html              # Vite entry HTML
-├── package.json            # scripts and dependencies
-├── vite.config.ts          # Vite config
-└── README.md
-```
-
-## Local development
+## Development
 
 ```bash
 npm install
-npm run dev
-```
-
-Open the local URL shown by Vite, usually:
-
-```text
-http://localhost:5173
-```
-
-## Build
-
-```bash
 npm run build
 ```
 
-The production build is generated in:
-
-```text
-dist/
-```
-
-## Tests
-
-```bash
-npm test
-```
-
-## Deployment
-
-Deployment is automated through GitHub Actions.
-
-Typical workflow:
+## Wdrożenie
 
 ```bash
 git add .
-git commit -m "Describe change"
+git commit -m "Sprint 2.0.9 - final UI polish"
 git push
 ```
 
-After pushing to `main`, GitHub Actions connects to the VPS and runs:
-
-```bash
-/usr/local/bin/deploy-bgapiary
-```
-
-The site is then updated at:
-
-```text
-https://bgapiary.pro
-```
-
-## Documentation
-
-Start here:
-
-- `docs/INDEX.md` - documentation map,
-- `docs/ROADMAP.md` - sprint roadmap,
-- `docs/ARCHITECTURE.md` - architecture overview,
-- `docs/CHANGELOG.md` - release history.
+Po `git push` GitHub Actions wdraża aplikację na `https://bgapiary.pro`.

@@ -1,19 +1,17 @@
-import { useMemo, useState } from 'react';
-import type { ApiaryState } from '../models/apiary';
-import { TaskCard } from '../components/TaskCard';
-import { BrandLogo } from '../components/BrandLogo';
-import { ModuleIcon } from '../components/ModuleIcon';
+import { useMemo } from 'react';
+import type { ApiaryState, Hive, Task } from '../models/apiary';
+import { getUrgentTasks } from '../logic/tasks';
 import { buildAlertCenter } from '../logic/alerts';
 import { buildReminderSummary } from '../logic/reminders';
-import { getUrgentTasks } from '../logic/tasks';
-import { buildColonyRanking, buildDailyPriority, buildPredictions20, buildRecommendations20 } from '../logic/assistant20';
-import { buildNotificationCenter } from '../logic/rcQuality20';
-import { globalSearch20 } from '../logic/search20';
-import { getSyncStatus } from '../logic/sync20';
+import { buildDailyPriority } from '../logic/assistant20';
 import { buildDashboardWeatherCard, buildMissingLocationWeather, getApiaryCoordinates, selectApiaryForWeather } from '../logic/weatherAccuracy21';
 import { getCurrentNectarFlow } from '../logic/nectarAccuracy21';
-import { buildDashboardApiaries21 } from '../logic/apiaryLocation21';
-import { HiveCardImage, WeatherIllustration, NectarIllustration } from '../components/bgapiary/CleanAssets';
+import { DashboardStatCard } from '../components/dashboard/DashboardStatCard';
+import { QuickActionsPanel } from '../components/dashboard/QuickActionsPanel';
+import { WeatherWidget } from '../components/dashboard/WeatherWidget';
+import { InspectionTimeline } from '../components/dashboard/InspectionTimeline';
+import { ApiaryStatusPanel } from '../components/dashboard/ApiaryStatusPanel';
+import '../styles/dashboard-v203.css';
 
 interface DashboardPageProps {
   state: ApiaryState;
@@ -24,27 +22,57 @@ interface DashboardPageProps {
   onGoCalendar: () => void;
   onOpenWeather: () => void;
   onOpenNectar: () => void;
+  onCreateApiary: () => void;
+  onCreateHive: () => void;
+  onCreateInspection: () => void;
+  onCreateTask: () => void;
 }
 
-const appVersion = 'BG Apiary v2.0';
+function formatShortDate(value: string): string {
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return value;
+  return new Intl.DateTimeFormat('pl-PL', { day: '2-digit', month: 'short' }).format(date);
+}
 
-export function DashboardPage({ state, onOpenHive, onGoApiaries, onCompleteTask, onOpenTask, onGoCalendar, onOpenWeather, onOpenNectar }: DashboardPageProps) {
-  const [query, setQuery] = useState('');
+function taskPriorityLabel(task: Task): string {
+  if (task.priority === 'urgent') return 'Pilne';
+  if (task.priority === 'high') return 'Ważne';
+  if (task.priority === 'medium') return 'Plan';
+  return 'Niskie';
+}
 
-  const urgentTasks = getUrgentTasks(state.tasks).slice(0, 3);
-  const alerts = buildAlertCenter(state).slice(0, 3);
-  const reminders = buildReminderSummary(state.tasks);
-  const notifications = buildNotificationCenter(state).slice(0, 2);
-  const dailyPriority = buildDailyPriority(state);
-  const recommendations = buildRecommendations20(state).slice(0, 2);
-  const predictions = buildPredictions20(state).slice(0, 2);
-  const ranking = buildColonyRanking(state);
-  const syncStatus = getSyncStatus(state);
-  const searchResults = useMemo(() => globalSearch20(state, query).slice(0, 5), [state, query]);
-  const apiaryCards = buildDashboardApiaries21(state).slice(0, 4);
+function hiveHealthLabel(hive: Hive): string {
+  if (hive.strength >= 8) return 'Mocna rodzina';
+  if (hive.strength <= 4) return 'Do obserwacji';
+  if (hive.queen.status === 'queenless' || hive.familyStatus === 'queenless') return 'Ryzyko bezmatka';
+  return 'Stabilnie';
+}
+
+export function DashboardPage({
+  state,
+  onOpenHive,
+  onGoApiaries,
+  onCompleteTask,
+  onOpenTask,
+  onGoCalendar,
+  onOpenWeather,
+  onOpenNectar,
+  onCreateApiary,
+  onCreateHive,
+  onCreateInspection,
+  onCreateTask
+}: DashboardPageProps) {
+  const openTasks = useMemo(() => state.tasks.filter(task => task.status !== 'done'), [state.tasks]);
+  const urgentTasks = useMemo(() => getUrgentTasks(state.tasks).slice(0, 4), [state.tasks]);
+  const alerts = useMemo(() => buildAlertCenter(state).slice(0, 3), [state]);
+  const reminders = useMemo(() => buildReminderSummary(state.tasks), [state.tasks]);
+  const dailyPriority = useMemo(() => buildDailyPriority(state), [state]);
+  const strongHives = useMemo(() => state.hives.filter(hive => hive.strength >= 8), [state.hives]);
+  const lastInspection = useMemo(() => [...state.inspections].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())[0], [state.inspections]);
+
   const weatherApiary = selectApiaryForWeather(state);
   const weatherCoords = getApiaryCoordinates(weatherApiary ?? undefined);
-  const accurateWeather = weatherCoords && weatherApiary
+  const weatherSnapshot = weatherCoords && weatherApiary
     ? {
         ...buildMissingLocationWeather(weatherApiary),
         source: 'offline-cache' as const,
@@ -53,199 +81,127 @@ export function DashboardPage({ state, onOpenHive, onGoApiaries, onCompleteTask,
         temperatureC: 0,
         windKmh: 0,
         precipitationMm: 0,
-        recommendation: 'Dane pogodowe zostaną pobrane z Open-Meteo',
-        message: 'Dane pogodowe z Open-Meteo'
+        recommendation: 'Podłączone pod lokalizację pasieki. Dane online zostaną spięte w kolejnym module.',
+        message: 'Gotowe pod dane pogodowe'
       }
     : buildMissingLocationWeather(weatherApiary);
-  const weatherCard = buildDashboardWeatherCard(accurateWeather);
-  const nectar = getCurrentNectarFlow(state, weatherApiary, accurateWeather);
-  const todayWorkCount = reminders.todayCount || urgentTasks.length;
-  const strongFamilies = state.hives.filter(hive => hive.strength >= 8).length;
-  const hivesToCheck = state.hives.filter(hive => hive.strength <= 5 || hive.foodLevel === 'niski').length;
-  const strongest = ranking[0] ? state.hives.find(hive => hive.id === ranking[0].hiveId) : undefined;
-
-  const stats = [
-    { label: 'Liczba uli', value: state.hives.length, helper: 'Wszystkie rodziny', icon: 'hives' as const, tone: 'gold' },
-    { label: 'Silne rodziny', value: strongFamilies, helper: `${state.hives.length ? Math.round((strongFamilies / state.hives.length) * 100) : 0}% pasieki`, icon: 'statistics' as const, tone: 'green' },
-    { label: 'Prace dzisiaj', value: todayWorkCount, helper: 'Plan dnia', icon: 'tasks' as const, tone: 'blue' },
-    { label: 'Do kontroli', value: hivesToCheck, helper: 'Pokarm / siła', icon: 'alerts' as const, tone: hivesToCheck ? 'orange' : 'green' }
-  ];
+  const weatherCard = buildDashboardWeatherCard(weatherSnapshot);
+  const nectar = getCurrentNectarFlow(state, weatherApiary, weatherSnapshot);
 
   return (
-    <main className="dashboard-v20">
-      <section className="dashboard-hero-v20">
-        <div className="dashboard-hero-copy-v20">
-          <div className="hero-brand-row-v20">
-            <BrandLogo variant="mark" />
-            <div>
-              <span>{appVersion}</span>
-              <strong>Smart Beekeeping Management</strong>
-            </div>
-          </div>
-          <h1>Profesjonalny pulpit Twojej pasieki</h1>
-          <p>Ule, matki, przeglądy, zadania, pogoda i decyzje pszczelarskie w jednym, spójnym systemie premium.</p>
-          <div className="hero-actions-v20">
-            <button onClick={onGoApiaries}><ModuleIcon name="gps" /> Pasieki</button>
-            <button onClick={onGoCalendar}><ModuleIcon name="calendar" /> Plan dnia</button>
-            <button onClick={onOpenWeather}><ModuleIcon name="weather" /> Pogoda</button>
-          </div>
+    <main className="dashboard-v203" aria-labelledby="dashboard-v203-title">
+      <section className="dashboard-v203-hero">
+        <div className="dashboard-v203-hero__copy">
+          <span>BG Apiary v2.0.9</span>
+          <h1 id="dashboard-v203-title">Panel właściciela pasieki</h1>
+          <p>Dashboard v2 porządkuje najważniejsze dane: rodziny, prace, pogodę, pożytek i ostatnie przeglądy. W końcu ekran główny robi coś więcej niż tylko istnieje.</p>
         </div>
-        <button className="weather-orb-v20" onClick={onOpenWeather}>
-          <WeatherIllustration type="sun" />
-          <span>{weatherCard.subtitle}</span>
-          <strong>{weatherCard.title}</strong>
-          <small>{weatherCard.recommendation}</small>
-        </button>
+        <div className="dashboard-v203-hero__card">
+          <span>Priorytet dnia</span>
+          <strong>{dailyPriority?.title ?? 'Sprawdź najbliższe prace'}</strong>
+          <p>{dailyPriority?.message ?? 'Brak pilnych alarmów. Utrzymaj rytm przeglądów i zaplanuj kolejne zadania.'}</p>
+          <button onClick={onGoCalendar}>Otwórz plan dnia</button>
+        </div>
       </section>
 
-      <section className="stat-grid-v20" aria-label="Szybkie statystyki">
-        {stats.map(stat => (
-          <article className={`stat-card-v20 tone-${stat.tone}`} key={stat.label}>
-            <span><ModuleIcon name={stat.icon} /></span>
-            <div>
-              <small>{stat.label}</small>
-              <strong>{stat.value}</strong>
-              <p>{stat.helper}</p>
+      <section className="dashboard-v203-stats" aria-label="Szybkie statystyki pasieki">
+        <DashboardStatCard label="Ule" value={state.hives.length} description={`${strongHives.length} silnych rodzin`} icon="🐝" tone="honey" />
+        <DashboardStatCard label="Otwarte zadania" value={openTasks.length} description={`${reminders.todayCount} zaplanowane na dziś`} icon="✅" tone="blue" />
+        <DashboardStatCard label="Alerty" value={alerts.length} description={alerts.length ? 'Wymagają sprawdzenia' : 'Brak pilnych ostrzeżeń'} icon="⚠️" tone={alerts.length ? 'red' : 'green'} />
+        <DashboardStatCard label="Ostatni przegląd" value={lastInspection ? formatShortDate(lastInspection.date) : 'Brak'} description={lastInspection ? 'Ostatni zapis w historii' : 'Dodaj pierwszy przegląd'} icon="📖" tone="graphite" />
+      </section>
+
+      <div className="dashboard-v203-grid">
+        <div className="dashboard-v203-main-column">
+          <QuickActionsPanel
+            onCreateInspection={onCreateInspection}
+            onCreateHive={onCreateHive}
+            onCreateTask={onCreateTask}
+            onCreateApiary={onCreateApiary}
+          />
+
+          <ApiaryStatusPanel
+            apiaries={state.apiaries}
+            hives={state.hives}
+            onOpenApiaries={onGoApiaries}
+            onOpenHive={onOpenHive}
+          />
+
+          <InspectionTimeline
+            inspections={state.inspections}
+            hives={state.hives}
+            onOpenHive={onOpenHive}
+            onCreateInspection={onCreateInspection}
+          />
+        </div>
+
+        <aside className="dashboard-v203-side-column" aria-label="Pogoda, pożytek i najbliższe zadania">
+          <WeatherWidget
+            title={weatherCard.title}
+            subtitle={`${weatherCard.subtitle} · ${nectar.label}: ${nectar.name}`}
+            recommendation={weatherCard.recommendation}
+            onOpenWeather={onOpenWeather}
+            onOpenNectar={onOpenNectar}
+          />
+
+          <section className="dashboard-v203-panel dashboard-v203-panel--tasks" aria-labelledby="urgent-tasks-title">
+            <div className="dashboard-v203-section-head">
+              <div>
+                <span>Najbliższe prace</span>
+                <h2 id="urgent-tasks-title">Co zrobić teraz</h2>
+              </div>
+              <button onClick={onGoCalendar}>Kalendarz</button>
             </div>
-          </article>
-        ))}
-      </section>
 
-      <section className="search-panel-v20">
-        <label>
-          <ModuleIcon name="dashboard" />
-          <input value={query} onChange={event => setQuery(event.target.value)} placeholder="Szukaj ula, pasieki, zadania, notatki..." />
-        </label>
-        {query.trim() && (
-          <div className="search-results-v20">
-            {searchResults.length === 0 ? <button onClick={onGoApiaries}>Brak wyników. Dodaj pierwszy ul.</button> : searchResults.map(result => (
-              <button key={`${result.type}-${result.id}`} onClick={() => result.type === 'ul' ? onOpenHive(result.id) : undefined}>
-                <strong>{result.title}</strong>
-                <span>{result.type} · {result.subtitle}</span>
-              </button>
-            ))}
-          </div>
-        )}
-      </section>
-
-      <section className="dashboard-grid-v20">
-        <article className="panel-v20 priority-panel-v20">
-          <header>
-            <span>2.0.1</span>
-            <h2>Rekomendacja dnia</h2>
-          </header>
-          <strong>{dailyPriority?.title ?? 'Sprawdź plan dnia'}</strong>
-          <p>{dailyPriority?.message ?? 'Brak pilnego alarmu. Skup się na najbliższych pracach i rodzinach do obserwacji.'}</p>
-          <div className="panel-badges-v20">
-            <b>{alerts.length ? 'Wymaga uwagi' : 'Spokojnie'}</b>
-            <small>{notifications.length || alerts.length} powiadomień</small>
-          </div>
-        </article>
-
-        <article className="panel-v20 nectar-panel-v20">
-          <header>
-            <span>2.0.2</span>
-            <h2>Pożytek i pogoda</h2>
-          </header>
-          <div className="nectar-row-v20">
-            <NectarIllustration name={nectar.name} />
-            <div>
-              <strong>{nectar.name}</strong>
-              <p>{nectar.recommendation}</p>
-              <button onClick={onOpenNectar}>Otwórz pożytki</button>
-            </div>
-          </div>
-        </article>
-
-        <article className="panel-v20 quick-actions-v20">
-          <header>
-            <span>2.0.3</span>
-            <h2>Szybkie akcje</h2>
-          </header>
-          <div>
-            <button onClick={onGoApiaries}><ModuleIcon name="hives" /> Dodaj / otwórz ul</button>
-            <button onClick={onGoCalendar}><ModuleIcon name="inspections" /> Przegląd</button>
-            <button onClick={onGoCalendar}><ModuleIcon name="tasks" /> Zadanie</button>
-            <button onClick={onOpenWeather}><ModuleIcon name="weather" /> Pogoda</button>
-          </div>
-        </article>
-      </section>
-
-      <section className="content-columns-v20">
-        <article className="panel-v20 apiaries-panel-v20">
-          <header>
-            <span>2.0.4</span>
-            <h2>Pasieki</h2>
-            <button onClick={onGoApiaries}>Wszystkie ›</button>
-          </header>
-          <div className="apiary-list-v20">
-            {apiaryCards.length === 0 ? (
-              <button className="empty-card-v20" onClick={onGoApiaries}>Dodaj pierwszą pasiekę</button>
-            ) : apiaryCards.map(apiary => (
-              <button key={apiary.id} onClick={onGoApiaries}>
-                <img src="/brand/placeholders/apiary.svg" alt="" />
-                <div>
-                  <strong>{apiary.name}</strong>
-                  <span>{apiary.location}</span>
-                  <p>{apiary.hiveCount} rodzin · {apiary.taskCount} prac · {apiary.alertCount ? `${apiary.alertCount} alert` : 'OK'}</p>
-                </div>
-              </button>
-            ))}
-          </div>
-        </article>
-
-        <article className="panel-v20 hives-panel-v20">
-          <header>
-            <span>2.0.5</span>
-            <h2>Najlepsze ule</h2>
-          </header>
-          <div className="hive-strip-v20">
-            {ranking.slice(0, 3).map(item => {
-              const hive = state.hives.find(value => value.id === item.hiveId);
-              if (!hive) return null;
-              return (
-                <button key={hive.id} onClick={() => onOpenHive(hive.id)}>
-                  <HiveCardImage hive={hive} />
-                  <strong>{hive.name}</strong>
-                  <span>Siła {hive.strength}/10</span>
-                </button>
-              );
-            })}
-            {ranking.length === 0 && <button className="empty-card-v20" onClick={onGoApiaries}>Dodaj ule do rankingu</button>}
-          </div>
-        </article>
-      </section>
-
-      <section className="content-columns-v20 bottom-v20">
-        <article className="panel-v20 tasks-panel-v20">
-          <header>
-            <span>2.0.6</span>
-            <h2>Najbliższe prace</h2>
-            <button onClick={onGoCalendar}>Kalendarz ›</button>
-          </header>
-          <div className="tasks-list-v20">
             {urgentTasks.length === 0 ? (
-              <button className="empty-card-v20" onClick={onGoCalendar}>Dodaj zadanie</button>
-            ) : urgentTasks.map(task => (
-              <TaskCard key={task.id} task={task} hive={state.hives.find(hive => hive.id === task.hiveId)} onOpenHive={() => onOpenTask(task.id)} onComplete={() => onCompleteTask(task.id)} />
-            ))}
-          </div>
-        </article>
+              <button className="dashboard-v203-empty" onClick={onCreateTask}>
+                <strong>Brak pilnych zadań</strong>
+                <span>Dodaj pracę, żeby nie polegać na pamięci. Odważna strategia, ale kiepska.</span>
+              </button>
+            ) : (
+              <div className="dashboard-v203-task-list">
+                {urgentTasks.map(task => {
+                  const hive = state.hives.find(item => item.id === task.hiveId);
+                  return (
+                    <article key={task.id} className={`dashboard-v203-task dashboard-v203-task--${task.priority}`}>
+                      <button onClick={() => onOpenTask(task.id)}>
+                        <span>{taskPriorityLabel(task)}</span>
+                        <strong>{task.title}</strong>
+                        <small>{hive?.name ?? 'Bez ula'} · {formatShortDate(task.dueDate)}</small>
+                      </button>
+                      <button className="dashboard-v203-task__done" onClick={() => onCompleteTask(task.id)}>✓</button>
+                    </article>
+                  );
+                })}
+              </div>
+            )}
+          </section>
 
-        <article className="panel-v20 assistant-panel-v20">
-          <header>
-            <span>2.0.7</span>
-            <h2>Asystent i jakość</h2>
-          </header>
-          <strong>{strongest ? `Najlepszy ul: ${strongest.name}` : 'Asystent gotowy'}</strong>
-          <p>{recommendations[0]?.message ?? 'Nie ma pilnych zaleceń. Przejrzyj najbliższe prace i obserwowane ule.'}</p>
-          <div className="quality-grid-v20">
-            <span><b>{recommendations.length}</b><small>zalecenia</small></span>
-            <span><b>{predictions.length}</b><small>prognozy</small></span>
-            <span><b>{syncStatus === 'synced' ? 'OK' : syncStatus}</b><small>sync</small></span>
-          </div>
-        </article>
-      </section>
+          <section className="dashboard-v203-panel dashboard-v203-panel--health" aria-labelledby="hive-health-title">
+            <div className="dashboard-v203-section-head">
+              <div>
+                <span>Stan rodzin</span>
+                <h2 id="hive-health-title">Szybki odczyt</h2>
+              </div>
+            </div>
+            <div className="dashboard-v203-health-list">
+              {state.hives.slice(0, 4).map(hive => (
+                <button key={hive.id} onClick={() => onOpenHive(hive.id)}>
+                  <strong>{hive.name}</strong>
+                  <span>{hiveHealthLabel(hive)}</span>
+                  <meter min={0} max={10} value={hive.strength} aria-label={`Siła ${hive.name}`} />
+                </button>
+              ))}
+              {state.hives.length === 0 && (
+                <button className="dashboard-v203-empty" onClick={onCreateHive}>
+                  <strong>Brak rodzin</strong>
+                  <span>Dodaj pierwszy ul, żeby panel miał co liczyć.</span>
+                </button>
+              )}
+            </div>
+          </section>
+        </aside>
+      </div>
     </main>
   );
 }

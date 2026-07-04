@@ -526,6 +526,10 @@ export default function App() {
         onGoCalendar={() => navigate('calendar')}
         onOpenWeather={() => navigate('weather')}
         onOpenNectar={() => navigate('nectar')}
+        onCreateApiary={() => navigate('createApiary')}
+        onCreateHive={() => navigate('createHive')}
+        onCreateInspection={() => navigate('createInspection')}
+        onCreateTask={() => navigate('createTask')}
       />
     );
   }
