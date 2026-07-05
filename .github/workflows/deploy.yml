@@ -1,20 +1,33 @@
-name: Deploy BG Apiary
+name: BG Apiary Full Deploy
 
 on:
   push:
     branches:
       - main
+  workflow_dispatch:
+
+concurrency:
+  group: bg-apiary-production
+  cancel-in-progress: true
 
 jobs:
   deploy:
+    name: Pull repo and run installer on VPS
     runs-on: ubuntu-latest
+    timeout-minutes: 20
 
     steps:
-      - name: Deploy to VPS
+      - name: Deploy on VPS
         uses: appleboy/ssh-action@v1.2.0
         with:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
+          command_timeout: 1200s
           script: |
-            /usr/local/bin/deploy-bgapiary
+            set -e
+            cd /opt/bg-apiary
+            git fetch origin main
+            git reset --hard origin/main
+            git clean -fd
+            bash scripts/install.sh
