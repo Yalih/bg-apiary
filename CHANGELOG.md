@@ -67,3 +67,10 @@ Added backend foundation under `backend/` with Express, TypeScript, Prisma, Post
 - Dodano backendowe modele odpowiedzi, paginację i helpery odpowiedzi API.
 - Ustabilizowano build backendu przed generowaniem Prisma Client.
 - Dodano `.gitignore`.
+
+
+## Fix backend TypeScript types
+
+- Ograniczono typy w `backend/tsconfig.json` do bibliotek backendowych.
+- Dodano dokumentację `backend/docs/BACKEND_TYPESCRIPT_FIX.md`.
+- Cel: naprawa błędu `Cannot find type definition file for react/babel/...` podczas `npm run build` backendu.
