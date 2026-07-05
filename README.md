@@ -61,3 +61,8 @@ Sprint 3 powinien rozpocząć realny moduł **Ule**:
 ## v2.6.1 mobile navigation fix
 
 Fixed duplicated bottom-navigation feel on Hive Details and Notes layout overlap on mobile.
+
+## Sprint 3.3 – Backend API foundation
+
+Added backend foundation under `backend/` with Express, TypeScript, Prisma, PostgreSQL schema, JWT helper structure, Swagger, Docker Compose and documentation. Business logic is not implemented yet.
+

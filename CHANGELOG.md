@@ -39,3 +39,8 @@ Nie zmieniono backendu, bazy danych ani modelu danych.
 - Dodano rejestrację service workera w `src/pwa/registerServiceWorker.ts`.
 - Naprawiono zmienną CSS skip linka i poprawiono redukcję animacji.
 - Zaktualizowano wersję aplikacji do `2.5.0`.
+
+## Sprint 3.3 – Backend API foundation
+
+Added backend foundation under `backend/` with Express, TypeScript, Prisma, PostgreSQL schema, JWT helper structure, Swagger, Docker Compose and documentation. Business logic is not implemented yet.
+

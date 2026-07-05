@@ -1,0 +1,285 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  ADMIN
+  BEEKEEPER
+  OBSERVER
+}
+
+enum HiveStatus {
+  ACTIVE
+  WEAK
+  WATCH
+  INACTIVE
+  LOST
+}
+
+enum QueenStatus {
+  ACTIVE
+  MISSING
+  REPLACED
+  VIRGIN
+  UNKNOWN
+}
+
+enum TaskStatus {
+  TODO
+  IN_PROGRESS
+  DONE
+  CANCELLED
+}
+
+enum TaskPriority {
+  LOW
+  MEDIUM
+  HIGH
+  URGENT
+}
+
+enum InspectionMood {
+  CALM
+  NORMAL
+  NERVOUS
+  AGGRESSIVE
+}
+
+model User {
+  id           String   @id @default(uuid()) @db.Uuid
+  email        String   @unique
+  passwordHash String   @map("password_hash")
+  displayName  String   @map("display_name")
+  role         UserRole @default(BEEKEEPER)
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+  deletedAt    DateTime? @map("deleted_at")
+
+  apiaries     Apiary[]
+  notes        Note[]
+  tasks        Task[]
+  auditLogs    AuditLog[]
+
+  @@map("users")
+}
+
+model Apiary {
+  id        String   @id @default(uuid()) @db.Uuid
+  ownerId   String   @map("owner_id") @db.Uuid
+  name      String
+  latitude  Float?
+  longitude Float?
+  address   String?
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  owner     User     @relation(fields: [ownerId], references: [id])
+  hives     Hive[]
+  weatherLogs WeatherLog[]
+
+  @@index([ownerId])
+  @@map("apiaries")
+}
+
+model Hive {
+  id          String     @id @default(uuid()) @db.Uuid
+  apiaryId    String     @map("apiary_id") @db.Uuid
+  hiveNumber  String     @map("hive_number")
+  hiveType    String     @map("hive_type")
+  status      HiveStatus @default(ACTIVE)
+  frameCount  Int?       @map("frame_count")
+  createdAt   DateTime   @default(now()) @map("created_at")
+  updatedAt   DateTime   @updatedAt @map("updated_at")
+  deletedAt   DateTime?  @map("deleted_at")
+
+  apiary      Apiary     @relation(fields: [apiaryId], references: [id])
+  queens      Queen[]
+  inspections Inspection[]
+  notes       Note[]
+  tasks       Task[]
+  feedings    Feeding[]
+  treatments  Treatment[]
+  photos      Photo[]
+
+  @@index([apiaryId])
+  @@unique([apiaryId, hiveNumber])
+  @@map("hives")
+}
+
+model Queen {
+  id        String      @id @default(uuid()) @db.Uuid
+  hiveId    String      @map("hive_id") @db.Uuid
+  name      String?
+  breed     String?
+  birthYear Int?        @map("birth_year")
+  markColor String?     @map("mark_color")
+  status    QueenStatus @default(UNKNOWN)
+  createdAt DateTime    @default(now()) @map("created_at")
+  updatedAt DateTime    @updatedAt @map("updated_at")
+  deletedAt DateTime?   @map("deleted_at")
+
+  hive      Hive        @relation(fields: [hiveId], references: [id])
+
+  @@index([hiveId])
+  @@map("queens")
+}
+
+model Inspection {
+  id        String         @id @default(uuid()) @db.Uuid
+  hiveId    String         @map("hive_id") @db.Uuid
+  inspectedAt DateTime     @map("inspected_at")
+  mood      InspectionMood?
+  summary   String?
+  createdAt DateTime       @default(now()) @map("created_at")
+  updatedAt DateTime       @updatedAt @map("updated_at")
+  deletedAt DateTime?      @map("deleted_at")
+
+  hive      Hive           @relation(fields: [hiveId], references: [id])
+  items     InspectionItem[]
+
+  @@index([hiveId, inspectedAt])
+  @@map("inspections")
+}
+
+model InspectionItem {
+  id           String   @id @default(uuid()) @db.Uuid
+  inspectionId String   @map("inspection_id") @db.Uuid
+  type         String
+  value        String?
+  note         String?
+  createdAt    DateTime @default(now()) @map("created_at")
+
+  inspection   Inspection @relation(fields: [inspectionId], references: [id])
+
+  @@index([inspectionId])
+  @@map("inspection_items")
+}
+
+model Note {
+  id        String   @id @default(uuid()) @db.Uuid
+  hiveId    String?  @map("hive_id") @db.Uuid
+  authorId  String?  @map("author_id") @db.Uuid
+  title     String?
+  content   String
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  hive      Hive?    @relation(fields: [hiveId], references: [id])
+  author    User?    @relation(fields: [authorId], references: [id])
+
+  @@index([hiveId])
+  @@index([authorId])
+  @@map("notes")
+}
+
+model Task {
+  id          String       @id @default(uuid()) @db.Uuid
+  hiveId      String?      @map("hive_id") @db.Uuid
+  assigneeId  String?      @map("assignee_id") @db.Uuid
+  title       String
+  description String?
+  dueDate     DateTime?    @map("due_date")
+  status      TaskStatus   @default(TODO)
+  priority    TaskPriority @default(MEDIUM)
+  createdAt   DateTime     @default(now()) @map("created_at")
+  updatedAt   DateTime     @updatedAt @map("updated_at")
+  deletedAt   DateTime?    @map("deleted_at")
+
+  hive        Hive?        @relation(fields: [hiveId], references: [id])
+  assignee    User?        @relation(fields: [assigneeId], references: [id])
+
+  @@index([hiveId])
+  @@index([assigneeId])
+  @@index([status, dueDate])
+  @@map("tasks")
+}
+
+model Feeding {
+  id        String   @id @default(uuid()) @db.Uuid
+  hiveId    String   @map("hive_id") @db.Uuid
+  fedAt     DateTime @map("fed_at")
+  feedType  String   @map("feed_type")
+  amount    Float?
+  unit      String?
+  note      String?
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  hive      Hive     @relation(fields: [hiveId], references: [id])
+
+  @@index([hiveId, fedAt])
+  @@map("feedings")
+}
+
+model Treatment {
+  id        String   @id @default(uuid()) @db.Uuid
+  hiveId    String   @map("hive_id") @db.Uuid
+  treatedAt DateTime @map("treated_at")
+  product   String
+  dose      String?
+  reason    String?
+  note      String?
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  hive      Hive     @relation(fields: [hiveId], references: [id])
+
+  @@index([hiveId, treatedAt])
+  @@map("treatments")
+}
+
+model Photo {
+  id        String   @id @default(uuid()) @db.Uuid
+  hiveId    String?  @map("hive_id") @db.Uuid
+  url       String
+  caption   String?
+  mimeType  String?  @map("mime_type")
+  createdAt DateTime @default(now()) @map("created_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  hive      Hive?    @relation(fields: [hiveId], references: [id])
+
+  @@index([hiveId])
+  @@map("photos")
+}
+
+model WeatherLog {
+  id        String   @id @default(uuid()) @db.Uuid
+  apiaryId  String   @map("apiary_id") @db.Uuid
+  loggedAt  DateTime @map("logged_at")
+  temperatureC Float? @map("temperature_c")
+  humidity  Float?
+  windMs    Float?   @map("wind_ms")
+  condition String?
+  createdAt DateTime @default(now()) @map("created_at")
+
+  apiary    Apiary   @relation(fields: [apiaryId], references: [id])
+
+  @@index([apiaryId, loggedAt])
+  @@map("weather_logs")
+}
+
+model AuditLog {
+  id        String   @id @default(uuid()) @db.Uuid
+  userId    String?  @map("user_id") @db.Uuid
+  action    String
+  entity    String
+  entityId  String?  @map("entity_id")
+  payload   Json?
+  createdAt DateTime @default(now()) @map("created_at")
+
+  user      User?    @relation(fields: [userId], references: [id])
+
+  @@index([userId])
+  @@index([entity, entityId])
+  @@map("audit_logs")
+}
