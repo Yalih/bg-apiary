@@ -198,3 +198,32 @@ Linux:
 ```bash
 bash scripts/dev-clean-build.sh
 ```
+
+
+## BG Apiary 1.0.4 UI/API Hotfix
+
+Ta wersja naprawia:
+- HTTP 405 przy logowaniu/rejestracji,
+- mobilny wygląd pierwszego ekranu,
+- stare cache/PWA po aktualizacji.
+
+### Deploy na VPS
+
+```bash
+cd /opt/bg-apiary
+git fetch origin main
+git reset --hard origin/main
+git clean -fd -e .env
+bash scripts/install.sh
+bash scripts/check.sh
+```
+
+### Test 405
+
+```bash
+curl -i -X POST http://127.0.0.1/api/v1/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"email":"missing-user@bgapiary.local","password":"x"}'
+```
+
+Dobry wynik to `401 Unauthorized`, bo backend odrzuca nieistniejące konto. Zły wynik to `405`, bo wtedy Nginx nadal blokuje POST do API.

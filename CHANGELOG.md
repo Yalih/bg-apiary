@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.0.4 - UI/API hotfix
+
+### Fixed
+- Naprawiono ryzyko `HTTP 405` przy logowaniu i rejestracji przez Nginx.
+- `scripts/install-nginx-host.sh` generuje konfigurację HTTP oraz HTTPS, jeśli certyfikaty istnieją.
+- Dodano test `POST /api/v1/auth/login` do instalatora i `scripts/check.sh`.
+- Ulepszono komunikat błędu frontendu dla HTTP 405.
+- Poprawiono mobilny ekran logowania/rejestracji.
+- Ukryto mockup telefonu na mobile, żeby nie zasłaniał formularza.
+- Dodano czyszczenie starych service workerów i cache po zmianie wersji.
+- Zmieniono cache PWA na `bg-apiary-1-0-4`.
+
 ## 1.0.3 - VPS stabilization fix
 
 ### Fixed

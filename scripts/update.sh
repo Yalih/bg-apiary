@@ -33,6 +33,14 @@ cd "$APP_DIR"
 echo "[7/8] Configure nginx"
 bash scripts/install-nginx-host.sh
 
+POST_CODE="$(curl -s -o /tmp/bgapiary-post-check.txt -w "%{http_code}" -X POST http://127.0.0.1/api/v1/auth/login -H "Content-Type: application/json" -d '{"email":"missing-user@bgapiary.local","password":"x"}' || true)"
+if [ "$POST_CODE" = "405" ]; then
+  echo "ERROR: Nginx returns 405 for API POST. Login/register will not work." >&2
+  sudo nginx -T | grep -n "location .*api" -A12 -B4 || true
+  exit 1
+fi
+echo "POST /api proxy HTTP $POST_CODE"
+
 echo "[8/8] Health check"
 for i in {1..60}; do
   if curl -fsS http://127.0.0.1/api/v1/health >/dev/null 2>&1; then

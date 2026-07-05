@@ -32,6 +32,12 @@ fi
 
 curl -fsS http://127.0.0.1:4000/api/v1/health >/tmp/bgapiary-api-health.json 2>/dev/null && pass "API direct health" || fail "API direct health" "http://127.0.0.1:4000/api/v1/health"
 curl -fsS http://127.0.0.1/api/v1/health >/tmp/bgapiary-web-health.json 2>/dev/null && pass "API through Nginx" || fail "API through Nginx" "http://127.0.0.1/api/v1/health"
+POST_CODE="$(curl -s -o /tmp/bgapiary-post-check.txt -w "%{http_code}" -X POST http://127.0.0.1/api/v1/auth/login -H "Content-Type: application/json" -d '{"email":"missing-user@bgapiary.local","password":"x"}' || true)"
+if [ "$POST_CODE" = "405" ]; then
+  fail "API POST through Nginx" "HTTP 405 - login/register blocked"
+else
+  pass "API POST through Nginx"
+fi
 curl -fsSI http://127.0.0.1/ >/dev/null 2>&1 && pass "Frontend through Nginx" || fail "Frontend through Nginx" "http://127.0.0.1/"
 
 if [ -f /var/www/html/index.html ]; then

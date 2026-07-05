@@ -1,4 +1,4 @@
-const CACHE = 'bg-apiary-1-0-0';
+const CACHE = 'bg-apiary-1-0-4';
 const APP_SHELL = ['/', '/manifest.webmanifest', '/logo.svg'];
 
 self.addEventListener('install', (event) => {
@@ -15,6 +15,8 @@ self.addEventListener('activate', (event) => {
 
 self.addEventListener('fetch', (event) => {
   const url = new URL(event.request.url);
+
+  if (event.request.method !== 'GET') return;
   if (url.pathname.startsWith('/api/')) return;
 
   event.respondWith(

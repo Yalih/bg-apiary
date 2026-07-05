@@ -4,7 +4,7 @@ set -Eeuo pipefail
 APP_DIR="${APP_DIR:-/opt/bg-apiary}"
 COMPOSE="docker compose"
 STEP=0
-TOTAL=14
+TOTAL=15
 WEB_ROOT="${WEB_ROOT:-/var/www/html}"
 
 log() { echo -e "\n[$((++STEP))/$TOTAL] $*"; }
@@ -98,13 +98,24 @@ for i in {1..30}; do
   sleep 1
 done
 
+log "Checking API POST through Nginx"
+POST_CODE="$(curl -s -o /tmp/bgapiary-post-check.txt -w "%{http_code}" \
+  -X POST http://127.0.0.1/api/v1/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"email":"missing-user@bgapiary.local","password":"x"}' || true)"
+if [ "$POST_CODE" = "405" ]; then
+  sudo nginx -T | grep -n "location .*api" -A12 -B4 || true
+  fail "Nginx zwraca HTTP 405 dla POST /api. To blokuje logowanie i rejestrację."
+fi
+echo "POST /api proxy returned HTTP $POST_CODE"
+
 log "Checking frontend through Nginx"
 curl -fsSI http://127.0.0.1/ >/dev/null || fail "Frontend nie odpowiada przez Nginx"
 
 log "Final diagnostics"
 bash scripts/check.sh || true
 
-log "BG Apiary 1.0.3 Production ready"
+log "BG Apiary 1.0.4 Production ready"
 echo "Frontend: http://SERVER_IP/"
 echo "API:      http://SERVER_IP/api/v1/health"
 echo "Swagger:  http://SERVER_IP/api/docs"
