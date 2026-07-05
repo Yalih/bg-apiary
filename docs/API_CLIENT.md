@@ -6,7 +6,7 @@ Frontend korzysta z `src/api/apiClient.ts`.
 Adres backendu ustawiany jest przez:
 
 ```env
-VITE_API_URL=http://localhost:4000
+VITE_API_URL=http://localhost:3000
 ```
 
 ## Zasady

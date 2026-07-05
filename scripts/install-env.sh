@@ -1,22 +1,20 @@
 #!/usr/bin/env bash
-set -e
-
+set -euo pipefail
 cd /opt/bg-apiary/backend
 
-cat > .env <<'EOF'
-NODE_ENV=development
+ACCESS_SECRET="$(openssl rand -hex 32 2>/dev/null || date +%s%N | sha256sum | awk '{print $1}')"
+REFRESH_SECRET="$(openssl rand -hex 32 2>/dev/null || date +%s%N | sha256sum | awk '{print $1}')"
+
+cat > .env <<ENV
+NODE_ENV=production
 PORT=3000
-
-DATABASE_URL="postgresql://postgres:postgres@localhost:5432/bg_apiary"
-
-JWT_SECRET="change-this-before-production-bg-apiary"
+DATABASE_URL="postgresql://postgres:postgres@postgres:5432/bg_apiary?schema=public"
+JWT_ACCESS_SECRET="$ACCESS_SECRET"
+JWT_REFRESH_SECRET="$REFRESH_SECRET"
 JWT_ACCESS_EXPIRES_IN="15m"
-JWT_REFRESH_EXPIRES_IN="7d"
-
-CORS_ORIGIN="https://bgapiary.pro,http://localhost:5173"
-EOF
-
+JWT_REFRESH_EXPIRES_IN="30d"
+CORS_ORIGIN="https://bgapiary.pro"
+LOG_LEVEL="info"
+ENV
 chmod 600 .env
-
-echo "Created backend/.env"
-cat .env
+echo "Created backend/.env for BG Apiary 1.0 PRO"

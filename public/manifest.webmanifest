@@ -1,7 +1,7 @@
 {
-  "name": "BG Apiary v3.5",
+  "name": "BG Apiary 1.0 PRO",
   "short_name": "BG Apiary",
-  "description": "Smart Beekeeping Management - finalne wydanie Sprintu 2",
+  "description": "Smart Beekeeping Management - produkcyjna aplikacja PWA dla pasieki z backendem API i PostgreSQL.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",

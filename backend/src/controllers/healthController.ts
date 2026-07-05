@@ -8,7 +8,7 @@ export const healthCheck: RequestHandler = async (_req, res) => {
       service: 'bg-apiary-backend',
       status: 'ok',
       database: 'connected',
-      version: '3.4.0',
+      version: '1.0.0',
       timestamp: new Date().toISOString()
     });
   } catch (_error) {
@@ -16,7 +16,7 @@ export const healthCheck: RequestHandler = async (_req, res) => {
       service: 'bg-apiary-backend',
       status: 'degraded',
       database: 'disconnected',
-      version: '3.4.0',
+      version: '1.0.0',
       timestamp: new Date().toISOString()
     });
   }

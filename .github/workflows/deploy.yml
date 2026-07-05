@@ -1,4 +1,4 @@
-name: BG Apiary Full Deploy v3
+name: BG Apiary 1.0 PRO Deploy
 
 on:
   push:
@@ -12,22 +12,22 @@ concurrency:
 
 jobs:
   deploy:
-    name: Full installer v3 on VPS
+    name: Production deploy on VPS
     runs-on: ubuntu-latest
-    timeout-minutes: 40
+    timeout-minutes: 45
 
     steps:
-      - name: Run installer on VPS
+      - name: Run BG Apiary 1.0 PRO installer
         uses: appleboy/ssh-action@v1.2.0
         with:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
-          command_timeout: 2400s
+          command_timeout: 2700s
           script: |
             set -e
             cd /opt/bg-apiary
             git fetch origin main
             git reset --hard origin/main
-            git clean -fd
+            git clean -fd -e backend/.env -e 'backend/.env.backup.*'
             bash scripts/install.sh

@@ -1,80 +1,91 @@
-# BG Apiary v2.6.1
+# BG Apiary 1.0 PRO
 
-**Smart Beekeeping Management** – aplikacja PWA do zarządzania pasieką, ulami, przeglądami, zadaniami i pracą sezonową.
+BG Apiary to aplikacja PWA do zarządzania pasieką. Wersja 1.0 PRO porządkuje projekt jako produkcyjny stack:
 
-Wersja **v2.6** zamyka Sprint 2. To finalne wydanie warstwy UI/UX: odświeżony layout, dashboard, branding, dostępność, PWA i poprawki po testach. Bez ruszania backendu i bazy danych, bo robienie wszystkiego naraz to znany sposób na stworzenie cyfrowej ruiny.
+- frontend: React + Vite,
+- backend: Node.js + Express + TypeScript,
+- baza danych: PostgreSQL,
+- ORM: Prisma,
+- runtime: Docker Compose,
+- serwer WWW: Nginx,
+- deploy: GitHub Actions → VPS.
 
-## Zakres Sprintu 2
+## Architektura
 
-- nowy layout aplikacji: topbar, sidebar desktop i mobile bottom nav,
-- dashboard premium z kartami statystyk, zadaniami, stanem rodzin i pogodą/pożytkiem,
-- logo, ikony PWA i podstawowy branding,
-- poprawki dostępności: skip link, focus states, `aria-current`, lepsza nawigacja,
-- podstawowe PWA: manifest, service worker, ekran offline,
-- poprawki mobile i reduced motion,
-- dokumentacja testów, poprawek i wydania finalnego.
+```text
+Browser / PWA
+   ↓
+Nginx
+   ├── /         → frontend /var/www/html
+   └── /api      → backend 127.0.0.1:3000
+                     ↓
+                  PostgreSQL
+```
 
-## Uruchomienie lokalne
+## Instalacja produkcyjna na VPS
+
+Projekt powinien znajdować się w:
+
+```bash
+/opt/bg-apiary
+```
+
+Uruchomienie:
+
+```bash
+cd /opt/bg-apiary
+bash scripts/install.sh
+```
+
+Sprawdzenie:
+
+```bash
+bash scripts/check.sh
+```
+
+## Lokalny frontend
 
 ```bash
 npm install
 npm run dev
 ```
 
-## Build produkcyjny
+Dla lokalnego API ustaw:
 
 ```bash
+cp .env.development.example .env.development
+```
+
+## Backend
+
+```bash
+cd backend
 npm install
 npm run build
+npm run start
 ```
 
-## Wdrożenie
-
-Projekt wdraża się automatycznie przez GitHub Actions po `git push`.
+## Docker
 
 ```bash
-git add .
-git commit -m "Sprint 2 complete"
-git push
+docker compose up -d --build
 ```
 
-## Najważniejsze dokumenty Sprintu 2
+Usługi:
 
-- `docs/SPRINT_2_ANALYSIS.md`
-- `docs/SPRINT_2_DESIGN.md`
-- `docs/SPRINT_2_IMPLEMENTATION.md`
-- `docs/SPRINT_2_TESTS.md`
-- `docs/SPRINT_2_5_FIXES.md`
-- `docs/SPRINT_2_FINAL_RELEASE.md`
+- `bg-apiary-postgres`
+- `bg-apiary-backend`
+- `bg-apiary-pgadmin`
 
-## Następny etap: Sprint 3
+## API health
 
-Sprint 3 powinien rozpocząć realny moduł **Ule**:
+```bash
+curl http://127.0.0.1:3000/api/v1/health
+curl http://127.0.0.1/api/v1/health
+```
 
-1. lista uli jako osobny, dopracowany ekran,
-2. karta ula z kluczowymi danymi,
-3. filtry i statusy rodzin,
-4. szczegóły ula,
-5. historia przeglądów powiązana z ulem.
+## Dokumentacja
 
-
-## v2.6.1 mobile navigation fix
-
-Fixed duplicated bottom-navigation feel on Hive Details and Notes layout overlap on mobile.
-
-## Sprint 3.3 – Backend API foundation
-
-Added backend foundation under `backend/` with Express, TypeScript, Prisma, PostgreSQL schema, JWT helper structure, Swagger, Docker Compose and documentation. Business logic is not implemented yet.
-
-
-## Backend Sprint 3.4
-
-Sprint 3.4 adds the first working backend layer for BG Apiary: PostgreSQL, Prisma, seed data and API endpoints for health, apiaries and hives. Frontend still does not depend on the API yet.
-
-
-
-## BG Apiary v3.5 – Frontend API Integration
-- Usunięto localStorage jako źródło danych biznesowych.
-- Dodano klienta API i health check backendu.
-- Pasieki i ule pobierane są z backendu PostgreSQL API.
-- Dodano ekran Backend unavailable i obsługę błędów sieciowych.
+- `docs/PRODUCTION_1_0.md`
+- `docs/ARCHITECTURE.md`
+- `docs/API_REFERENCE.md`

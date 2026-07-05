@@ -30,7 +30,7 @@ export function AuthPage({ onAuthenticated }: AuthPageProps) {
     <main className="auth-screen">
       <section className="auth-card">
         <div className="auth-hero">
-          <span>BG Apiary v3.5 · Backend API</span>
+          <span>BG Apiary 1.0 PRO · Backend API</span>
           <h1>{mode === 'login' ? 'Zaloguj się' : 'Załóż konto testowe'}</h1>
           <p>Tryb przejściowy do backendu. Dane biznesowe są pobierane z API i PostgreSQL, nie z localStorage.</p>
         </div>

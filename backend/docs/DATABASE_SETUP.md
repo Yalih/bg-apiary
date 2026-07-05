@@ -15,8 +15,8 @@ npm run start
 ```
 
 ## Dostęp
-- Backend: `http://localhost:4000`
-- Swagger: `http://localhost:4000/api/docs`
+- Backend: `http://localhost:3000`
+- Swagger: `http://localhost:3000/api/docs`
 - pgAdmin: `http://localhost:5050`
 
 ## Środowiska
