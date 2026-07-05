@@ -227,3 +227,23 @@ curl -i -X POST http://127.0.0.1/api/v1/auth/login \
 ```
 
 Dobry wynik to `401 Unauthorized`, bo backend odrzuca nieistniejące konto. Zły wynik to `405`, bo wtedy Nginx nadal blokuje POST do API.
+
+
+## BG Apiary 1.0.5 TypeScript Build Fix
+
+Ta wersja naprawia błąd builda:
+
+```text
+error TS5103: Invalid value for '--ignoreDeprecations'
+```
+
+### Deploy na VPS
+
+```bash
+cd /opt/bg-apiary
+git fetch origin main
+git reset --hard origin/main
+git clean -fd -e .env
+bash scripts/install.sh
+bash scripts/check.sh
+```

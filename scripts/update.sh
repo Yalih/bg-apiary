@@ -13,6 +13,7 @@ git reset --hard origin/main
 echo "[3/8] Stop old app containers"
 docker compose down --remove-orphans || true
 docker rm -f bg-apiary-web bg-apiary-api 2>/dev/null || true
+docker network rm bg-apiary_default 2>/dev/null || true
 
 echo "[4/8] Build API"
 DOCKER_BUILDKIT=1 docker compose build --pull --no-cache api

@@ -44,6 +44,7 @@ fi
 log "Stopping old Docker containers"
 $COMPOSE down --remove-orphans || true
 docker rm -f bg-apiary-web bg-apiary-api bg-apiary-postgres bg-apiary-pgadmin >/dev/null 2>&1 || true
+docker network rm bg-apiary_default >/dev/null 2>&1 || true
 
 log "Building API image"
 DOCKER_BUILDKIT=1 $COMPOSE build --pull --no-cache api
@@ -115,7 +116,7 @@ curl -fsSI http://127.0.0.1/ >/dev/null || fail "Frontend nie odpowiada przez Ng
 log "Final diagnostics"
 bash scripts/check.sh || true
 
-log "BG Apiary 1.0.4 Production ready"
+log "BG Apiary 1.0.5 Production ready"
 echo "Frontend: http://SERVER_IP/"
 echo "API:      http://SERVER_IP/api/v1/health"
 echo "Swagger:  http://SERVER_IP/api/docs"

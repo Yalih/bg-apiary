@@ -1,4 +1,4 @@
-const CACHE = 'bg-apiary-1-0-4';
+const CACHE = 'bg-apiary-1-0-5';
 const APP_SHELL = ['/', '/manifest.webmanifest', '/logo.svg'];
 
 self.addEventListener('install', (event) => {

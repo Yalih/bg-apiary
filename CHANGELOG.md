@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.0.5 - TypeScript build fix
+
+### Fixed
+- Usunięto niepoprawne `ignoreDeprecations: "6.0"` z `frontend/tsconfig.json`.
+- Utrzymano `moduleResolution: "Bundler"` i typy Vite.
+- Zaktualizowano wersję PWA/cache do `1.0.5`.
+- Dodano czyszczenie starej sieci Docker `bg-apiary_default` przed startem, żeby uniknąć hałaśliwego konfliktu sieci.
+
 ## 1.0.4 - UI/API hotfix
 
 ### Fixed
