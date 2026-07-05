@@ -1,4 +1,4 @@
-name: BG Apiary Full Deploy v2
+name: BG Apiary Full Deploy v3
 
 on:
   push:
@@ -12,9 +12,9 @@ concurrency:
 
 jobs:
   deploy:
-    name: Full update on VPS
+    name: Full installer v3 on VPS
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 40
 
     steps:
       - name: Run installer on VPS
@@ -23,7 +23,7 @@ jobs:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
-          command_timeout: 1800s
+          command_timeout: 2400s
           script: |
             set -e
             cd /opt/bg-apiary
