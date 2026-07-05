@@ -1,28 +1,21 @@
-import { Router } from 'express';
-import { healthRouter } from './health.routes.js';
-import { authRouter } from './auth.routes.js';
-import { usersRouter } from './users.routes.js';
-import { apiariesRouter } from './apiaries.routes.js';
-import { hivesRouter } from './hives.routes.js';
-import { queensRouter } from './queens.routes.js';
-import { inspectionsRouter } from './inspections.routes.js';
-import { tasksRouter } from './tasks.routes.js';
-import { notesRouter } from './notes.routes.js';
-import { feedingsRouter } from './feedings.routes.js';
-import { treatmentsRouter } from './treatments.routes.js';
-import { photosRouter } from './photos.routes.js';
+import type { FastifyInstance } from 'fastify';
+import { authRoutes } from './auth';
+import { systemRoutes } from './system';
+import { registerCrudRoutes } from './crud';
 
-export const apiRouter = Router();
+export async function registerRoutes(app: FastifyInstance) {
+  await app.register(async (v1) => {
+    await systemRoutes(v1);
+    await authRoutes(v1);
 
-apiRouter.use('/health', healthRouter);
-apiRouter.use('/auth', authRouter);
-apiRouter.use('/users', usersRouter);
-apiRouter.use('/apiaries', apiariesRouter);
-apiRouter.use('/hives', hivesRouter);
-apiRouter.use('/queens', queensRouter);
-apiRouter.use('/inspections', inspectionsRouter);
-apiRouter.use('/tasks', tasksRouter);
-apiRouter.use('/notes', notesRouter);
-apiRouter.use('/feedings', feedingsRouter);
-apiRouter.use('/treatments', treatmentsRouter);
-apiRouter.use('/photos', photosRouter);
+    await registerCrudRoutes(v1, { path: 'apiaries', model: 'apiary', schema: 'apiary' });
+    await registerCrudRoutes(v1, { path: 'hives', model: 'hive', schema: 'hive' });
+    await registerCrudRoutes(v1, { path: 'queens', model: 'queen', schema: 'queen' });
+    await registerCrudRoutes(v1, { path: 'inspections', model: 'inspection', schema: 'inspection', touchHiveInspection: true });
+    await registerCrudRoutes(v1, { path: 'feedings', model: 'feeding', schema: 'feeding' });
+    await registerCrudRoutes(v1, { path: 'treatments', model: 'treatment', schema: 'treatment' });
+    await registerCrudRoutes(v1, { path: 'tasks', model: 'task', schema: 'task' });
+    await registerCrudRoutes(v1, { path: 'notes', model: 'note', schema: 'note' });
+    await registerCrudRoutes(v1, { path: 'photos', model: 'photo', schema: 'photo' });
+  }, { prefix: '/api/v1' });
+}

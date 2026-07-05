@@ -1,33 +1,31 @@
-name: BG Apiary 1.0 PRO Deploy
+name: Deploy BG Apiary 1.0 Production
 
 on:
   push:
-    branches:
-      - main
+    branches: ["main"]
   workflow_dispatch:
-
-concurrency:
-  group: bg-apiary-production
-  cancel-in-progress: true
 
 jobs:
   deploy:
-    name: Production deploy on VPS
     runs-on: ubuntu-latest
-    timeout-minutes: 45
-
     steps:
-      - name: Run BG Apiary 1.0 PRO installer
-        uses: appleboy/ssh-action@v1.2.0
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Deploy on VPS
+        uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
-          command_timeout: 2700s
           script: |
-            set -e
+            set -Eeuo pipefail
+            if [ ! -d /opt/bg-apiary/.git ]; then
+              sudo mkdir -p /opt/bg-apiary
+              sudo chown -R "$USER:$USER" /opt/bg-apiary
+              git clone https://github.com/${{ github.repository }}.git /opt/bg-apiary
+            fi
             cd /opt/bg-apiary
             git fetch origin main
             git reset --hard origin/main
-            git clean -fd -e backend/.env -e 'backend/.env.backup.*'
             bash scripts/install.sh

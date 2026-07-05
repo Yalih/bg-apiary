@@ -1,36 +1,67 @@
-# BG Apiary 1.0 PRO
+# BG Apiary 1.0 Production
 
-BG Apiary to aplikacja PWA do zarządzania pasieką. Wersja 1.0 PRO porządkuje projekt jako produkcyjny stack:
+Nowoczesna aplikacja PWA dla pszczelarzy do prowadzenia pasiek, uli, matek, przeglądów, karmień, leczeń, zadań i historii rodzin pszczelich.
 
-- frontend: React + Vite,
-- backend: Node.js + Express + TypeScript,
-- baza danych: PostgreSQL,
-- ORM: Prisma,
-- runtime: Docker Compose,
-- serwer WWW: Nginx,
-- deploy: GitHub Actions → VPS.
+To jest czysty projekt napisany od zera na podstawie `docs/BG_APIARY_1_0_MASTER_PLAN.md`. Nie jest to łatka do starego prototypu, bo czasem trzeba przestać malować zgniłą deskę i wziąć nową.
 
-## Architektura
+## Stack
 
-```text
-Browser / PWA
-   ↓
-Nginx
-   ├── /         → frontend /var/www/html
-   └── /api      → backend 127.0.0.1:3000
-                     ↓
-                  PostgreSQL
-```
+### Frontend
 
-## Instalacja produkcyjna na VPS
+- React
+- TypeScript
+- Vite
+- PWA
+- mobile first UI
+- IndexedDB pod podstawowy offline
+- `/api/v1` jako jeden kontrakt komunikacji
 
-Projekt powinien znajdować się w:
+### Backend
+
+- Node.js
+- TypeScript
+- Fastify
+- Prisma
+- PostgreSQL
+- JWT
+- Zod
+- Swagger/OpenAPI
+
+### Production
+
+- Docker Compose
+- Nginx container dla frontendu i proxy `/api`
+- PostgreSQL
+- backend jako osobny kontener
+- skrypty `install`, `update`, `check`
+- GitHub Actions pod deploy na VPS
+
+## Szybki start lokalny
 
 ```bash
-/opt/bg-apiary
+cp .env.example .env
+docker compose up -d --build
 ```
 
-Uruchomienie:
+Aplikacja:
+
+```text
+http://localhost
+```
+
+API health:
+
+```text
+http://localhost/api/v1/health
+```
+
+Swagger:
+
+```text
+http://localhost/api/docs
+```
+
+## Instalacja na VPS
 
 ```bash
 cd /opt/bg-apiary
@@ -43,49 +74,16 @@ Sprawdzenie:
 bash scripts/check.sh
 ```
 
-## Lokalny frontend
+Aktualizacja:
 
 ```bash
-npm install
-npm run dev
+bash scripts/update.sh
 ```
 
-Dla lokalnego API ustaw:
+## Konta i dane
 
-```bash
-cp .env.development.example .env.development
-```
+Po uruchomieniu załóż konto na ekranie rejestracji. Aplikacja przeprowadzi przez pierwsze utworzenie pasieki i uli.
 
-## Backend
+## Ważne
 
-```bash
-cd backend
-npm install
-npm run build
-npm run start
-```
-
-## Docker
-
-```bash
-docker compose up -d --build
-```
-
-Usługi:
-
-- `bg-apiary-postgres`
-- `bg-apiary-backend`
-- `bg-apiary-pgadmin`
-
-## API health
-
-```bash
-curl http://127.0.0.1:3000/api/v1/health
-curl http://127.0.0.1/api/v1/health
-```
-
-## Dokumentacja
-
-- `docs/PRODUCTION_1_0.md`
-- `docs/ARCHITECTURE.md`
-- `docs/API_REFERENCE.md`
+Dane biznesowe nie są trzymane w `localStorage`. Źródłem prawdy jest PostgreSQL. Frontend używa IndexedDB do podstawowego trybu offline i kolejki synchronizacji.

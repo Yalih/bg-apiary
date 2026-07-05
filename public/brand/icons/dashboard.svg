@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" role="img" aria-label="Dashboard">
-  <defs><linearGradient id="g" x1="20" y1="12" x2="108" y2="116" gradientUnits="userSpaceOnUse"><stop stop-color="#ffd66b"/><stop offset="1" stop-color="#f5b82e"/></linearGradient></defs>
-  <rect width="128" height="128" rx="30" fill="#0f172a"/>
-  <polygon points="100.4,43.0 100.4,85.0 64.0,106.0 27.6,85.0 27.6,43.0 64.0,22.0" fill="url(#g)" opacity=".95"/>
-  <circle cx="64" cy="64" r="28" fill="rgba(255,255,255,.22)"/>
-  <text x="64" y="76" text-anchor="middle" font-size="42" font-family="Arial, sans-serif">⌂</text>
-  <text x="64" y="114" text-anchor="middle" font-size="10" font-weight="700" fill="#ffffff" font-family="Inter, Arial, sans-serif">DASHBOARD</text>
-</svg>

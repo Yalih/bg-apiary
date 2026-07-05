@@ -1,0 +1,98 @@
+import { z } from 'zod';
+
+const nullableString = z.string().trim().max(2000).nullable().optional();
+const dateInput = z.string().datetime().or(z.string().date()).optional();
+
+export const schemas = {
+  apiary: z.object({
+    name: z.string().min(1).max(160),
+    location: nullableString,
+    description: nullableString,
+    status: z.string().max(80).optional(),
+  }),
+  hive: z.object({
+    apiaryId: z.string().uuid(),
+    name: z.string().min(1).max(160),
+    hiveType: nullableString,
+    status: z.enum(['OK', 'OBSERVE', 'ACTION', 'UNKNOWN', 'INACTIVE']).optional(),
+    strength: z.number().int().min(0).max(10).optional().nullable(),
+    notes: nullableString,
+  }),
+  queen: z.object({
+    hiveId: z.string().uuid().optional().nullable(),
+    name: nullableString,
+    line: nullableString,
+    race: nullableString,
+    year: z.number().int().min(1900).max(2200).optional().nullable(),
+    markingColor: nullableString,
+    origin: nullableString,
+    introducedAt: dateInput,
+    acceptedAt: dateInput,
+    status: z.enum(['ACTIVE', 'INTRODUCED', 'ACCEPTED', 'REJECTED', 'REPLACED', 'MISSING', 'WATCH']).optional(),
+    layingRating: z.number().int().min(0).max(10).optional().nullable(),
+    notes: nullableString,
+  }),
+  inspection: z.object({
+    hiveId: z.string().uuid(),
+    inspectedAt: dateInput,
+    weather: nullableString,
+    temperature: z.number().optional().nullable(),
+    mood: nullableString,
+    strength: z.number().int().min(0).max(10).optional().nullable(),
+    queenSeen: z.boolean().optional().nullable(),
+    eggs: z.boolean().optional().nullable(),
+    openBrood: z.boolean().optional().nullable(),
+    cappedBrood: z.boolean().optional().nullable(),
+    foodLevel: nullableString,
+    pollenLevel: nullableString,
+    queenCells: z.number().int().min(0).optional().nullable(),
+    diseases: nullableString,
+    varroa: nullableString,
+    framesAdded: z.number().int().min(0).optional().nullable(),
+    framesRemoved: z.number().int().min(0).optional().nullable(),
+    note: nullableString,
+    details: z.record(z.any()).optional().nullable(),
+  }),
+  feeding: z.object({
+    hiveId: z.string().uuid(),
+    fedAt: dateInput,
+    type: z.string().min(1).max(120),
+    amount: z.number().optional().nullable(),
+    unit: nullableString,
+    purpose: nullableString,
+    note: nullableString,
+  }),
+  treatment: z.object({
+    hiveId: z.string().uuid(),
+    treatedAt: dateInput,
+    product: z.string().min(1).max(160),
+    dose: nullableString,
+    method: nullableString,
+    stage: nullableString,
+    nextCheckAt: dateInput,
+    note: nullableString,
+  }),
+  task: z.object({
+    hiveId: z.string().uuid().optional().nullable(),
+    title: z.string().min(1).max(220),
+    description: nullableString,
+    dueAt: dateInput,
+    priority: z.enum(['LOW', 'NORMAL', 'HIGH', 'URGENT']).optional(),
+    status: z.enum(['TODO', 'IN_PROGRESS', 'DONE', 'CANCELLED']).optional(),
+    source: nullableString,
+  }),
+  note: z.object({
+    hiveId: z.string().uuid().optional().nullable(),
+    title: nullableString,
+    body: z.string().min(1).max(5000),
+    context: nullableString,
+  }),
+  photo: z.object({
+    hiveId: z.string().uuid().optional().nullable(),
+    url: z.string().min(1).max(1000),
+    caption: nullableString,
+    context: nullableString,
+  }),
+};
+
+export type SchemaKey = keyof typeof schemas;

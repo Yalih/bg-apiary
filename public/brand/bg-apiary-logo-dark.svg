@@ -1,7 +1,0 @@
-<svg width="640" height="180" viewBox="0 0 640 180" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="640" height="180" rx="36" fill="#12100B"/>
-  <path d="M91 25L148.2 58V124L91 157L33.8 124V58L91 25Z" fill="#F2A900"/>
-  <path d="M91 44L131.7 67.5V114.5L91 138L50.3 114.5V67.5L91 44Z" fill="#FFF8E1"/>
-  <text x="190" y="86" font-family="Inter, Arial, sans-serif" font-size="44" font-weight="900" fill="#FFF8E1">BG Apiary</text>
-  <text x="192" y="122" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="700" fill="#F2A900">Smart Beekeeping Management</text>
-</svg>

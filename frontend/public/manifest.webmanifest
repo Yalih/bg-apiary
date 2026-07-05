@@ -1,0 +1,13 @@
+{
+  "name": "BG Apiary",
+  "short_name": "BG Apiary",
+  "description": "Nowoczesne zarządzanie pasieką",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fff8e7",
+  "theme_color": "#f4b740",
+  "lang": "pl",
+  "icons": [
+    { "src": "/logo.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

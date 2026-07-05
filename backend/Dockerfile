@@ -1,23 +1,35 @@
 FROM node:20-alpine AS deps
 WORKDIR /app
-ENV PRISMA_SKIP_POSTINSTALL_GENERATE=true
+ENV NPM_CONFIG_AUDIT=false \
+    NPM_CONFIG_FUND=false \
+    NPM_CONFIG_FETCH_RETRIES=5 \
+    NPM_CONFIG_FETCH_RETRY_MINTIMEOUT=20000 \
+    NPM_CONFIG_FETCH_RETRY_MAXTIMEOUT=120000 \
+    NPM_CONFIG_FETCH_TIMEOUT=300000 \
+    PRISMA_SKIP_POSTINSTALL_GENERATE=true
 COPY package*.json ./
-RUN npm ci --no-audit --no-fund || npm install --no-audit --no-fund
+RUN if [ -f package-lock.json ]; then npm ci --include=dev --no-audit --no-fund; else npm install --include=dev --no-audit --no-fund; fi
 
-FROM node:20-alpine AS build
+FROM deps AS build
 WORKDIR /app
-COPY --from=deps /app/node_modules ./node_modules
-COPY . .
+COPY prisma ./prisma
 RUN npx prisma generate
+COPY tsconfig.json ./
+COPY src ./src
 RUN npm run build
 
 FROM node:20-alpine AS runner
 WORKDIR /app
 ENV NODE_ENV=production
+RUN apk add --no-cache openssl curl
 COPY package*.json ./
-COPY --from=deps /app/node_modules ./node_modules
-COPY --from=build /app/dist ./dist
-COPY --from=build /app/prisma ./prisma
+RUN if [ -f package-lock.json ]; then npm ci --omit=dev --no-audit --no-fund; else npm install --omit=dev --no-audit --no-fund; fi
 COPY --from=build /app/node_modules/.prisma ./node_modules/.prisma
-EXPOSE 3000
-CMD ["sh", "-c", "npx prisma migrate deploy && node dist/server.js"]
+COPY --from=build /app/node_modules/@prisma ./node_modules/@prisma
+COPY --from=build /app/prisma ./prisma
+COPY --from=build /app/dist ./dist
+COPY healthcheck.js ./healthcheck.js
+COPY docker-entrypoint.sh ./docker-entrypoint.sh
+RUN chmod +x ./docker-entrypoint.sh
+EXPOSE 4000
+CMD ["./docker-entrypoint.sh"]

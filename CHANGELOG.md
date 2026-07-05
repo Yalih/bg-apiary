@@ -1,21 +1,17 @@
 # Changelog
 
-## BG Apiary 1.0 PRO
+## 1.0.0 Production from zero
 
-### Production stabilization
-
-- Ujednolicono wersję projektu do `1.0.0`.
-- Dodano produkcyjny `docker-compose.yml` z usługami PostgreSQL, backend i pgAdmin.
-- Naprawiono uruchamianie backendu w Dockerze.
-- Ujednolicono port backendu do `3000`.
-- Naprawiono zmienne środowiskowe backendu: `JWT_ACCESS_SECRET` i `JWT_REFRESH_SECRET`.
-- Frontend w produkcji używa relatywnego API `/api/v1` zamiast `localhost`.
-- Dodano produkcyjny installer `scripts/install.sh`.
-- Dodano diagnostykę `scripts/check.sh`.
-- Dodano konfigurację Nginx z reverse proxy `/api`.
-- GitHub Actions uruchamia pełny installer na VPS.
-- Usunięto wymaganie ręcznego uruchamiania backendu po wdrożeniu.
-
-### Status
-
-Wersja 1.0 PRO jest przygotowana jako stabilna baza produkcyjna pod dalszy rozwój modułów aplikacji.
+- Utworzono czysty projekt BG Apiary 1.0 od zera.
+- Dodano frontend React + TypeScript + Vite + PWA.
+- Dodano nowoczesny ekran logowania i rejestracji z pierwszym wrażeniem marki.
+- Dodano onboarding po rejestracji.
+- Dodano dashboard, pasieki, ule, przeglądy, matki, karmienia, leczenia, zadania i historię ula.
+- Dodano podstawową obsługę offline przez IndexedDB.
+- Dodano backend Fastify + Prisma + PostgreSQL.
+- Dodano JWT auth, walidację Zod i Swagger.
+- Dodano CRUD dla modułów 1.0.
+- Dodano Docker Compose z web, api, postgres i pgAdmin.
+- Dodano skrypty produkcyjne install/update/check.
+- Dodano GitHub Actions deploy.
+- Dodano dokumentację produkcyjną.

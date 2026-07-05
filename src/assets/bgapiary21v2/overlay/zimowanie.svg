@@ -1,5 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96">
-  <defs><filter id="s"><feDropShadow dx="0" dy="9" stdDeviation="7" flood-color="#0F3D2E" flood-opacity=".22"/></filter></defs>
-  <circle cx="48" cy="48" r="38" fill="#77A9C8" stroke="#fff" stroke-width="6" filter="url(#s)"/>
-  <text x="48" y="60" text-anchor="middle" font-family="Arial, sans-serif" font-size="42" font-weight="800" fill="#fff">❄</text>
-</svg>
