@@ -1,4 +1,11 @@
 
+## BG Apiary v3.4 – running backend foundation
+
+- PostgreSQL/Prisma backend endpoints for health, apiaries and hives.
+- Added initial Prisma migration SQL and seed script.
+- Added database setup and API reference documentation.
+
+
 ## BG Apiary v2.6.1 - Mobile nav and Notes fix
 
 - Fixed duplicated bottom-navigation feel on Hive Details by moving quick actions into normal page flow.

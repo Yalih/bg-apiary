@@ -1,12 +1,27 @@
-// Prisma schema is prepared in Sprint 3.3. The generated Prisma client
-// will be wired after database migrations are introduced in Sprint 3.4.
+import { PrismaClient } from '@prisma/client';
+import { logger } from '../logger/logger.js';
 
-export const prisma = null;
+export const prisma = new PrismaClient({
+  log: [
+    { emit: 'event', level: 'error' },
+    { emit: 'event', level: 'warn' }
+  ]
+});
+
+prisma.$on('error', (event: { message: string; target?: string; timestamp: Date }) => {
+  logger.error({ event }, 'Prisma error');
+});
+
+prisma.$on('warn', (event: { message: string; target?: string; timestamp: Date }) => {
+  logger.warn({ event }, 'Prisma warning');
+});
 
 export async function connectDatabase(): Promise<void> {
-  // No-op in backend foundation. Real connection comes with migrations.
+  await prisma.$connect();
+  logger.info('Database connected');
 }
 
 export async function disconnectDatabase(): Promise<void> {
-  // No-op in backend foundation. Real connection comes with migrations.
+  await prisma.$disconnect();
+  logger.info('Database disconnected');
 }

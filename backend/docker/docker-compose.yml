@@ -2,6 +2,7 @@ services:
   postgres:
     image: postgres:16-alpine
     container_name: bg-apiary-postgres
+    restart: unless-stopped
     environment:
       POSTGRES_USER: bg_apiary_user
       POSTGRES_PASSWORD: bg_apiary_password
@@ -21,17 +22,20 @@ services:
       context: ..
       dockerfile: Dockerfile
     container_name: bg-apiary-backend
+    restart: unless-stopped
     env_file:
-      - ../.env.example
+      - ../.env
     ports:
       - "4000:4000"
     depends_on:
       postgres:
         condition: service_healthy
+    command: sh -c "npx prisma migrate deploy && node dist/server.js"
 
   pgadmin:
     image: dpage/pgadmin4:8
     container_name: bg-apiary-pgadmin
+    restart: unless-stopped
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@bgapiary.local
       PGADMIN_DEFAULT_PASSWORD: admin

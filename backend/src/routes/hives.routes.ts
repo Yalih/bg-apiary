@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import { notImplemented } from '../controllers/notImplementedController.js';
+import { getHives, postHive } from '../controllers/hiveController.js';
 
 export const hivesRouter = Router();
-hivesRouter.all('/', notImplemented('hives'));
-hivesRouter.all('/:id', notImplemented('hives'));
+hivesRouter.get('/', getHives);
+hivesRouter.post('/', postHive);

@@ -66,3 +66,8 @@ Fixed duplicated bottom-navigation feel on Hive Details and Notes layout overlap
 
 Added backend foundation under `backend/` with Express, TypeScript, Prisma, PostgreSQL schema, JWT helper structure, Swagger, Docker Compose and documentation. Business logic is not implemented yet.
 
+
+## Backend Sprint 3.4
+
+Sprint 3.4 adds the first working backend layer for BG Apiary: PostgreSQL, Prisma, seed data and API endpoints for health, apiaries and hives. Frontend still does not depend on the API yet.
+
