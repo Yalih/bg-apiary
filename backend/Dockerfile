@@ -1,5 +1,6 @@
 FROM node:20-alpine AS deps
 WORKDIR /app
+ENV PRISMA_SKIP_POSTINSTALL_GENERATE=true
 COPY package*.json ./
 RUN npm ci --no-audit --no-fund || npm install --no-audit --no-fund
 

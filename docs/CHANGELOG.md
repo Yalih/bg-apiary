@@ -1,3 +1,12 @@
+# Changelog
+
+## 1.0.1 PRO Production Fix
+
+- Naprawiono instalator zawieszający się na kroku 7/16 przez dodanie timeoutów, cache i logów npm.
+- Dodano root `.env` oraz `env_file` w Docker Compose.
+- Poprawiono diagnostykę `scripts/check.sh`.
+- Ustabilizowano uruchamianie backendu przez Docker Compose.
+
 
 ## BG Apiary v3.4 – running backend foundation
 
