@@ -1,19 +1,9 @@
 #!/usr/bin/env bash
 set -e
 
-TARGET_DIR="/opt/bg-apiary/backend"
-ENV_FILE="$TARGET_DIR/.env"
+cd /opt/bg-apiary/backend
 
-echo "=== BG Apiary ENV installer ==="
-
-if [ ! -d "$TARGET_DIR" ]; then
-  echo "ERROR: backend directory not found: $TARGET_DIR"
-  echo "Run this on VPS after pulling the project to /opt/bg-apiary."
-  exit 1
-fi
-
-cat > "$ENV_FILE" <<'EOF'
-# BG Apiary backend environment
+cat > .env <<'EOF'
 NODE_ENV=development
 PORT=3000
 
@@ -26,13 +16,7 @@ JWT_REFRESH_EXPIRES_IN="7d"
 CORS_ORIGIN="https://bgapiary.pro,http://localhost:5173"
 EOF
 
-chmod 600 "$ENV_FILE"
+chmod 600 .env
 
-echo "Created: $ENV_FILE"
-echo
-echo "Current .env:"
-cat "$ENV_FILE"
-echo
-echo "Now run:"
-echo "cd /opt/bg-apiary/backend"
-echo "npx prisma validate"
+echo "Created backend/.env"
+cat .env
