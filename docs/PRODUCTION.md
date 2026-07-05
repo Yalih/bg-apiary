@@ -54,3 +54,18 @@ docker exec bg-apiary-postgres pg_dump -U bg_apiary bg_apiary > bg_apiary_backup
 ```
 
 Docelowo należy dodać cron i rotację backupów.
+
+
+## Aktualizacja 1.0.3
+
+Od wersji 1.0.3 domyślnie używamy host Nginx, a nie kontenera web na porcie 80. Powód jest prosty: na VPS i tak działa systemowy Nginx, więc nie zmuszamy dwóch Nginxów do walki o port jak dwie matki w jednym ulu.
+
+```text
+Nginx hosta:
+- /var/www/html dla frontendu
+- /api/ proxy do 127.0.0.1:4000/api/
+
+Docker:
+- postgres
+- api
+```

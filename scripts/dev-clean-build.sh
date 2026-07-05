@@ -3,7 +3,7 @@ set -Eeuo pipefail
 
 cd "$(dirname "$0")/.."
 
-echo "BG Apiary 1.0.1 - clean local build"
+echo "BG Apiary 1.0.3 - clean local build"
 
 rm -rf node_modules frontend/node_modules backend/node_modules
 rm -f package-lock.json frontend/package-lock.json backend/package-lock.json frontend/tsconfig.tsbuildinfo

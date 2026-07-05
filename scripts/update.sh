@@ -4,19 +4,36 @@ set -Eeuo pipefail
 APP_DIR="${APP_DIR:-/opt/bg-apiary}"
 cd "$APP_DIR"
 
-echo "[1/6] Fetch git"
+echo "[1/8] Fetch git"
 git fetch origin main
 
-echo "[2/6] Reset to origin/main"
+echo "[2/8] Reset to origin/main"
 git reset --hard origin/main
 
-echo "[3/6] Build images"
-DOCKER_BUILDKIT=1 docker compose build --pull
+echo "[3/8] Stop old app containers"
+docker compose down --remove-orphans || true
+docker rm -f bg-apiary-web bg-apiary-api 2>/dev/null || true
 
-echo "[4/6] Restart stack"
-docker compose up -d
+echo "[4/8] Build API"
+DOCKER_BUILDKIT=1 docker compose build --pull --no-cache api
 
-echo "[5/6] Health check"
+echo "[5/8] Restart database and API"
+docker compose up -d postgres api
+
+echo "[6/8] Build and publish frontend"
+cd frontend
+rm -rf node_modules package-lock.json tsconfig.tsbuildinfo
+npm install --include=dev --no-audit --no-fund --prefer-online --fetch-timeout=300000 --fetch-retries=5
+npm run build
+sudo rm -rf /var/www/html/*
+sudo cp -a dist/. /var/www/html/
+sudo chown -R www-data:www-data /var/www/html || true
+cd "$APP_DIR"
+
+echo "[7/8] Configure nginx"
+bash scripts/install-nginx-host.sh
+
+echo "[8/8] Health check"
 for i in {1..60}; do
   if curl -fsS http://127.0.0.1/api/v1/health >/dev/null 2>&1; then
     echo "OK"
@@ -29,5 +46,4 @@ for i in {1..60}; do
   fi
 done
 
-echo "[6/6] Done"
 bash scripts/check.sh

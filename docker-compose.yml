@@ -54,7 +54,9 @@ services:
       api:
         condition: service_started
     ports:
-      - "80:80"
+      - "8080:80"
+    profiles:
+      - docker-web
 
   pgadmin:
     image: dpage/pgadmin4:8

@@ -150,3 +150,51 @@ docker builder prune -f
 bash scripts/install.sh
 bash scripts/check.sh
 ```
+
+
+## BG Apiary 1.0.3 Stabilization Fix
+
+Domyślny model produkcyjny:
+
+```text
+Host Nginx :80
+  ├── frontend z /var/www/html
+  └── /api/ -> 127.0.0.1:4000/api/
+
+Docker
+  ├── bg-apiary-postgres
+  └── bg-apiary-api
+```
+
+### Deploy na VPS
+
+```bash
+cd /opt/bg-apiary
+git fetch origin main
+git reset --hard origin/main
+git clean -fd -e .env
+bash scripts/install.sh
+bash scripts/check.sh
+```
+
+### Testy
+
+```bash
+curl http://127.0.0.1:4000/api/v1/health
+curl http://127.0.0.1/api/v1/health
+curl -I http://127.0.0.1
+```
+
+### Lokalny build
+
+Windows:
+
+```powershell
+.\scripts\dev-clean-build.ps1
+```
+
+Linux:
+
+```bash
+bash scripts/dev-clean-build.sh
+```

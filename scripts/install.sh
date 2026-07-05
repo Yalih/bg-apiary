@@ -4,7 +4,8 @@ set -Eeuo pipefail
 APP_DIR="${APP_DIR:-/opt/bg-apiary}"
 COMPOSE="docker compose"
 STEP=0
-TOTAL=13
+TOTAL=14
+WEB_ROOT="${WEB_ROOT:-/var/www/html}"
 
 log() { echo -e "\n[$((++STEP))/$TOTAL] $*"; }
 fail() { echo "ERROR: $*" >&2; exit 1; }
@@ -15,18 +16,11 @@ cd "$APP_DIR" || fail "Nie mogę wejść do $APP_DIR"
 log "Checking required tools"
 need git
 need curl
-if ! command -v docker >/dev/null 2>&1; then
-  fail "Docker nie jest zainstalowany. Zainstaluj Docker albo uruchom scripts/install-docker-ubuntu.sh"
-fi
+need docker
+need node
+need npm
 if ! docker compose version >/dev/null 2>&1; then
   fail "Docker Compose nie działa"
-fi
-
-log "Checking ports"
-if ss -ltn | awk '{print $4}' | grep -qE '(:80)$'; then
-  if ! docker ps --format '{{.Names}}' | grep -q '^bg-apiary-web$'; then
-    echo "UWAGA: port 80 jest już zajęty. Jeśli to stary nginx, zatrzymaj go albo zmień konfigurację." >&2
-  fi
 fi
 
 log "Preparing .env"
@@ -47,55 +41,70 @@ if [ "$CURRENT_BRANCH" = "main" ]; then
   git reset --hard origin/main || true
 fi
 
-log "Stopping old containers"
+log "Stopping old Docker containers"
 $COMPOSE down --remove-orphans || true
-
 docker rm -f bg-apiary-web bg-apiary-api bg-apiary-postgres bg-apiary-pgadmin >/dev/null 2>&1 || true
 
-log "Cleaning Docker builder cache for app images"
-docker builder prune -f >/dev/null 2>&1 || true
-docker rm -f bg-apiary-api bg-apiary-web 2>/dev/null || true
+log "Building API image"
+DOCKER_BUILDKIT=1 $COMPOSE build --pull --no-cache api
 
-log "Building images with public npm registry"
-DOCKER_BUILDKIT=1 $COMPOSE build --pull --no-cache
-
-log "Starting database and API"
+log "Starting PostgreSQL and API"
 $COMPOSE up -d postgres api
 
 log "Waiting for API health"
-for i in {1..60}; do
+for i in {1..90}; do
   if curl -fsS http://127.0.0.1:4000/api/v1/health >/dev/null 2>&1; then
     echo "API is healthy"
     break
   fi
-  if [ "$i" = "60" ]; then
+  if [ "$i" = "90" ]; then
     echo "API logs:" >&2
-    docker logs bg-apiary-api --tail=120 >&2 || true
+    docker logs bg-apiary-api --tail=160 >&2 || true
     fail "API nie odpowiada na /api/v1/health"
   fi
   sleep 2
 done
 
-log "Starting web"
-$COMPOSE up -d web
+log "Installing frontend dependencies"
+cd "$APP_DIR/frontend"
+rm -rf node_modules package-lock.json tsconfig.tsbuildinfo
+npm cache clean --force >/dev/null 2>&1 || true
+npm install --include=dev --no-audit --no-fund --prefer-online --fetch-timeout=300000 --fetch-retries=5
 
-log "Checking frontend"
-for i in {1..40}; do
-  if curl -fsS http://127.0.0.1/ >/dev/null 2>&1; then
-    echo "Frontend is responding"
+log "Building frontend"
+npm run build
+test -f dist/index.html || fail "Brakuje frontend/dist/index.html po buildzie"
+
+log "Publishing frontend to host Nginx"
+sudo mkdir -p "$WEB_ROOT"
+sudo rm -rf "$WEB_ROOT"/*
+sudo cp -a "$APP_DIR/frontend/dist/." "$WEB_ROOT/"
+sudo chown -R www-data:www-data "$WEB_ROOT" || true
+cd "$APP_DIR"
+
+log "Configuring host Nginx"
+bash scripts/install-nginx-host.sh
+
+log "Checking API through Nginx"
+for i in {1..30}; do
+  if curl -fsS http://127.0.0.1/api/v1/health >/dev/null 2>&1; then
+    echo "API proxy is healthy"
     break
   fi
-  if [ "$i" = "40" ]; then
-    docker logs bg-apiary-web --tail=120 >&2 || true
-    fail "Frontend nie odpowiada"
+  if [ "$i" = "30" ]; then
+    sudo nginx -T | grep -n "location .*api" -A8 -B3 || true
+    fail "Nginx nie przekierowuje /api do backendu"
   fi
-  sleep 2
+  sleep 1
 done
+
+log "Checking frontend through Nginx"
+curl -fsSI http://127.0.0.1/ >/dev/null || fail "Frontend nie odpowiada przez Nginx"
 
 log "Final diagnostics"
 bash scripts/check.sh || true
 
-log "BG Apiary 1.0 Production ready"
+log "BG Apiary 1.0.3 Production ready"
 echo "Frontend: http://SERVER_IP/"
 echo "API:      http://SERVER_IP/api/v1/health"
 echo "Swagger:  http://SERVER_IP/api/docs"

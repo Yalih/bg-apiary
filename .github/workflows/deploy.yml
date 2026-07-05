@@ -1,4 +1,4 @@
-name: Deploy BG Apiary 1.0 Production
+name: Deploy BG Apiary 1.0.3 Production
 
 on:
   push:

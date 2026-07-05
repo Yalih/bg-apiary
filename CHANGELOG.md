@@ -1,5 +1,21 @@
 # Changelog
 
+## 1.0.3 - VPS stabilization fix
+
+### Fixed
+- Utrwalono działający model VPS: Docker dla PostgreSQL/API + host Nginx dla frontendu i proxy `/api`.
+- Dodano `docker/nginx-host.conf`.
+- Dodano `scripts/install-nginx-host.sh`.
+- Przepisano `scripts/install.sh` pod rzeczywisty deploy na VPS.
+- Przepisano `scripts/update.sh`.
+- Zaktualizowano `scripts/check.sh`, żeby sprawdzał API direct, API through Nginx i frontend.
+- Dodano `frontend/src/vite-env.d.ts`.
+- Ustawiono `moduleResolution: Bundler` w `frontend/tsconfig.json`.
+- Utrwalono `frontend/src/styles.css`.
+- Dockerowy kontener `web` przeniesiono do profilu opcjonalnego `docker-web`, port 8080.
+- Backend entrypoint używa `prisma db push`, jeśli nie ma migracji.
+- Przypięto wersje Vite/TypeScript/React/Prisma, żeby instalacja nie ściągała losowych większych wersji.
+
 ## 1.0.2 - Prisma binary fix
 
 ### Fixed
