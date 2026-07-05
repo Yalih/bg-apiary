@@ -1,33 +1,15 @@
-# Dependencies
 node_modules/
-
-# Production build
 dist/
-build/
-
-# Environment files
+backend/node_modules/
+backend/dist/
 .env
 .env.*
 !.env.example
-
-# Logs
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-*.log
-
-# Editor / OS
+!.env.development.example
+!.env.production.example
+!.env.test.example
+.DS_Store
 .vscode/
 .idea/
-.DS_Store
-Thumbs.db
-
-# Test / coverage
 coverage/
-.vitest/
-
-# Temporary archives
-*.zip
-*.7z
-*.rar
+*.log

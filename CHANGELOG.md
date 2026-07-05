@@ -58,3 +58,12 @@ Added backend foundation under `backend/` with Express, TypeScript, Prisma, Post
 - Dodano klienta API i health check backendu.
 - Pasieki i ule pobierane są z backendu PostgreSQL API.
 - Dodano ekran Backend unavailable i obsługę błędów sieciowych.
+
+## Sprint 3.6 – Stabilizacja Backend + Frontend
+- Dodano modele API/DTO dla frontendu i backendu.
+- Dodano `src/services/apiStateService.ts`.
+- Dodano hook `useAsyncAction`.
+- Dodano strukturę `src/features/` pod moduły biznesowe.
+- Dodano backendowe modele odpowiedzi, paginację i helpery odpowiedzi API.
+- Ustabilizowano build backendu przed generowaniem Prisma Client.
+- Dodano `.gitignore`.

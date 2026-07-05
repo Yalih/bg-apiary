@@ -1,5 +1,8 @@
-import { PrismaClient } from '@prisma/client';
+import { createRequire } from 'node:module';
 import { logger } from '../logger/logger.js';
+
+const require = createRequire(import.meta.url);
+const { PrismaClient } = require('@prisma/client') as { PrismaClient: new (options?: unknown) => any };
 
 export const prisma = new PrismaClient({
   log: [
@@ -8,11 +11,11 @@ export const prisma = new PrismaClient({
   ]
 });
 
-prisma.$on('error', (event: { message: string; target?: string; timestamp: Date }) => {
+prisma.$on?.('error', (event: { message: string; target?: string; timestamp: Date }) => {
   logger.error({ event }, 'Prisma error');
 });
 
-prisma.$on('warn', (event: { message: string; target?: string; timestamp: Date }) => {
+prisma.$on?.('warn', (event: { message: string; target?: string; timestamp: Date }) => {
   logger.warn({ event }, 'Prisma warning');
 });
 
