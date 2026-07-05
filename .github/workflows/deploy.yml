@@ -12,6 +12,7 @@ concurrency:
 
 jobs:
   deploy:
+    name: Build and deploy BG Apiary
     runs-on: ubuntu-latest
     timeout-minutes: 20
 
@@ -19,32 +20,49 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      - name: Setup Node.js 20 LTS
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: npm
+          cache-dependency-path: package-lock.json
 
       - name: Show environment
         run: |
           echo "Node: $(node -v)"
           echo "NPM : $(npm -v)"
-          pwd
+          echo "PWD : $(pwd)"
           ls -la
+          npm config get registry
 
-      - name: Clear npm cache
-        run: npm cache clean --force
+      - name: Force public npm registry
+        run: |
+          npm config set registry https://registry.npmjs.org/
+          npm config delete proxy || true
+          npm config delete https-proxy || true
+          npm config delete cafile || true
+          npm config get registry
+
+      - name: Validate package lock
+        run: |
+          test -f package-lock.json
+          if grep -R "applied-caas\|internal.api.openai" package-lock.json package.json .npmrc 2>/dev/null; then
+            echo "package-lock.json contains an internal registry URL. Stop."
+            exit 1
+          fi
+          echo "package-lock.json registry URLs are clean."
 
       - name: Install dependencies
-        run: npm install --no-audit --no-fund
+        run: npm ci --no-audit --no-fund --registry=https://registry.npmjs.org/
 
       - name: Build application
         run: npm run build
 
-      - name: Verify build
+      - name: Verify dist
         run: |
           test -d dist
-          echo "===== DIST ====="
+          test -f dist/index.html
+          echo "===== dist ====="
           ls -la dist
 
       - name: Upload dist to VPS
@@ -69,21 +87,12 @@ jobs:
           command_timeout: 300s
           script: |
             set -e
-
-            echo "=== BG Apiary Deploy ==="
-
+            echo "=== BG Apiary deploy ==="
             sudo mkdir -p /var/www/html
-
+            test -f /tmp/bg-apiary-dist/index.html
             sudo rm -rf /var/www/html/*
             sudo cp -r /tmp/bg-apiary-dist/* /var/www/html/
-
             sudo chown -R www-data:www-data /var/www/html
-
             sudo nginx -t
-
             sudo systemctl reload nginx
-
-            echo "=== Deploy finished ==="
-
-      - name: Done
-        run: echo "BG Apiary deployed successfully."
+            echo "=== BG Apiary deployed successfully ==="
