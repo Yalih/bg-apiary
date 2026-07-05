@@ -11,36 +11,40 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build-and-deploy:
-    name: Build and deploy
+  deploy:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Node.js 20 LTS
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: npm
-          cache-dependency-path: package-lock.json
 
-      - name: Show versions
+      - name: Show environment
         run: |
-          node -v
-          npm -v
+          echo "Node: $(node -v)"
+          echo "NPM : $(npm -v)"
+          pwd
+          ls -la
+
+      - name: Clear npm cache
+        run: npm cache clean --force
 
       - name: Install dependencies
-        run: npm ci --no-audit --no-fund --prefer-offline
+        run: npm install --no-audit --no-fund
 
-      - name: Build app
+      - name: Build application
         run: npm run build
 
-      - name: Verify dist
+      - name: Verify build
         run: |
           test -d dist
+          echo "===== DIST ====="
           ls -la dist
 
       - name: Upload dist to VPS
@@ -53,8 +57,8 @@ jobs:
           target: "/tmp/bg-apiary-dist"
           strip_components: 1
           rm: true
-          timeout: 60s
-          command_timeout: 120s
+          timeout: 120s
+          command_timeout: 300s
 
       - name: Publish on VPS
         uses: appleboy/ssh-action@v1.2.0
@@ -62,10 +66,24 @@ jobs:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
-          command_timeout: 120s
+          command_timeout: 300s
           script: |
             set -e
+
+            echo "=== BG Apiary Deploy ==="
+
+            sudo mkdir -p /var/www/html
+
             sudo rm -rf /var/www/html/*
             sudo cp -r /tmp/bg-apiary-dist/* /var/www/html/
+
+            sudo chown -R www-data:www-data /var/www/html
+
+            sudo nginx -t
+
             sudo systemctl reload nginx
-            echo "BG Apiary deployed successfully"
+
+            echo "=== Deploy finished ==="
+
+      - name: Done
+        run: echo "BG Apiary deployed successfully."
