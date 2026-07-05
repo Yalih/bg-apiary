@@ -1,3 +1,11 @@
+
+## BG Apiary v2.6.1 - Mobile nav and Notes fix
+
+- Fixed duplicated bottom-navigation feel on Hive Details by moving quick actions into normal page flow.
+- Fixed Notes tab overlap with quick action toolbar.
+- Improved mobile safe-area spacing and quick-action wrapping.
+- Aligned hive detail tile icons.
+
 # Changelog
 
 ## 2.0 BGS Visual Experience

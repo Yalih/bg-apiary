@@ -1,4 +1,4 @@
-# BG Apiary v2.6
+# BG Apiary v2.6.1
 
 **Smart Beekeeping Management** – aplikacja PWA do zarządzania pasieką, ulami, przeglądami, zadaniami i pracą sezonową.
 
@@ -56,3 +56,8 @@ Sprint 3 powinien rozpocząć realny moduł **Ule**:
 3. filtry i statusy rodzin,
 4. szczegóły ula,
 5. historia przeglądów powiązana z ulem.
+
+
+## v2.6.1 mobile navigation fix
+
+Fixed duplicated bottom-navigation feel on Hive Details and Notes layout overlap on mobile.

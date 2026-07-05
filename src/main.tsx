@@ -12,6 +12,7 @@ import './styles/apiaryMapPolish21.css';
 import './styles/gpsLocation21.css';
 import './styles/apiaryEditGps21.css';
 import './styles/sprint2.css';
+import './styles/fix-2-6-1-navigation.css';
 import { registerServiceWorker } from './pwa/registerServiceWorker';
 
 registerServiceWorker();
