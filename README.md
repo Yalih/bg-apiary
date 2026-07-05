@@ -71,3 +71,10 @@ Added backend foundation under `backend/` with Express, TypeScript, Prisma, Post
 
 Sprint 3.4 adds the first working backend layer for BG Apiary: PostgreSQL, Prisma, seed data and API endpoints for health, apiaries and hives. Frontend still does not depend on the API yet.
 
+
+
+## BG Apiary v3.5 – Frontend API Integration
+- Usunięto localStorage jako źródło danych biznesowych.
+- Dodano klienta API i health check backendu.
+- Pasieki i ule pobierane są z backendu PostgreSQL API.
+- Dodano ekran Backend unavailable i obsługę błędów sieciowych.

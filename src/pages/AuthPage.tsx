@@ -30,9 +30,9 @@ export function AuthPage({ onAuthenticated }: AuthPageProps) {
     <main className="auth-screen">
       <section className="auth-card">
         <div className="auth-hero">
-          <span>BG Apiary v2.6 · Tryb lokalny</span>
+          <span>BG Apiary v3.5 · Backend API</span>
           <h1>{mode === 'login' ? 'Zaloguj się' : 'Załóż konto testowe'}</h1>
-          <p>Lokalne konta testowe. Bez chmury, bez serwera, bez udawania, że localStorage jest Fort Knox.</p>
+          <p>Tryb przejściowy do backendu. Dane biznesowe są pobierane z API i PostgreSQL, nie z localStorage.</p>
         </div>
 
         <div className="auth-switch">
@@ -72,12 +72,12 @@ export function AuthPage({ onAuthenticated }: AuthPageProps) {
           )}
 
           <button className="primary full" type="submit">
-            {mode === 'login' ? 'Zaloguj' : 'Utwórz konto testowe'}
+            {mode === 'login' ? 'Zaloguj' : 'Utwórz sesję testową'}
           </button>
         </form>
 
         <div className="auth-note">
-          <strong>Ważne:</strong> to logowanie działa tylko lokalnie w tej przeglądarce. Do produkcji potrzebna będzie prawdziwa chmura i backend w 1.1+.
+          <strong>Ważne:</strong> ten ekran jest tymczasową bramką testową. Produkcyjne JWT zostanie podłączone w kolejnym sprincie backendowym.
         </div>
       </section>
     </main>

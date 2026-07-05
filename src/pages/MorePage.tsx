@@ -72,7 +72,7 @@ export function MorePage({
           <button className="wide-action" onClick={onPlatform}>🧾 Dziennik zmian</button>
           <button className="wide-action" onClick={onPlatform}>🕘 Wersje danych</button>
           <button className="wide-action" onClick={onBackup}>💾 Kopia zapasowa</button>
-          <small>Funkcje chmurowe są gotowe architektonicznie. Backend nie jest podłączony, bo nie będziemy udawać, że kliknięcie w localStorage wysyła satelitę.</small>
+          <small>Backend API jest podłączany etapami. Źródłem prawdy dla danych biznesowych jest PostgreSQL.</small>
         </div>
       </Section>
 

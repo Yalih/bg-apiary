@@ -1,6 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import type { Apiary, ApiaryState, Feeding, Hive, HiveEvent, HiveNote, HivePhoto, Inspection, Task } from './models/apiary';
-import { loadStateForUser, resetStateForUser, saveStateForUser } from './storage/localStore';
 import { AppShell } from './components/AppShell';
 import { StartPage } from './pages/StartPage';
 import { DashboardPage } from './pages/DashboardPage';
@@ -46,7 +45,12 @@ import { getCurrentUser, logoutUser, type TestUser } from './auth/auth';
 import { clearUserData, deleteApiaryData, deleteHiveData } from './logic/dataManagement';
 import { addInventoryMovement } from './logic/inventory';
 import type { InventoryItem, InventoryMovement } from './models/apiary';
-import { isEmptyApiaryState } from './storage/emptyState';
+import { createEmptyState, isEmptyApiaryState } from './storage/emptyState';
+import { getHealth } from './api/healthApi';
+import { createApiary as createApiaryRequest, listApiaries } from './api/apiaryApi';
+import { createHive as createHiveRequest, listHives } from './api/hiveApi';
+import { BackendUnavailable } from './components/system/BackendUnavailable';
+import { LoadingOverlay } from './components/system/LoadingOverlay';
 
 export type View = 'start' | 'dashboard' | 'apiaries' | 'hives' | 'hiveDetails' | 'tasks' | 'more' | 'createApiary' | 'createHive' | 'createInspection' | 'createFeeding' | 'createNote' | 'createTask' | 'calendar' | 'today' | 'reports' | 'assistant' | 'backup' | 'createPhoto' | 'workCenter' | 'queenReplacement' | 'apiaryMap' | 'tour' | 'queenCatalog' | 'queenControl' | 'inventory' | 'honey' | 'health' | 'seasonPlan' | 'platform' | 'platform20' | 'weather' | 'nectar';
 
@@ -111,62 +115,35 @@ function mergeUniqueTasks(existing: Task[], incoming: Task[]): Task[] {
 
 export default function App() {
   const [user, setUser] = useState<TestUser | null>(() => getCurrentUser());
-  const [state, setState] = useState<ApiaryState>(() => {
-    const currentUser = getCurrentUser();
-    if (!currentUser) return normalizeState({
-      apiaries: [],
-      hives: [],
-      inspections: [],
-      feedings: [],
-      events: [],
-      notes: [],
-      photos: [],
-      tasks: [],
-      decisionEvents: [],
-      queenControls: [],
-      workTours: [],
-      workPreferences: {},
-      inventoryItems: [],
-      inventoryMovements: [],
-      honeyHarvests: [],
-      honeyBatches: [],
-      honeyJarStocks: [],
-      honeyCustomers: [],
-      honeySales: [],
-      honeyLabels: [],
-      varroaMeasurements: [],
-      treatments: [],
-      healthChecks: [],
-      hiveTransfers: [],
-      hiveQuarantines: [],
-      seasonPlans: [],
-      syncQueue: [],
-      syncHistory: [],
-      syncConflicts: [],
-      sharedMembers: [],
-      permissionRules: [],
-      auditLog: [],
-      dataVersions: [],
-      hiveAIProfiles: [],
-      colonyScores: [],
-      recommendations20: [],
-      predictions: [],
-      photoAnalyses: [],
-      lastOpenedHiveId: undefined
-    });
-    const loaded = normalizeState(loadStateForUser(currentUser.id));
-    return { ...loaded, tasks: mergeUniqueTasks(loaded.tasks, buildSeasonalTasks(loaded.hives)) };
-  });
+  const [state, setState] = useState<ApiaryState>(() => normalizeState(createEmptyState()));
   const [route, setRoute] = useState<RouteState>({ view: 'dashboard' });
+  const [isBooting, setIsBooting] = useState(true);
+  const [backendError, setBackendError] = useState<string | null>(null);
+
+  const loadBackendState = useCallback(async () => {
+    setIsBooting(true);
+    setBackendError(null);
+    try {
+      await getHealth();
+      const [apiaries, hives] = await Promise.all([listApiaries(), listHives()]);
+      const loaded = normalizeState({ ...createEmptyState(), apiaries, hives });
+      setState({ ...loaded, tasks: mergeUniqueTasks(loaded.tasks, buildSeasonalTasks(loaded.hives)) });
+    } catch (error) {
+      const message = error instanceof Error ? error.message : 'Nieznany błąd połączenia z backendem.';
+      setBackendError(message);
+      setState(normalizeState(createEmptyState()));
+    } finally {
+      setIsBooting(false);
+    }
+  }, []);
 
   useEffect(() => {
-    if (user) saveStateForUser(user.id, state);
-  }, [state, user]);
+    if (user) void loadBackendState();
+    else setIsBooting(false);
+  }, [user, loadBackendState]);
 
   function handleAuthenticated(nextUser: TestUser) {
     setUser(nextUser);
-    const loaded = normalizeState(loadStateForUser(nextUser.id));
-    setState({ ...loaded, tasks: mergeUniqueTasks(loaded.tasks, buildSeasonalTasks(loaded.hives)) });
     setRoute({ view: 'dashboard' });
   }
 
@@ -178,6 +155,14 @@ export default function App() {
 
   if (!user) {
     return <AuthPage onAuthenticated={handleAuthenticated} />;
+  }
+
+  if (isBooting) {
+    return <LoadingOverlay />;
+  }
+
+  if (backendError) {
+    return <BackendUnavailable message={backendError} onRetry={loadBackendState} />;
   }
 
   const activeUser = user;
@@ -273,12 +258,22 @@ export default function App() {
     setRoute({ view: 'tasks' });
   }
 
-  function createApiary(apiary: Apiary) {
-    setState(current => ({
-      ...current,
-      apiaries: [...current.apiaries, apiary]
-    }));
-    setRoute({ view: 'hives', apiaryId: apiary.id });
+  async function createApiary(apiary: Apiary) {
+    try {
+      const created = await createApiaryRequest({
+        name: apiary.name,
+        address: apiary.locationName ?? apiary.location,
+        latitude: apiary.latitude,
+        longitude: apiary.longitude
+      });
+      setState(current => ({
+        ...current,
+        apiaries: [...current.apiaries, created]
+      }));
+      setRoute({ view: 'hives', apiaryId: created.id });
+    } catch (error) {
+      setBackendError(error instanceof Error ? error.message : 'Nie udało się utworzyć pasieki.');
+    }
   }
 
   function updateApiary(apiary: Apiary) {
@@ -288,14 +283,25 @@ export default function App() {
     }));
   }
 
-  function createHive(hive: Hive, event: HiveEvent) {
-    setState(current => ({
-      ...current,
-      hives: [...current.hives, hive],
-      events: [...current.events, event],
-      lastOpenedHiveId: hive.id
-    }));
-    setRoute({ view: 'hiveDetails', hiveId: hive.id });
+  async function createHive(hive: Hive, event: HiveEvent) {
+    try {
+      const created = await createHiveRequest({
+        apiaryId: hive.apiaryId,
+        hiveNumber: String(hive.number || hive.name),
+        hiveType: hive.type,
+        status: hive.strength <= 4 ? 'WEAK' : 'ACTIVE',
+        frameCount: hive.frameCount
+      });
+      setState(current => ({
+        ...current,
+        hives: [...current.hives, created],
+        events: [...current.events, event],
+        lastOpenedHiveId: created.id
+      }));
+      setRoute({ view: 'hiveDetails', hiveId: created.id });
+    } catch (error) {
+      setBackendError(error instanceof Error ? error.message : 'Nie udało się utworzyć ula.');
+    }
   }
 
   function createInspection(hiveId: string, form: InspectionForm, inspection: Inspection) {
@@ -500,8 +506,7 @@ export default function App() {
   }
 
   function handleResetDemo() {
-    const reset = normalizeState(resetStateForUser(activeUser.id));
-    setState({ ...reset, tasks: mergeUniqueTasks(reset.tasks, buildSeasonalTasks(reset.hives)) });
+    void loadBackendState();
     setRoute({ view: 'dashboard' });
   }
 

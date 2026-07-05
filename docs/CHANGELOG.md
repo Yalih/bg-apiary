@@ -403,3 +403,10 @@
 - Zaktualizowano PWA/cache i metadane aplikacji.
 - Dodano `docs/SPRINT_2_FINAL_RELEASE.md`.
 
+
+
+## BG Apiary v3.5 – Frontend API Integration
+- Usunięto localStorage jako źródło danych biznesowych.
+- Dodano klienta API i health check backendu.
+- Pasieki i ule pobierane są z backendu PostgreSQL API.
+- Dodano ekran Backend unavailable i obsługę błędów sieciowych.

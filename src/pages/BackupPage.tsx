@@ -47,7 +47,7 @@ export function BackupPage({ state, onRestore }: BackupPageProps) {
         <div>
           <span>Kopia zapasowa</span>
           <h1>Eksport i import danych</h1>
-          <p>Dane są zapisane lokalnie w tej przeglądarce. Eksportuj kopię regularnie, bo localStorage nie jest sejfem, tylko szufladą z etykietą.</p>
+          <p>Dane biznesowe są przenoszone do PostgreSQL. Eksport lokalny pozostaje tymczasowym narzędziem serwisowym.</p>
         </div>
         <div className="backup-version">
           <strong>{backup.version}</strong>

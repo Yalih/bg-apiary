@@ -23,6 +23,11 @@ export interface ApiaryWeather {
 
 export const OPEN_METEO_BASE_URL = 'https://api.open-meteo.com/v1/forecast';
 export const WEATHER_CACHE_PREFIX = 'bgapiary.weather.';
+const inMemoryWeatherCache = new Map<string, string>();
+const memoryStorage: Pick<Storage, 'getItem' | 'setItem'> = {
+  getItem: (key: string) => inMemoryWeatherCache.get(key) ?? null,
+  setItem: (key: string, value: string) => { inMemoryWeatherCache.set(key, value); }
+};
 
 export function parseApiaryCoordinates(location?: string): WeatherCoordinates | undefined {
   if (!location) return undefined;
@@ -87,11 +92,11 @@ export function weatherCacheKey(apiaryId: string): string {
   return `${WEATHER_CACHE_PREFIX}${apiaryId}`;
 }
 
-export function saveWeatherCache(apiaryId: string, weather: ApiaryWeather, storage: Storage = localStorage): void {
+export function saveWeatherCache(apiaryId: string, weather: ApiaryWeather, storage: Pick<Storage, 'setItem'> = memoryStorage): void {
   storage.setItem(weatherCacheKey(apiaryId), JSON.stringify(weather));
 }
 
-export function readWeatherCache(apiaryId: string, storage: Storage = localStorage): ApiaryWeather | undefined {
+export function readWeatherCache(apiaryId: string, storage: Pick<Storage, 'getItem'> = memoryStorage): ApiaryWeather | undefined {
   const raw = storage.getItem(weatherCacheKey(apiaryId));
   if (!raw) return undefined;
   try {
@@ -118,15 +123,15 @@ export function fallbackWeather(): ApiaryWeather {
   };
 }
 
-export async function fetchApiaryWeather(apiaryId: string, coords: WeatherCoordinates, storage: Storage = localStorage): Promise<ApiaryWeather> {
+export async function fetchApiaryWeather(apiaryId: string, coords: WeatherCoordinates): Promise<ApiaryWeather> {
   try {
     const response = await fetch(buildOpenMeteoUrl(coords));
     if (!response.ok) throw new Error(`Open-Meteo ${response.status}`);
     const weather = normalizeOpenMeteoResponse(await response.json());
-    saveWeatherCache(apiaryId, weather, storage);
+    saveWeatherCache(apiaryId, weather);
     return weather;
   } catch {
-    return readWeatherCache(apiaryId, storage) ?? fallbackWeather();
+    return readWeatherCache(apiaryId) ?? fallbackWeather();
   }
 }
 

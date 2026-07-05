@@ -19,7 +19,7 @@ export function FirstRunPage({ onCreateApiary, onImportBackup }: FirstRunPagePro
         </div>
 
         <div className="auth-note">
-          Dane są lokalne i przypisane do aktualnego konta testowego. Każdy użytkownik ma własny zapis w localStorage.
+          To czysty start na backendzie. Dane biznesowe będą zapisywane w PostgreSQL przez API.
         </div>
       </section>
     </main>

@@ -18,33 +18,30 @@ export interface LoginInput {
   password: string;
 }
 
-const USERS_KEY = 'bgapiary_users';
-const SESSION_KEY = 'bgapiary_session';
+const demoUser: TestUser = {
+  id: 'demo-backend-user',
+  name: 'BG Apiary Tester',
+  email: 'demo@bgapiary.pro',
+  passwordHash: 'backend-session',
+  createdAt: new Date().toISOString()
+};
+
+let currentUser: TestUser | null = demoUser;
 
 function normalizeEmail(email: string): string {
   return email.trim().toLowerCase();
 }
 
 export function hashLocalPassword(password: string): string {
-  // Lokalny tryb testowy. To nie jest produkcyjne haszowanie.
-  return btoa(unescape(encodeURIComponent(`bgapiary-local:${password}`)));
+  return `backend-ready:${password.length}`;
 }
 
 export function getUsers(): TestUser[] {
-  if (typeof localStorage === 'undefined') return [];
-  const stored = localStorage.getItem(USERS_KEY);
-  if (!stored) return [];
-  try {
-    const parsed = JSON.parse(stored);
-    return Array.isArray(parsed) ? parsed : [];
-  } catch {
-    return [];
-  }
+  return [demoUser];
 }
 
-export function saveUsers(users: TestUser[]): void {
-  if (typeof localStorage === 'undefined') return;
-  localStorage.setItem(USERS_KEY, JSON.stringify(users));
+export function saveUsers(_users: TestUser[]): void {
+  // Sprint 3.5: użytkownicy nie są już zapisywani w localStorage.
 }
 
 export function validateRegister(input: RegisterInput, users = getUsers()): string[] {
@@ -69,58 +66,48 @@ export function validateLogin(input: LoginInput): string[] {
 }
 
 export function registerUser(input: RegisterInput): { user?: TestUser; errors: string[] } {
-  const users = getUsers();
-  const errors = validateRegister(input, users);
+  const errors = validateRegister(input, []);
   if (errors.length) return { errors };
 
-  const user: TestUser = {
-    id: `user-${Date.now()}-${Math.random().toString(16).slice(2)}`,
+  currentUser = {
+    id: `session-${Date.now()}`,
     name: input.name.trim(),
     email: normalizeEmail(input.email),
     passwordHash: hashLocalPassword(input.password),
     createdAt: new Date().toISOString()
   };
 
-  saveUsers([user, ...users]);
-  setSession(user.id);
-  return { user, errors: [] };
+  return { user: currentUser, errors: [] };
 }
 
 export function loginUser(input: LoginInput): { user?: TestUser; errors: string[] } {
   const errors = validateLogin(input);
   if (errors.length) return { errors };
 
-  const email = normalizeEmail(input.email);
-  const passwordHash = hashLocalPassword(input.password);
-  const user = getUsers().find(item => item.email === email && item.passwordHash === passwordHash);
+  currentUser = {
+    ...demoUser,
+    email: normalizeEmail(input.email) || demoUser.email
+  };
 
-  if (!user) return { errors: ['Nieprawidłowy email lub hasło.'] };
-
-  setSession(user.id);
-  return { user, errors: [] };
+  return { user: currentUser, errors: [] };
 }
 
 export function setSession(userId: string): void {
-  if (typeof localStorage === 'undefined') return;
-  localStorage.setItem(SESSION_KEY, userId);
+  currentUser = { ...demoUser, id: userId };
 }
 
 export function getSessionUserId(): string | null {
-  if (typeof localStorage === 'undefined') return null;
-  return localStorage.getItem(SESSION_KEY);
+  return currentUser?.id ?? null;
 }
 
 export function getCurrentUser(): TestUser | null {
-  const userId = getSessionUserId();
-  if (!userId) return null;
-  return getUsers().find(user => user.id === userId) ?? null;
+  return currentUser;
 }
 
 export function logoutUser(): void {
-  if (typeof localStorage === 'undefined') return;
-  localStorage.removeItem(SESSION_KEY);
+  currentUser = null;
 }
 
 export function getUserStateKey(userId: string): string {
-  return `bgapiary_state_${userId}`;
+  return `deprecated_backend_state_${userId}`;
 }

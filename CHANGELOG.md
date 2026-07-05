@@ -51,3 +51,10 @@ Nie zmieniono backendu, bazy danych ani modelu danych.
 
 Added backend foundation under `backend/` with Express, TypeScript, Prisma, PostgreSQL schema, JWT helper structure, Swagger, Docker Compose and documentation. Business logic is not implemented yet.
 
+
+
+## BG Apiary v3.5 – Frontend API Integration
+- Usunięto localStorage jako źródło danych biznesowych.
+- Dodano klienta API i health check backendu.
+- Pasieki i ule pobierane są z backendu PostgreSQL API.
+- Dodano ekran Backend unavailable i obsługę błędów sieciowych.

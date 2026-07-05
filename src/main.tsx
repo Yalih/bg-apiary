@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
+import { GlobalErrorBoundary } from './components/system/GlobalErrorBoundary';
 import './styles.css';
 import './styles/bgApiaryAssetPack.css';
 import './styles/premiumVisualSystem21.css';
@@ -19,6 +20,8 @@ registerServiceWorker();
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <App />
+    <GlobalErrorBoundary>
+      <App />
+    </GlobalErrorBoundary>
   </React.StrictMode>
 );

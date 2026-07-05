@@ -2,7 +2,8 @@ import type { Apiary, ApiaryState, Hive } from '../models/apiary';
 
 export const WEATHER_ACCURACY_VERSION = '2.1-weather-nectar-accuracy';
 export const OPEN_METEO_BASE_URL = 'https://api.open-meteo.com/v1/forecast';
-export const WEATHER_CACHE_PREFIX = 'bgapiary.weather21.';
+export const weatherSnapshotCache21 = new Map<string, string>();
+const WEATHER_CACHE_PREFIX = 'bgapiary.weather21.';
 
 export type WeatherWorkScore = 'idealnie' | 'mozliwe' | 'niezalecane';
 export type ApiaryCoordinates = { latitude: number; longitude: number };
@@ -176,7 +177,7 @@ export function buildDashboardWeatherCard(snapshot: AccurateWeatherSnapshot) {
 
 export function readCachedWeather(apiaryId: string): AccurateWeatherSnapshot | null {
   try {
-    const raw = window.localStorage.getItem(getWeatherCacheKey(apiaryId));
+    const raw = weatherSnapshotCache21.get(getWeatherCacheKey(apiaryId));
     return raw ? JSON.parse(raw) as AccurateWeatherSnapshot : null;
   } catch {
     return null;
@@ -186,9 +187,9 @@ export function readCachedWeather(apiaryId: string): AccurateWeatherSnapshot | n
 export function writeCachedWeather(snapshot: AccurateWeatherSnapshot): void {
   if (!snapshot.apiaryId || typeof window === 'undefined') return;
   try {
-    window.localStorage.setItem(getWeatherCacheKey(snapshot.apiaryId), JSON.stringify(snapshot));
+    weatherSnapshotCache21.set(getWeatherCacheKey(snapshot.apiaryId), JSON.stringify(snapshot));
   } catch {
-    // localStorage may be full or unavailable; the app must keep working offline.
+    // Cache może być niedostępny; aplikacja musi działać dalej.
   }
 }
 
