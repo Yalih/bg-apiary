@@ -127,3 +127,26 @@ bash scripts/check.sh
 ### Ważne
 
 W tej wersji celowo usunięto `package-lock.json`, ponieważ wcześniejsze locki mogły zawierać adresy wewnętrznego registry niedostępnego na komputerze i VPS. Instalacja zależności idzie przez publiczny npm registry.
+
+
+## BG Apiary 1.0.2 Prisma Binary Fix
+
+Ta wersja naprawia błąd backendu:
+
+```text
+Prisma Client could not locate the Query Engine for runtime "linux-musl-openssl-3.0.x"
+```
+
+Po aktualizacji na VPS wykonaj:
+
+```bash
+cd /opt/bg-apiary
+git fetch origin main
+git reset --hard origin/main
+git clean -fd -e .env
+docker compose down --remove-orphans
+docker rm -f bg-apiary-api bg-apiary-web 2>/dev/null || true
+docker builder prune -f
+bash scripts/install.sh
+bash scripts/check.sh
+```

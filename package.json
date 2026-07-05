@@ -1,6 +1,6 @@
 {
   "name": "bg-apiary",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "private": true,
   "description": "BG Apiary 1.0 Production - clean PWA for beekeeping management",
   "scripts": {

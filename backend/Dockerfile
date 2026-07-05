@@ -1,6 +1,8 @@
 FROM node:20-alpine AS deps
 WORKDIR /app
 
+RUN apk add --no-cache openssl curl
+
 ENV NPM_CONFIG_REGISTRY=https://registry.npmjs.org/ \
     NPM_CONFIG_AUDIT=false \
     NPM_CONFIG_FUND=false \
@@ -16,7 +18,7 @@ RUN npm install --include=dev --no-audit --no-fund --prefer-online
 FROM deps AS build
 WORKDIR /app
 COPY prisma ./prisma
-RUN npx prisma generate
+RUN npx prisma generate --schema=prisma/schema.prisma
 COPY tsconfig.json ./
 COPY src ./src
 RUN npm run build

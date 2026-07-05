@@ -54,6 +54,7 @@ docker rm -f bg-apiary-web bg-apiary-api bg-apiary-postgres bg-apiary-pgadmin >/
 
 log "Cleaning Docker builder cache for app images"
 docker builder prune -f >/dev/null 2>&1 || true
+docker rm -f bg-apiary-api bg-apiary-web 2>/dev/null || true
 
 log "Building images with public npm registry"
 DOCKER_BUILDKIT=1 $COMPOSE build --pull --no-cache

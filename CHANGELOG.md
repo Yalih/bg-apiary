@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.0.2 - Prisma binary fix
+
+### Fixed
+- Naprawiono błąd Prisma Query Engine dla runtime `linux-musl-openssl-3.0.x`.
+- Dodano `binaryTargets` w `backend/prisma/schema.prisma`.
+- Backend Dockerfile instaluje `openssl` w build stage.
+- Backend entrypoint uruchamia `prisma generate` przed migracjami jako zabezpieczenie runtime.
+- Instalator usuwa stare kontenery API/WEB przed pełnym buildem.
+
 ## 1.0.1 - dependency/install fix
 
 ### Fixed
