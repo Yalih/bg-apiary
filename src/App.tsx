@@ -526,10 +526,6 @@ export default function App() {
         onGoCalendar={() => navigate('calendar')}
         onOpenWeather={() => navigate('weather')}
         onOpenNectar={() => navigate('nectar')}
-        onCreateApiary={() => navigate('createApiary')}
-        onCreateHive={() => navigate('createHive')}
-        onCreateInspection={() => navigate('createInspection')}
-        onCreateTask={() => navigate('createTask')}
       />
     );
   }
@@ -832,5 +828,5 @@ export default function App() {
     ) : <div className="empty-card">Nie znaleziono ula.</div>;
   }
 
-  return <AppShell view={route.view} onNavigate={navigate}>{page}</AppShell>;
+  return <AppShell view={route.view} onNavigate={navigate} hiveCount={state.hives.length} taskCount={state.tasks.filter(task => task.status !== 'done').length}>{page}</AppShell>;
 }

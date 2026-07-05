@@ -1,11 +1,12 @@
 {
-  "name": "BG Apiary v2.0.9",
+  "name": "BG Apiary v2.6",
   "short_name": "BG Apiary",
-  "description": "Smart Beekeeping Management dla nowoczesnej pasieki.",
+  "description": "Smart Beekeeping Management - finalne wydanie Sprintu 2",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
-  "background_color": "#fff8e6",
-  "theme_color": "#ffb703",
+  "background_color": "#fff8e1",
+  "theme_color": "#f2a900",
   "icons": [
     {
       "src": "/icons/icon-192.png",
@@ -18,55 +19,6 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
-    },
-    {
-      "src": "/favicon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
-      "purpose": "any"
-    }
-  ],
-  "id": "/",
-  "scope": "/",
-  "display_override": [
-    "window-controls-overlay",
-    "standalone",
-    "minimal-ui"
-  ],
-  "orientation": "portrait-primary",
-  "categories": [
-    "productivity",
-    "utilities",
-    "lifestyle"
-  ],
-  "lang": "pl",
-  "dir": "ltr",
-  "shortcuts": [
-    {
-      "name": "Dashboard",
-      "short_name": "Dashboard",
-      "description": "Otwórz pulpit pasieki",
-      "url": "/",
-      "icons": [
-        {
-          "src": "/icons/icon-192.png",
-          "sizes": "192x192",
-          "type": "image/png"
-        }
-      ]
-    },
-    {
-      "name": "Zadania",
-      "short_name": "Zadania",
-      "description": "Sprawdź najbliższe prace",
-      "url": "/?view=tasks",
-      "icons": [
-        {
-          "src": "/icons/icon-192.png",
-          "sizes": "192x192",
-          "type": "image/png"
-        }
-      ]
     }
   ]
 }

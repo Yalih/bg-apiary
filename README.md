@@ -1,36 +1,27 @@
-# BG Apiary v2.0.9
+# BG Apiary v2.6
 
-**Smart Beekeeping Management**
+**Smart Beekeeping Management** – aplikacja PWA do zarządzania pasieką, ulami, przeglądami, zadaniami i pracą sezonową.
 
-BG Apiary to aplikacja dla pszczelarzy do prowadzenia pasiek, uli, przeglądów, zadań, pogody, pożytków i raportów.
+Wersja **v2.6** zamyka Sprint 2. To finalne wydanie warstwy UI/UX: odświeżony layout, dashboard, branding, dostępność, PWA i poprawki po testach. Bez ruszania backendu i bazy danych, bo robienie wszystkiego naraz to znany sposób na stworzenie cyfrowej ruiny.
 
-## Aktualna wersja
+## Zakres Sprintu 2
 
-- Sprint: **2.0.9**
-- Wersja aplikacji: **BG Apiary v2.0.9**
-- Zakres: **Final polish Sprintu 2.0 i przygotowanie do Sprintu 3.0**
+- nowy layout aplikacji: topbar, sidebar desktop i mobile bottom nav,
+- dashboard premium z kartami statystyk, zadaniami, stanem rodzin i pogodą/pożytkiem,
+- logo, ikony PWA i podstawowy branding,
+- poprawki dostępności: skip link, focus states, `aria-current`, lepsza nawigacja,
+- podstawowe PWA: manifest, service worker, ekran offline,
+- poprawki mobile i reduced motion,
+- dokumentacja testów, poprawek i wydania finalnego.
 
-## Co zawiera Sprint 2.0
+## Uruchomienie lokalne
 
-- `2.0.1` - branding i design system.
-- `2.0.2` - layout aplikacji.
-- `2.0.3` - dashboard v2.
-- `2.0.4` - system komponentów UI.
-- `2.0.5` - ikony i grafiki aplikacyjne.
-- `2.0.6` - tryb jasny/ciemny/systemowy.
-- `2.0.7` - responsywność i mobile polish.
-- `2.0.8` - PWA i instalacja aplikacji.
-- `2.0.9` - final polish UI, porządek wersji i przygotowanie do modułu Ule.
+```bash
+npm install
+npm run dev
+```
 
-## Sprint 2.0.9
-
-- Ujednolicono numerację wersji w aplikacji, topbarze, `index.html`, manifeście i dokumentacji.
-- Dodano `src/version.ts` jako jedno miejsce prawdy dla wersji widocznej w UI.
-- Dodano `src/styles/final-polish.css` dla spójności layoutu, dashboardu, PWA/offline i trybów kolorystycznych.
-- Uporządkowano dokumentację końcową Sprintu 2.0.
-- Przygotowano wejście do Sprintu 3.0: Moduł Ule.
-
-## Development
+## Build produkcyjny
 
 ```bash
 npm install
@@ -39,10 +30,29 @@ npm run build
 
 ## Wdrożenie
 
+Projekt wdraża się automatycznie przez GitHub Actions po `git push`.
+
 ```bash
 git add .
-git commit -m "Sprint 2.0.9 - final UI polish"
+git commit -m "Sprint 2 complete"
 git push
 ```
 
-Po `git push` GitHub Actions wdraża aplikację na `https://bgapiary.pro`.
+## Najważniejsze dokumenty Sprintu 2
+
+- `docs/SPRINT_2_ANALYSIS.md`
+- `docs/SPRINT_2_DESIGN.md`
+- `docs/SPRINT_2_IMPLEMENTATION.md`
+- `docs/SPRINT_2_TESTS.md`
+- `docs/SPRINT_2_5_FIXES.md`
+- `docs/SPRINT_2_FINAL_RELEASE.md`
+
+## Następny etap: Sprint 3
+
+Sprint 3 powinien rozpocząć realny moduł **Ule**:
+
+1. lista uli jako osobny, dopracowany ekran,
+2. karta ula z kluczowymi danymi,
+3. filtry i statusy rodzin,
+4. szczegóły ula,
+5. historia przeglądów powiązana z ulem.

@@ -30,7 +30,7 @@ export function AuthPage({ onAuthenticated }: AuthPageProps) {
     <main className="auth-screen">
       <section className="auth-card">
         <div className="auth-hero">
-          <span>BgApiary 1.0 RC-UserTest</span>
+          <span>BG Apiary v2.6 · Tryb lokalny</span>
           <h1>{mode === 'login' ? 'Zaloguj się' : 'Załóż konto testowe'}</h1>
           <p>Lokalne konta testowe. Bez chmury, bez serwera, bez udawania, że localStorage jest Fort Knox.</p>
         </div>

@@ -1,5 +1,5 @@
 import type { View } from '../../App';
-import { primaryNavigationItems } from './navigationItems';
+import { mobileNavigation } from './navigationItems';
 
 interface MobileNavProps {
   view: View;
@@ -8,17 +8,18 @@ interface MobileNavProps {
 
 export function MobileNav({ view, onNavigate }: MobileNavProps) {
   return (
-    <nav className="app-mobile-nav" aria-label="Dolna nawigacja mobilna">
-      {primaryNavigationItems.map(item => (
+    <nav className="mobile-nav-v23" aria-label="Nawigacja mobilna">
+      {mobileNavigation.map(item => (
         <button
           key={item.view}
           type="button"
-          className={view === item.view ? 'is-active' : ''}
-          onClick={() => onNavigate(item.view)}
+          className={view === item.view ? 'active' : ''}
           aria-current={view === item.view ? 'page' : undefined}
+          aria-label={`Przejdź do: ${item.label}`}
+          onClick={() => onNavigate(item.view)}
         >
           <span aria-hidden="true">{item.icon}</span>
-          <small>{item.shortLabel ?? item.label}</small>
+          <small>{item.label}</small>
         </button>
       ))}
     </nav>
