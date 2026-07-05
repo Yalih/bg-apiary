@@ -4,7 +4,7 @@ set -Eeuo pipefail
 APP_DIR="${APP_DIR:-/opt/bg-apiary}"
 COMPOSE="docker compose"
 STEP=0
-TOTAL=12
+TOTAL=13
 
 log() { echo -e "\n[$((++STEP))/$TOTAL] $*"; }
 fail() { echo "ERROR: $*" >&2; exit 1; }
@@ -52,8 +52,11 @@ $COMPOSE down --remove-orphans || true
 
 docker rm -f bg-apiary-web bg-apiary-api bg-apiary-postgres bg-apiary-pgadmin >/dev/null 2>&1 || true
 
-log "Building images"
-DOCKER_BUILDKIT=1 $COMPOSE build --pull
+log "Cleaning Docker builder cache for app images"
+docker builder prune -f >/dev/null 2>&1 || true
+
+log "Building images with public npm registry"
+DOCKER_BUILDKIT=1 $COMPOSE build --pull --no-cache
 
 log "Starting database and API"
 $COMPOSE up -d postgres api

@@ -1,5 +1,20 @@
 # Changelog
 
+## 1.0.1 - dependency/install fix
+
+### Fixed
+- Naprawiono błąd `Cannot find package '@vitejs/plugin-react'`.
+- Przeniesiono `@vitejs/plugin-react` do `frontend/devDependencies`.
+- Usunięto stare `package-lock.json`, które mogły wskazywać na niedostępny wewnętrzny registry.
+- Dodano `.npmrc` wymuszające publiczny `https://registry.npmjs.org/`.
+- Dockerfile frontendu i backendu używa teraz czystego `npm install` z publicznego registry.
+- Dodano root `package.json`, więc `npm run build` z katalogu głównego działa poprawnie.
+- Dodano skrypty:
+  - `scripts/dev-clean-build.ps1`
+  - `scripts/dev-clean-build.sh`
+
+# Changelog
+
 ## 1.0.0 Production from zero
 
 - Utworzono czysty projekt BG Apiary 1.0 od zera.

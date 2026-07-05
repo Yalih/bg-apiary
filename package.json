@@ -1,0 +1,21 @@
+{
+  "name": "bg-apiary",
+  "version": "1.0.1",
+  "private": true,
+  "description": "BG Apiary 1.0 Production - clean PWA for beekeeping management",
+  "scripts": {
+    "install:frontend": "npm --prefix frontend install --include=dev --no-audit --no-fund --prefer-online",
+    "install:backend": "npm --prefix backend install --include=dev --no-audit --no-fund --prefer-online",
+    "install:all": "npm run install:frontend && npm run install:backend",
+    "build:frontend": "npm --prefix frontend run build",
+    "build:backend": "npm --prefix backend run build",
+    "build": "npm run install:all && npm run build:frontend && npm run build:backend",
+    "dev:frontend": "npm --prefix frontend run dev",
+    "dev:backend": "npm --prefix backend run dev",
+    "check": "bash scripts/check.sh"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "npm": ">=10.0.0"
+  }
+}

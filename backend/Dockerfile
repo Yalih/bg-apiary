@@ -1,14 +1,17 @@
 FROM node:20-alpine AS deps
 WORKDIR /app
-ENV NPM_CONFIG_AUDIT=false \
+
+ENV NPM_CONFIG_REGISTRY=https://registry.npmjs.org/ \
+    NPM_CONFIG_AUDIT=false \
     NPM_CONFIG_FUND=false \
     NPM_CONFIG_FETCH_RETRIES=5 \
     NPM_CONFIG_FETCH_RETRY_MINTIMEOUT=20000 \
     NPM_CONFIG_FETCH_RETRY_MAXTIMEOUT=120000 \
     NPM_CONFIG_FETCH_TIMEOUT=300000 \
     PRISMA_SKIP_POSTINSTALL_GENERATE=true
-COPY package*.json ./
-RUN if [ -f package-lock.json ]; then npm ci --include=dev --no-audit --no-fund; else npm install --include=dev --no-audit --no-fund; fi
+
+COPY package.json .npmrc ./
+RUN npm install --include=dev --no-audit --no-fund --prefer-online
 
 FROM deps AS build
 WORKDIR /app
@@ -21,9 +24,19 @@ RUN npm run build
 FROM node:20-alpine AS runner
 WORKDIR /app
 ENV NODE_ENV=production
+
 RUN apk add --no-cache openssl curl
-COPY package*.json ./
-RUN if [ -f package-lock.json ]; then npm ci --omit=dev --no-audit --no-fund; else npm install --omit=dev --no-audit --no-fund; fi
+
+ENV NPM_CONFIG_REGISTRY=https://registry.npmjs.org/ \
+    NPM_CONFIG_AUDIT=false \
+    NPM_CONFIG_FUND=false \
+    NPM_CONFIG_FETCH_RETRIES=5 \
+    NPM_CONFIG_FETCH_TIMEOUT=300000 \
+    PRISMA_SKIP_POSTINSTALL_GENERATE=true
+
+COPY package.json .npmrc ./
+RUN npm install --omit=dev --no-audit --no-fund --prefer-online
+
 COPY --from=build /app/node_modules/.prisma ./node_modules/.prisma
 COPY --from=build /app/node_modules/@prisma ./node_modules/@prisma
 COPY --from=build /app/prisma ./prisma
@@ -31,5 +44,6 @@ COPY --from=build /app/dist ./dist
 COPY healthcheck.js ./healthcheck.js
 COPY docker-entrypoint.sh ./docker-entrypoint.sh
 RUN chmod +x ./docker-entrypoint.sh
+
 EXPOSE 4000
 CMD ["./docker-entrypoint.sh"]

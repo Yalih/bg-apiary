@@ -87,3 +87,43 @@ Po uruchomieniu załóż konto na ekranie rejestracji. Aplikacja przeprowadzi pr
 ## Ważne
 
 Dane biznesowe nie są trzymane w `localStorage`. Źródłem prawdy jest PostgreSQL. Frontend używa IndexedDB do podstawowego trybu offline i kolejki synchronizacji.
+
+
+## BG Apiary 1.0.1 Dependency Fix
+
+Ta paczka naprawia problem z lokalnym buildem:
+
+```text
+Cannot find package '@vitejs/plugin-react'
+```
+
+### Windows, test lokalny
+
+Uruchom PowerShell w katalogu głównym projektu:
+
+```powershell
+.\scripts\dev-clean-build.ps1
+```
+
+albo ręcznie:
+
+```powershell
+npm run build
+```
+
+Root `package.json` sam zainstaluje zależności frontendu i backendu przed buildem.
+
+### VPS, czysty deploy
+
+```bash
+cd /opt/bg-apiary
+git fetch origin main
+git reset --hard origin/main
+git clean -fd -e .env
+bash scripts/install.sh
+bash scripts/check.sh
+```
+
+### Ważne
+
+W tej wersji celowo usunięto `package-lock.json`, ponieważ wcześniejsze locki mogły zawierać adresy wewnętrznego registry niedostępnego na komputerze i VPS. Instalacja zależności idzie przez publiczny npm registry.
