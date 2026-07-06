@@ -280,3 +280,26 @@ curl -i -X POST https://bgapiary.pro/api/v1/auth/login \
 ```
 
 Wynik ma być `401` albo `400`, nie `405`.
+
+
+## Last Working Rollback 1.0.6
+
+Ta paczka przywraca ostatnią stabilnie działającą wersję przed modułem 1.1.x.
+
+### Deploy
+
+```bash
+cd /opt/bg-apiary
+git fetch origin main
+git reset --hard origin/main
+git clean -fd -e .env
+bash scripts/install.sh
+bash scripts/check.sh
+```
+
+### Awaryjnie po HTTP 502
+
+```bash
+cd /opt/bg-apiary
+bash scripts/rollback-recover-1-0-6.sh
+```

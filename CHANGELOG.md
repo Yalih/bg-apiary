@@ -1,5 +1,13 @@
 # Changelog
 
+## Last working rollback - 1.0.6
+
+### Restored
+- Przywrócono ostatnią stabilną wersję BG Apiary 1.0.6.
+- Usunięto zmiany z linii 1.1.x z tej paczki rollback.
+- Dodano `scripts/rollback-recover-1-0-6.sh`.
+- Dodano dokumentację `docs/ROLLBACK_LAST_WORKING_1_0_6.md`.
+
 ## 1.0.6 - Nginx HTTPS API fix
 
 ### Fixed

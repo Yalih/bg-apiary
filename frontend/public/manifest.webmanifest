@@ -1,7 +1,7 @@
 {
   "name": "BG Apiary 1.0.6 Production",
   "short_name": "BG Apiary",
-  "description": "BG Apiary 1.0.6 - stabilna aplikacja PWA do zarządzania pasieką.",
+  "description": "BG Apiary 1.0.6 - ostatnia stabilna wersja produkcyjna przed modułem 1.1.x.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#fff8e7",
