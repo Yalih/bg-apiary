@@ -6,9 +6,9 @@ cd "$APP_DIR"
 
 if [ -f .env ]; then
   if grep -q "^APP_VERSION=" .env; then
-    sed -i "s/^APP_VERSION=.*/APP_VERSION=1.1.0/" .env
+    sed -i "s/^APP_VERSION=.*/APP_VERSION=1.1.1/" .env
   else
-    echo "APP_VERSION=1.1.0" >> .env
+    echo "APP_VERSION=1.1.1" >> .env
   fi
 fi
 
@@ -41,9 +41,9 @@ cd "$APP_DIR"
 
 if [ -f .env ]; then
   if grep -q "^APP_VERSION=" .env; then
-    sed -i "s/^APP_VERSION=.*/APP_VERSION=1.1.0/" .env
+    sed -i "s/^APP_VERSION=.*/APP_VERSION=1.1.1/" .env
   else
-    echo "APP_VERSION=1.1.0" >> .env
+    echo "APP_VERSION=1.1.1" >> .env
   fi
 fi
 

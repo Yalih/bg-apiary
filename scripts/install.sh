@@ -35,9 +35,9 @@ if [ ! -f .env ]; then
 fi
 
 if grep -q "^APP_VERSION=" .env; then
-  sed -i "s/^APP_VERSION=.*/APP_VERSION=1.1.0/" .env
+  sed -i "s/^APP_VERSION=.*/APP_VERSION=1.1.1/" .env
 else
-  echo "APP_VERSION=1.1.0" >> .env
+  echo "APP_VERSION=1.1.1" >> .env
 fi
 
 log "Syncing git repository"
@@ -122,7 +122,7 @@ curl -fsSI http://127.0.0.1/ >/dev/null || fail "Frontend nie odpowiada przez Ng
 log "Final diagnostics"
 bash scripts/check.sh || true
 
-log "BG Apiary 1.1.0 Production ready"
+log "BG Apiary 1.1.1 Production ready"
 echo "Frontend: http://SERVER_IP/"
 echo "API:      http://SERVER_IP/api/v1/health"
 echo "Swagger:  http://SERVER_IP/api/docs"

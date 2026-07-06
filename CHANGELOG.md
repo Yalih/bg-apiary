@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.1.1 - TypeScript record render fix
+
+### Fixed
+- Naprawiono błąd builda `Property 'product' does not exist on type 'Queen | Treatment'`.
+- Dodano bezpieczne helpery `recordTitle` i `recordSubtitle`.
+- Dodano `scripts/recover-api-502.sh` do awaryjnego podniesienia API po nieudanym deployu.
+- Zaktualizowano PWA/cache do 1.1.1.
+
 ## 1.1.0 - Moduł Ule + Historia Ula
 
 ### Added

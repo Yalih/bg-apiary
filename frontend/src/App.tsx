@@ -636,11 +636,40 @@ function SimpleModule({ title, eyebrow, children }: { title: string; eyebrow: st
   return <main className="page"><div className="pageHeader"><p className="eyebrow">{eyebrow}</p><h1>{title}</h1></div>{children}</main>;
 }
 
+
+function recordTitle(
+  type: 'queens' | 'feedings' | 'treatments' | 'tasks',
+  item: Queen | Feeding | Treatment | Task,
+) {
+  if (type === 'queens') {
+    const queen = item as Queen;
+    return queen.line || queen.name || `Matka ${queen.year ?? ''}`.trim();
+  }
+  if (type === 'feedings') return (item as Feeding).type;
+  if (type === 'treatments') return (item as Treatment).product;
+  return (item as Task).title;
+}
+
+function recordSubtitle(
+  type: 'queens' | 'feedings' | 'treatments' | 'tasks',
+  item: Queen | Feeding | Treatment | Task,
+  hives: Hive[],
+) {
+  const hiveName = hives.find((h) => h.id === item.hiveId)?.name || 'Pasieka';
+  if (type === 'queens') return `${hiveName} · ${(item as Queen).status}`;
+  if (type === 'feedings') {
+    const feeding = item as Feeding;
+    return `${hiveName} · ${feeding.amount ?? ''}${feeding.unit ?? ''}`.trim();
+  }
+  if (type === 'treatments') return `${hiveName} · ${(item as Treatment).method || 'leczenie'}`;
+  return `${hiveName} · ${(item as Task).status}`;
+}
+
 function RecordsView({ type, hives, reload, queens, feedings, treatments, tasks }: { type: 'queens' | 'feedings' | 'treatments' | 'tasks'; hives: Hive[]; reload: () => Promise<void>; queens: Queen[]; feedings: Feeding[]; treatments: Treatment[]; tasks: Task[] }) {
   const [hiveId, setHiveId] = useState('');
   const [text, setText] = useState('');
   const labels = { queens: ['Matki', 'linia / opis matki'], feedings: ['Karmienia', 'np. syrop 1:1 1,5 l'], treatments: ['Leczenie', 'np. Apiwarol / kwas szczawiowy'], tasks: ['Zadania', 'np. sprawdzić matkę za 3 dni'] } as const;
-  const data = type === 'queens' ? queens : type === 'feedings' ? feedings : type === 'treatments' ? treatments : tasks;
+  const data: Array<Queen | Feeding | Treatment | Task> = type === 'queens' ? queens : type === 'feedings' ? feedings : type === 'treatments' ? treatments : tasks;
   async function submit(e: FormEvent) {
     e.preventDefault();
     const selectedHive = hiveId || hives[0]?.id;
@@ -651,7 +680,7 @@ function RecordsView({ type, hives, reload, queens, feedings, treatments, tasks 
     if (type === 'tasks') await create<Task>('tasks', { hiveId: selectedHive, title: text, priority: 'NORMAL', status: 'TODO' });
     setText(''); await reload();
   }
-  return <SimpleModule eyebrow={labels[type][0]} title={labels[type][0]}><form className="inlineForm" onSubmit={submit}><select value={hiveId} onChange={(e) => setHiveId(e.target.value)}>{hives.map((h) => <option key={h.id} value={h.id}>{h.name}</option>)}</select><input value={text} onChange={(e) => setText(e.target.value)} placeholder={labels[type][1]} required /><button>Dodaj</button></form><section className="panel">{data.length === 0 ? <EmptyState title="Brak wpisów" text="Dodaj pierwszy wpis." /> : data.map((item) => <div className="listRow" key={item.id}><strong>{'title' in item ? item.title : 'line' in item ? item.line : 'type' in item ? item.type : item.product}</strong><span>{hives.find((h) => h.id === item.hiveId)?.name || 'Pasieka'} · {'status' in item ? item.status : 'unit' in item ? item.unit : ''}</span></div>)}</section></SimpleModule>;
+  return <SimpleModule eyebrow={labels[type][0]} title={labels[type][0]}><form className="inlineForm" onSubmit={submit}><select value={hiveId} onChange={(e) => setHiveId(e.target.value)}>{hives.map((h) => <option key={h.id} value={h.id}>{h.name}</option>)}</select><input value={text} onChange={(e) => setText(e.target.value)} placeholder={labels[type][1]} required /><button>Dodaj</button></form><section className="panel">{data.length === 0 ? <EmptyState title="Brak wpisów" text="Dodaj pierwszy wpis." /> : data.map((item) => <div className="listRow" key={item.id}><strong>{recordTitle(type, item)}</strong><span>{recordSubtitle(type, item, hives)}</span></div>)}</section></SimpleModule>;
 }
 
 function HistoryView({ hives, inspections, feedings, treatments, tasks, notes }: { hives: Hive[]; inspections: Inspection[]; feedings: Feeding[]; treatments: Treatment[]; tasks: Task[]; notes: Note[] }) {

@@ -305,3 +305,32 @@ git clean -fd -e .env
 bash scripts/install.sh
 bash scripts/check.sh
 ```
+
+
+## BG Apiary 1.1.1 TypeScript Record Fix
+
+Ta wersja naprawia błąd builda z 1.1.0:
+
+```text
+Property 'product' does not exist on type 'Queen | Treatment'
+```
+
+### Gdy po nieudanym deployu masz HTTP 502
+
+Na VPS:
+
+```bash
+cd /opt/bg-apiary
+bash scripts/recover-api-502.sh
+```
+
+### Pełny deploy
+
+```bash
+cd /opt/bg-apiary
+git fetch origin main
+git reset --hard origin/main
+git clean -fd -e .env
+bash scripts/install.sh
+bash scripts/check.sh
+```
