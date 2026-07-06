@@ -1,5 +1,37 @@
 # Changelog
 
+## 1.1.0 - Moduł Ule + Historia Ula
+
+### Added
+- Nowy moduł **Ule 1.1.0**.
+- Wyszukiwarka uli.
+- Filtrowanie uli po statusie.
+- Nowe karty uli z siłą, statusem, ostatnim przeglądem, zadaniami i matką.
+- Panel szczegółów ula.
+- Edycja statusu, siły i notatki ula.
+- Szybkie akcje z karty ula:
+  - szybki przegląd,
+  - zadanie „sprawdzić matkę”,
+  - karmienie 1 l,
+  - notatka.
+- Historia ula łącząca przeglądy, karmienia, leczenia, zadania, notatki i matki.
+- Backend endpoint `GET /api/v1/hives/:id/timeline`.
+
+### Changed
+- Dashboard i historia korzystają także z notatek.
+- PWA/cache podniesione do 1.1.0.
+- Instalator aktualizuje `APP_VERSION=1.1.0` w istniejącym `.env`.
+
+## 1.0.6 - Nginx HTTPS API fix
+
+### Fixed
+- Dodano `scripts/fix-nginx-api-proxy.sh`.
+- `scripts/install-nginx-host.sh` wymusza aktywny server block dla HTTP i HTTPS.
+- Stare konfiguracje z `sites-enabled` są przenoszone do backupu, żeby nie powodowały HTTP 405.
+- Test POST do API obejmuje lokalny HTTP, domenę HTTP i domenę HTTPS.
+- Konfiguracja `/api/` używa `location ^~ /api/` i `location = /api`.
+- Poprawiono wersję cache/PWA do 1.0.6.
+
 ## 1.0.5 - TypeScript build fix
 
 ### Fixed

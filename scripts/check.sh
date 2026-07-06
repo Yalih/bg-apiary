@@ -57,6 +57,31 @@ df -h / | tail -1 | awk '{print "Disk usage                     " $5 " used, " $
 free -h | awk '/Mem:/ {print "Memory                         " $3 " used / " $2}'
 
 echo
+echo "Nginx POST proxy checks"
+echo "-----------------------"
+
+check_post_url() {
+  url="$1"
+  label="$2"
+  code="$(curl -k -s -o /tmp/bgapiary-post-check-body.txt -w "%{http_code}" \
+    -X POST "$url/api/v1/auth/login" \
+    -H "Content-Type: application/json" \
+    -d '{"email":"missing-user@bgapiary.local","password":"x"}' || true)"
+
+  if [ "$code" = "405" ]; then
+    fail "$label" "HTTP 405 - Nginx blocks API POST"
+  elif [ "$code" = "000" ]; then
+    warn "$label" "not reachable from this host"
+  else
+    pass "$label HTTP $code"
+  fi
+}
+
+check_post_url "http://127.0.0.1" "Local HTTP POST"
+check_post_url "http://bgapiary.pro" "Domain HTTP POST"
+check_post_url "https://bgapiary.pro" "Domain HTTPS POST"
+
+echo
 if [ -s /tmp/bgapiary-api-health.json ]; then
   echo "API direct health response:"
   cat /tmp/bgapiary-api-health.json

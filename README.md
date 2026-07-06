@@ -247,3 +247,61 @@ git clean -fd -e .env
 bash scripts/install.sh
 bash scripts/check.sh
 ```
+
+
+## BG Apiary 1.0.6 Nginx HTTPS API Fix
+
+Ta wersja naprawia przypadek, w którym przeglądarka dalej widzi HTTP 405 mimo że lokalne `/api` działa. Powód: stary albo osobny blok Nginx dla HTTPS.
+
+### Szybka naprawa na VPS
+
+```bash
+cd /opt/bg-apiary
+bash scripts/fix-nginx-api-proxy.sh
+```
+
+### Pełny deploy
+
+```bash
+cd /opt/bg-apiary
+git fetch origin main
+git reset --hard origin/main
+git clean -fd -e .env
+bash scripts/install.sh
+bash scripts/check.sh
+```
+
+### Test
+
+```bash
+curl -i -X POST https://bgapiary.pro/api/v1/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"email":"missing-user@bgapiary.local","password":"x"}'
+```
+
+Wynik ma być `401` albo `400`, nie `405`.
+
+
+## BG Apiary 1.1.0 - Moduł Ule + Historia Ula
+
+Pierwszy moduł funkcjonalny po stabilizacji 1.0.
+
+### Najważniejsze
+
+- lista uli,
+- karta ula,
+- status i siła rodziny,
+- szybkie akcje przy ulu,
+- historia ula,
+- endpoint `/api/v1/hives/:id/timeline`.
+
+### Deploy na VPS
+
+```bash
+cd /opt/bg-apiary
+git fetch origin main
+git reset --hard origin/main
+git clean -fd -e .env
+bash scripts/install.sh
+bash scripts/check.sh
+```
