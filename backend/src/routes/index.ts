@@ -2,13 +2,11 @@ import type { FastifyInstance } from 'fastify';
 import { authRoutes } from './auth';
 import { systemRoutes } from './system';
 import { registerCrudRoutes } from './crud';
-import { hiveTimelineRoutes } from './hiveTimeline';
 
 export async function registerRoutes(app: FastifyInstance) {
   await app.register(async (v1) => {
     await systemRoutes(v1);
     await authRoutes(v1);
-    await hiveTimelineRoutes(v1);
 
     await registerCrudRoutes(v1, { path: 'apiaries', model: 'apiary', schema: 'apiary' });
     await registerCrudRoutes(v1, { path: 'hives', model: 'hive', schema: 'hive' });

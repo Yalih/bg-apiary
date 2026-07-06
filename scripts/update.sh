@@ -4,14 +4,6 @@ set -Eeuo pipefail
 APP_DIR="${APP_DIR:-/opt/bg-apiary}"
 cd "$APP_DIR"
 
-if [ -f .env ]; then
-  if grep -q "^APP_VERSION=" .env; then
-    sed -i "s/^APP_VERSION=.*/APP_VERSION=1.1.1/" .env
-  else
-    echo "APP_VERSION=1.1.1" >> .env
-  fi
-fi
-
 echo "[1/8] Fetch git"
 git fetch origin main
 
@@ -38,14 +30,6 @@ sudo rm -rf /var/www/html/*
 sudo cp -a dist/. /var/www/html/
 sudo chown -R www-data:www-data /var/www/html || true
 cd "$APP_DIR"
-
-if [ -f .env ]; then
-  if grep -q "^APP_VERSION=" .env; then
-    sed -i "s/^APP_VERSION=.*/APP_VERSION=1.1.1/" .env
-  else
-    echo "APP_VERSION=1.1.1" >> .env
-  fi
-fi
 
 echo "[7/8] Configure nginx"
 bash scripts/install-nginx-host.sh

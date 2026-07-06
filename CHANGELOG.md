@@ -1,35 +1,5 @@
 # Changelog
 
-## 1.1.1 - TypeScript record render fix
-
-### Fixed
-- Naprawiono błąd builda `Property 'product' does not exist on type 'Queen | Treatment'`.
-- Dodano bezpieczne helpery `recordTitle` i `recordSubtitle`.
-- Dodano `scripts/recover-api-502.sh` do awaryjnego podniesienia API po nieudanym deployu.
-- Zaktualizowano PWA/cache do 1.1.1.
-
-## 1.1.0 - Moduł Ule + Historia Ula
-
-### Added
-- Nowy moduł **Ule 1.1.0**.
-- Wyszukiwarka uli.
-- Filtrowanie uli po statusie.
-- Nowe karty uli z siłą, statusem, ostatnim przeglądem, zadaniami i matką.
-- Panel szczegółów ula.
-- Edycja statusu, siły i notatki ula.
-- Szybkie akcje z karty ula:
-  - szybki przegląd,
-  - zadanie „sprawdzić matkę”,
-  - karmienie 1 l,
-  - notatka.
-- Historia ula łącząca przeglądy, karmienia, leczenia, zadania, notatki i matki.
-- Backend endpoint `GET /api/v1/hives/:id/timeline`.
-
-### Changed
-- Dashboard i historia korzystają także z notatek.
-- PWA/cache podniesione do 1.1.0.
-- Instalator aktualizuje `APP_VERSION=1.1.0` w istniejącym `.env`.
-
 ## 1.0.6 - Nginx HTTPS API fix
 
 ### Fixed

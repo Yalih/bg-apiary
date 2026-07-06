@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom/client';
 import { App } from './App';
 import './styles.css';
 
-const APP_VERSION = '1.1.1';
+const APP_VERSION = '1.0.6';
 const VERSION_KEY = 'bg_apiary_app_version';
-const RELOAD_KEY = 'bg_apiary_reloaded_for_1_1_1';
+const RELOAD_KEY = 'bg_apiary_reloaded_for_1_0_6';
 
 async function prepareServiceWorker() {
   if (!('serviceWorker' in navigator)) return;

@@ -1,7 +1,7 @@
 {
-  "name": "BG Apiary 1.1.1 Production",
+  "name": "BG Apiary 1.0.6 Production",
   "short_name": "BG Apiary",
-  "description": "BG Apiary 1.1.1 - poprawka builda modułu Ule i Historia Ula.",
+  "description": "BG Apiary 1.0.6 - stabilna aplikacja PWA do zarządzania pasieką.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#fff8e7",

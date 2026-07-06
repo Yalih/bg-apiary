@@ -34,12 +34,6 @@ if [ ! -f .env ]; then
   sed -i "s/change-this-pgadmin-password/${PGADMIN_PASSWORD}/g" .env
 fi
 
-if grep -q "^APP_VERSION=" .env; then
-  sed -i "s/^APP_VERSION=.*/APP_VERSION=1.1.1/" .env
-else
-  echo "APP_VERSION=1.1.1" >> .env
-fi
-
 log "Syncing git repository"
 git fetch origin main || true
 CURRENT_BRANCH="$(git branch --show-current || echo main)"
@@ -122,7 +116,7 @@ curl -fsSI http://127.0.0.1/ >/dev/null || fail "Frontend nie odpowiada przez Ng
 log "Final diagnostics"
 bash scripts/check.sh || true
 
-log "BG Apiary 1.1.1 Production ready"
+log "BG Apiary 1.0.6 Production ready"
 echo "Frontend: http://SERVER_IP/"
 echo "API:      http://SERVER_IP/api/v1/health"
 echo "Swagger:  http://SERVER_IP/api/docs"
